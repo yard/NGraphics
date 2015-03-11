@@ -76,4 +76,7 @@
       <Private>True</Private>
     </Reference>
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Inputs\Elvis.svg" />
+  </ItemGroup>
 </Project>
