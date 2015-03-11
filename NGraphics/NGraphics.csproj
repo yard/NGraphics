@@ -34,12 +34,15 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Brush.cs" />
+    <Compile Include="Codes\OperationType.cs" />
     <Compile Include="Color.cs" />
+    <Compile Include="ExtensionMethods\CharExtensions.cs" />
     <Compile Include="Interfaces\IDrawable.cs" />
     <Compile Include="Interfaces\IImage.cs" />
     <Compile Include="Interfaces\IPlatform.cs" />
     <Compile Include="Log.cs" />
     <Compile Include="NullPlatform.cs" />
+    <Compile Include="Parsers\OperationParser.cs" />
     <Compile Include="Pen.cs" />
     <Compile Include="Point.cs" />
     <Compile Include="Size.cs" />

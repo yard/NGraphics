@@ -134,7 +134,7 @@ namespace NGraphics
 			Operations.Add (op);
 		}
 
-		public void MoveTo (Point point)
+		public void MoveTo (Point point, bool isAbsolute)
 		{
 			Add (new MoveTo (point));
 		}

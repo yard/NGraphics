@@ -5,7 +5,10 @@ using System.Xml.Linq;
 using System.Globalization;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
+using NGraphics.Codes;
+using NGraphics.ExtensionMethods;
 using NGraphics.Interfaces;
+using NGraphics.Parsers;
 
 namespace NGraphics
 {
@@ -386,50 +389,151 @@ namespace NGraphics
 				//
 				// Get the operation
 				//
-				var op = "";
+				char operation;
 				if (a.Length == 1) {
-					op = a;
+					operation = a[0];
 					i++;
 				} else {
-					op = a.Substring (0, 1);
+					operation = a.Substring (0, 1)[0];
 					args [i] = a.Substring (1);
 				}
+
+			  var operationType = OperationParser.Parse(operation);
 
 				//
 				// Execute
 				//
-				if (op == "M" && i + 1 < n) {
-					p.MoveTo (new Point (ReadNumber (args [i]), ReadNumber (args [i + 1])));
+				if (operationType == OperationType.MoveTo && i + 1 < n) {
+					p.MoveTo (new Point (ReadNumber (args [i]), ReadNumber (args [i + 1])), operation.IsAbsolute());
 					i += 2;
-				} else if (op == "L" && i + 1 < n) {
-					p.LineTo (new Point (ReadNumber (args [i]), ReadNumber (args [i + 1])));
-					i += 2;
-				} else if (op == "C" && i + 5 < n) {
-					var c1 = new Point (ReadNumber (args [i]), ReadNumber (args [i + 1]));
-					var c2 = new Point (ReadNumber (args [i + 2]), ReadNumber (args [i + 3]));
-					var pt = new Point (ReadNumber (args [i + 4]), ReadNumber (args [i + 5]));
-					p.CurveTo (c1, c2, pt);
-					i += 6;
-				} else if (op == "S" && i + 3 < n) {
-					var c  = new Point (ReadNumber (args [i]), ReadNumber (args [i + 1]));
-					var pt = new Point (ReadNumber (args [i + 2]), ReadNumber (args [i + 3]));
-					p.ContinueCurveTo (c, pt);
-					i += 4;
-				} else if (op == "A" && i + 6 < n) {
-					var r = new Size (ReadNumber (args [i]), ReadNumber (args [i + 1]));
+				} 
+         else if (operationType == OperationType.LineTo && i + 1 < n)
+         {
+           p.LineTo(new Point(ReadNumber(args[i]), ReadNumber(args[i + 1])));
+           i += 2;
+         }
+         else if (operationType == OperationType.CurveTo && i + 5 < n)
+         {
+           var c1 = new Point(ReadNumber(args[i]), ReadNumber(args[i + 1]));
+           var c2 = new Point(ReadNumber(args[i + 2]), ReadNumber(args[i + 3]));
+           var pt = new Point(ReadNumber(args[i + 4]), ReadNumber(args[i + 5]));
+           p.CurveTo(c1, c2, pt);
+           i += 6;
+         }
+         else if (operationType == OperationType.ContinueCurveTo && i + 3 < n)
+         {
+           var c = new Point(ReadNumber(args[i]), ReadNumber(args[i + 1]));
+           var pt = new Point(ReadNumber(args[i + 2]), ReadNumber(args[i + 3]));
+           p.ContinueCurveTo(c, pt);
+           i += 4;
+         }
+         else if (operationType == OperationType.ArcTo && i + 6 < n)
+         {
+           var r = new Size(ReadNumber(args[i]), ReadNumber(args[i + 1]));
 //					var xr = ReadNumber (args [i + 2]);
-					var laf = ReadNumber (args [i + 3]) != 0;
-					var swf = ReadNumber (args [i + 4]) != 0;
-					var pt = new Point (ReadNumber (args [i + 5]), ReadNumber (args [i + 6]));
-					p.ArcTo (r, laf, swf, pt);
-					i += 7;
-				} else if (op == "z" || op == "Z") {
-					p.Close ();
-				} else {
-					throw new NotSupportedException ("Path Operation " + op);
-				}
+           var laf = ReadNumber(args[i + 3]) != 0;
+           var swf = ReadNumber(args[i + 4]) != 0;
+           var pt = new Point(ReadNumber(args[i + 5]), ReadNumber(args[i + 6]));
+           p.ArcTo(r, laf, swf, pt);
+           i += 7;
+         }
+         else if (operationType == OperationType.Close)
+         {
+           p.Close();
+         }
+         else
+         {
+           throw new NotSupportedException("Path Operation " + operation);
+         }
 			}
 		}
+
+    //void generatePathElement()
+    //{
+    //  bool wasCubicBezierCurve = false;
+    //  bool wasQuadraticBezierCurve = false;
+    //  switch (this.mCommand)
+    //  { // TODO Extract to constants
+    //    case 'm':
+    //      this.generateMove(false);
+    //      break;
+    //    case 'M':
+    //      this.generateMove(true);
+    //      break;
+    //    case 'l':
+    //      this.generateLine(false);
+    //      break;
+    //    case 'L':
+    //      this.generateLine(true);
+    //      break;
+    //    case 'h':
+    //      this.generateHorizontalLine(false);
+    //      break;
+    //    case 'H':
+    //      this.generateHorizontalLine(true);
+    //      break;
+    //    case 'v':
+    //      this.generateVerticalLine(false);
+    //      break;
+    //    case 'V':
+    //      this.generateVerticalLine(true);
+    //      break;
+    //    case 'c':
+    //      this.generateCubicBezierCurve(false);
+    //      wasCubicBezierCurve = true;
+    //      break;
+    //    case 'C':
+    //      this.generateCubicBezierCurve(true);
+    //      wasCubicBezierCurve = true;
+    //      break;
+    //    case 's':
+    //      this.generateSmoothCubicBezierCurve(false);
+    //      wasCubicBezierCurve = true;
+    //      break;
+    //    case 'S':
+    //      this.generateSmoothCubicBezierCurve(true);
+    //      wasCubicBezierCurve = true;
+    //      break;
+    //    case 'q':
+    //      this.generateQuadraticBezierCurve(false);
+    //      wasQuadraticBezierCurve = true;
+    //      break;
+    //    case 'Q':
+    //      this.generateQuadraticBezierCurve(true);
+    //      wasQuadraticBezierCurve = true;
+    //      break;
+    //    case 't':
+    //      this.generateSmoothQuadraticBezierCurve(false);
+    //      wasQuadraticBezierCurve = true;
+    //      break;
+    //    case 'T':
+    //      this.generateSmoothQuadraticBezierCurve(true);
+    //      wasQuadraticBezierCurve = true;
+    //      break;
+    //    case 'a':
+    //      this.generateArc(false);
+    //      break;
+    //    case 'A':
+    //      this.generateArc(true);
+    //      break;
+    //    case 'z':
+    //    case 'Z':
+    //      this.generateClose();
+    //      break;
+    //    default:
+    //      throw new InvalidOperationException("Unexpected SVG command: " + this.mCommand);
+    //  }
+    //  if (!wasCubicBezierCurve)
+    //  {
+    //    this.mLastCubicBezierX2 = this.mLastX;
+    //    this.mLastCubicBezierY2 = this.mLastY;
+    //  }
+    //  if (!wasQuadraticBezierCurve)
+    //  {
+    //    this.mLastQuadraticBezierX2 = this.mLastX;
+    //    this.mLastQuadraticBezierY2 = this.mLastY;
+    //  }
+    //}
 
 		string ReadString (XElement e, string defaultValue = "")
 		{

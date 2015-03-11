@@ -12,7 +12,7 @@ namespace NGraphics.Test
 		public void Contains ()
 		{
 			var p = new Path ();
-			p.MoveTo (new Point (0, 0));
+			p.MoveTo (new Point (0, 0), false);
 			p.LineTo (new Point (100, 0));
 			p.LineTo (new Point (100, 50));
 			p.Close ();
@@ -27,7 +27,7 @@ namespace NGraphics.Test
 		public void TurtleGraphics ()
 		{
 			var p = new Path ();
-			p.MoveTo (new Point (100, 200));
+			p.MoveTo (new Point (100, 200), false);
 			p.LineTo (new Point (200, 250));
 			p.LineTo (new Point (100, 300));
 			p.Close ();

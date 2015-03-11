@@ -27,11 +27,11 @@ namespace NGraphics.Test
 			c.GetImage ().SaveAsPng (GetPath (path));
 		}
 
-	  [Test]
-	  public void Elvis()
-	  {
-      ReadAndDraw("Elvis.svg");
-	  }
+    //[Test]
+    //public void Elvis()
+    //{
+    //  ReadAndDraw("Elvis.svg");
+    //}
 
 		[Test]
 		public void MozillaEllipse ()

@@ -120,17 +120,17 @@ namespace NGraphics.Interfaces
 			p.Draw (canvas);
 		}
 
-		public static void DrawLine (this ICanvas canvas, Point start, Point end, Pen pen)
+		public static void DrawLine (this ICanvas canvas, Point start, Point end, Pen pen, bool isAbsolute)
 		{
 			var p = new Path { Pen = pen };
-			p.MoveTo (start);
+			p.MoveTo (start, isAbsolute);
 			p.LineTo (end);
 			p.Draw (canvas);				
 		}
-		public static void DrawLine (this ICanvas canvas, Point start, Point end, Color color, double width = 1.0)
+		public static void DrawLine (this ICanvas canvas, Point start, Point end, Color color, bool isAbsolute, double width = 1.0)
 		{
 			var p = new Path { Pen = new Pen (color, width) };
-			p.MoveTo (start);
+			p.MoveTo (start, isAbsolute);
 			p.LineTo (end);
 			p.Draw (canvas);				
 		}
