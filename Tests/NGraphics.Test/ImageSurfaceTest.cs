@@ -94,7 +94,7 @@ namespace NGraphics.Test
 				new Point (0.5, 1), 1,
 				Colors.Yellow, Colors.Blue);
 			var p = new Path ();
-			p.MoveTo (0, 0);
+			p.MoveTo (0, 0, false);
 			p.LineTo (size.Width, 0);
 			p.LineTo (size.Width / 2, size.Height);
 			p.Close ();
@@ -106,7 +106,7 @@ namespace NGraphics.Test
 		public void Line ()
 		{
 			var canvas = Platform.CreateImageCanvas (new Size (100), transparency: true);
-			canvas.DrawLine (10, 20, 80, 70, Colors.DarkGray, 5);
+			canvas.DrawLine (10, 20, 80, 70, Colors.DarkGray,false, 5);
 			canvas.GetImage ().SaveAsPng (GetPath ("ImageCanvas.Line"));
 		}
 		[Test]

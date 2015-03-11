@@ -12,12 +12,16 @@ namespace NGraphics
 	public class MoveTo : PathOp
 	{
 		public Point Point;
-		public MoveTo (Point point)
-		{
-			Point = point;
-		}
-		public MoveTo (double x, double y)
-			: this (new Point (x, y))
+	  public bool IsAbsolute;
+
+	  public MoveTo (Point point, bool isAbsolute)
+	  {
+	    Point = point;
+	    IsAbsolute = isAbsolute;
+	  }
+
+	  public MoveTo (double x, double y, bool isAbsolute)
+			: this (new Point (x, y), isAbsolute)
 		{
 		}
 
@@ -136,11 +140,11 @@ namespace NGraphics
 
 		public void MoveTo (Point point, bool isAbsolute)
 		{
-			Add (new MoveTo (point));
+			Add (new MoveTo (point, isAbsolute));
 		}
-		public void MoveTo (double x, double y)
+		public void MoveTo (double x, double y, bool isAbsolute)
 		{
-			Add (new MoveTo (x, y));
+			Add (new MoveTo (x, y, isAbsolute));
 		}
 
 		public void LineTo (Point point)
