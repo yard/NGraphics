@@ -1,6 +1,4 @@
-using System;
-
-namespace NGraphics
+namespace NGraphics.Interfaces
 {
 	public interface IImage //: IDrawable
 	{

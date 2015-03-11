@@ -1,7 +1,7 @@
 using System;
 using System.IO;
 
-namespace NGraphics
+namespace NGraphics.Interfaces
 {
 	public interface IPlatform
 	{

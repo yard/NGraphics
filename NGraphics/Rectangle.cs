@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using NGraphics.Interfaces;
 
 namespace NGraphics
 {

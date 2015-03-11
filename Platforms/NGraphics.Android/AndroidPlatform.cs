@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using Android.Graphics;
 using Android.Text;
-using System.IO;
+using NGraphics.Interfaces;
 
-namespace NGraphics
+namespace NGraphics.Android
 {
 	public class AndroidPlatform : IPlatform
 	{

@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using System;
+using NGraphics.Interfaces;
 
 namespace NGraphics.Test
 {

@@ -11,7 +11,7 @@
 
 [assembly: Android.Runtime.ResourceDesignerAttribute("NGraphics.Android.Test.Resource", IsApplication=true)]
 
-namespace NGraphics.Android.Test
+namespace NGraphics.Android.Test.Resources
 {
 	
 	
@@ -26,7 +26,7 @@ namespace NGraphics.Android.Test
 		
 		public static void UpdateIdValues()
 		{
-			global::NGraphics.Android.Resource.String.library_name = global::NGraphics.Android.Test.Resource.String.library_name;
+			global::NGraphics.Android.Resource.String.library_name = global::NGraphics.Android.Test.Resources.Resource.String.library_name;
 		}
 		
 		public partial class Attribute

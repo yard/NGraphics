@@ -11,7 +11,7 @@
 
 [assembly: Android.Runtime.ResourceDesignerAttribute("NGraphics.Android.Resource", IsApplication=false)]
 
-namespace NGraphics.Android
+namespace NGraphics.Android.Resources
 {
 	
 	

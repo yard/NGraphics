@@ -8,6 +8,7 @@ using Android.Widget;
 using Android.OS;
 using NGraphics.Test;
 using System.Linq;
+using NGraphics.Android.Test.Resources;
 
 namespace NGraphics.Android.Test
 {

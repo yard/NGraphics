@@ -4,6 +4,7 @@ using NGraphics;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
+using NGraphics.Interfaces;
 
 namespace NGraphics.Test
 {

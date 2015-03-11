@@ -1,11 +1,12 @@
 ﻿using System;
-using System.Drawing;
-using System.Drawing.Imaging;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
 using System.IO;
+using NGraphics.Interfaces;
 
-namespace NGraphics
+namespace NGraphics.Net
 {
 	public class SystemDrawingPlatform : IPlatform
 	{

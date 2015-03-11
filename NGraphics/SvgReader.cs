@@ -5,6 +5,7 @@ using System.Xml.Linq;
 using System.Globalization;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
+using NGraphics.Interfaces;
 
 namespace NGraphics
 {

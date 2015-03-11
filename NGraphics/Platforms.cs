@@ -1,6 +1,8 @@
 using System;
 using System.Linq;
 using System.Reflection;
+using NGraphics.Interfaces;
+using NGraphics.Net;
 
 namespace NGraphics
 {
