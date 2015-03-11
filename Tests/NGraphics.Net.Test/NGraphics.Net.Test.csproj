@@ -47,6 +47,10 @@
       <Project>{D59E8B57-9EC9-46FC-9E74-02FD6F2AA6FD}</Project>
       <Name>NGraphics.Net</Name>
     </ProjectReference>
+    <ProjectReference Include="..\NGraphics.Test\NGraphics.Test.csproj">
+      <Project>{d8259a30-0714-4160-89af-0c644551df3b}</Project>
+      <Name>NGraphics.Test</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

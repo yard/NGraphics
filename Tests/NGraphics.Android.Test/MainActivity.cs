@@ -8,7 +8,6 @@ using Android.Widget;
 using Android.OS;
 using NGraphics.Test;
 using System.Linq;
-using NGraphics.Android.Test.Resources;
 
 namespace NGraphics.Android.Test
 {
@@ -45,7 +44,7 @@ namespace NGraphics.Android.Test
 
 			var ngd = System.Environment.GetFolderPath (System.Environment.SpecialFolder.MyDocuments);
 			PlatformTest.ResultsDirectory = System.IO.Path.Combine (ngd, "TestResults");
-			PlatformTest.Platform = Platforms.Current;
+			PlatformTest.Platform = NGraphics.Test.PlatformTest.Platforms.Current;
 			System.IO.Directory.CreateDirectory (PlatformTest.ResultsDirectory);
 //			System.Environment.CurrentDirectory = PlatformTest.ResultsDirectory;
 

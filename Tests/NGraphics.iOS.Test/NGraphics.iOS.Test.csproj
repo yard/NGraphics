@@ -128,8 +128,9 @@
       <Name>NGraphics</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Platforms\NGraphics.iOS\NGraphics.iOS.csproj">
-      <Project>{11A2EFE5-5E9E-41A1-B3D4-CD6665BD5D96}</Project>
+      <Project>{11a2efe5-5e9e-41a1-b3d4-cd6665bd5d96}</Project>
       <Name>NGraphics.iOS</Name>
+      <IsAppExtension>false</IsAppExtension>
     </ProjectReference>
   </ItemGroup>
 </Project>

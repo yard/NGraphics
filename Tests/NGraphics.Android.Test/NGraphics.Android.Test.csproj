@@ -81,5 +81,9 @@
       <Project>{4EA643B9-84F6-4AD4-B89E-AE230A7461B8}</Project>
       <Name>NGraphics</Name>
     </ProjectReference>
+    <ProjectReference Include="..\NGraphics.Test\NGraphics.Test.csproj">
+      <Project>{d8259a30-0714-4160-89af-0c644551df3b}</Project>
+      <Name>NGraphics.Test</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>
