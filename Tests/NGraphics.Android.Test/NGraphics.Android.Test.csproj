@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -80,10 +80,6 @@
     <ProjectReference Include="..\..\NGraphics\NGraphics.csproj">
       <Project>{4EA643B9-84F6-4AD4-B89E-AE230A7461B8}</Project>
       <Name>NGraphics</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\NGraphics.Test\NGraphics.Test.csproj">
-      <Project>{D8259A30-0714-4160-89AF-0C644551DF3B}</Project>
-      <Name>NGraphics.Test</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

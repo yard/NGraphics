@@ -127,11 +127,7 @@
       <Project>{4EA643B9-84F6-4AD4-B89E-AE230A7461B8}</Project>
       <Name>NGraphics</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\NGraphics.Test\NGraphics.Test.csproj">
-      <Project>{D8259A30-0714-4160-89AF-0C644551DF3B}</Project>
-      <Name>NGraphics.Test</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\NGraphics.iOS\NGraphics.iOS.csproj">
+    <ProjectReference Include="..\..\Platforms\NGraphics.iOS\NGraphics.iOS.csproj">
       <Project>{11A2EFE5-5E9E-41A1-B3D4-CD6665BD5D96}</Project>
       <Name>NGraphics.iOS</Name>
     </ProjectReference>
