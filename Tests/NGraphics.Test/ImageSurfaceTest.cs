@@ -23,7 +23,7 @@ namespace NGraphics.Test
 			var name = (filename.EndsWith (".png", StringComparison.Ordinal)) ?
 				System.IO.Path.GetFileNameWithoutExtension (filename) :
 				filename;
-			var path = System.IO.Path.Combine (ResultsDirectory, name + "-" + Platform.Name + ".png");
+			var path = System.IO.Path.Combine (ResultsDirectory,Platform.Name, name + "-" + Platform.Name + ".png");
 			Debug.WriteLine (path);
 			return path;
 		}

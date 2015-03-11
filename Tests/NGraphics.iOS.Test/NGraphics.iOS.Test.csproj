@@ -132,5 +132,9 @@
       <Name>NGraphics.iOS</Name>
       <IsAppExtension>false</IsAppExtension>
     </ProjectReference>
+    <ProjectReference Include="..\NGraphics.Test\NGraphics.Test.csproj">
+      <Project>{D8259A30-0714-4160-89AF-0C644551DF3B}</Project>
+      <Name>NGraphics.Test</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>
