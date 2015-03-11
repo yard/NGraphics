@@ -377,7 +377,7 @@ namespace NGraphics
 
 		static readonly char[] WSC = new char[] { ',', ' ', '\t', '\n', '\r' };
 
-		void ReadPath (Path p, string pathDescriptor)
+		void ReadPath (Path path, string pathDescriptor)
 		{
 			var args = pathDescriptor.Split (WSC, StringSplitOptions.RemoveEmptyEntries);
 
@@ -385,61 +385,56 @@ namespace NGraphics
 			var n = args.Length;
 
 			while (i < n) {
-				var a = args[i];
-				//
-				// Get the operation
-				//
-				char operation;
-				if (a.Length == 1) {
-					operation = a[0];
+				var pathDescriptionSection = args[i];
+
+			  var operation = OperationParser.Parse(pathDescriptionSection);
+				
+        if (pathDescriptionSection.Length == 1) {
 					i++;
 				} else {
-					operation = a.Substring (0, 1)[0];
-					args [i] = a.Substring (1);
+					args [i] = pathDescriptionSection.Substring (1);
 				}
-
-			  var operationType = OperationParser.Parse(operation);
 
 				//
 				// Execute
 				//
-				if (operationType == OperationType.MoveTo && i + 1 < n) {
-					p.MoveTo (new Point (ReadNumber (args [i]), ReadNumber (args [i + 1])), operation.IsAbsolute());
+				if (operation.Type == OperationType.MoveTo && i + 1 < n) {
+					path.MoveTo (new Point (ReadNumber (args [i]), ReadNumber (args [i + 1])), operation.IsAbsolute);
 					i += 2;
 				} 
-         else if (operationType == OperationType.LineTo && i + 1 < n)
+         else if (operation.Type == OperationType.LineTo && i + 1 < n)
          {
-           p.LineTo(new Point(ReadNumber(args[i]), ReadNumber(args[i + 1])));
+           path.LineTo(new Point(ReadNumber(args[i]), ReadNumber(args[i + 1])));
            i += 2;
          }
-         else if (operationType == OperationType.CurveTo && i + 5 < n)
+         else if (operation.Type == OperationType.CurveTo && i + 5 < n)
          {
            var c1 = new Point(ReadNumber(args[i]), ReadNumber(args[i + 1]));
            var c2 = new Point(ReadNumber(args[i + 2]), ReadNumber(args[i + 3]));
            var pt = new Point(ReadNumber(args[i + 4]), ReadNumber(args[i + 5]));
-           p.CurveTo(c1, c2, pt);
+           path.CurveTo(c1, c2, pt);
            i += 6;
          }
-         else if (operationType == OperationType.ContinueCurveTo && i + 3 < n)
+         else if (operation.Type == OperationType.ContinueCurveTo && i + 3 < n)
          {
            var c = new Point(ReadNumber(args[i]), ReadNumber(args[i + 1]));
            var pt = new Point(ReadNumber(args[i + 2]), ReadNumber(args[i + 3]));
-           p.ContinueCurveTo(c, pt);
+           path.ContinueCurveTo(c, pt);
            i += 4;
          }
-         else if (operationType == OperationType.ArcTo && i + 6 < n)
+         else if (operation.Type == OperationType.ArcTo && i + 6 < n)
          {
            var r = new Size(ReadNumber(args[i]), ReadNumber(args[i + 1]));
 //					var xr = ReadNumber (args [i + 2]);
            var laf = ReadNumber(args[i + 3]) != 0;
            var swf = ReadNumber(args[i + 4]) != 0;
            var pt = new Point(ReadNumber(args[i + 5]), ReadNumber(args[i + 6]));
-           p.ArcTo(r, laf, swf, pt);
+           path.ArcTo(r, laf, swf, pt);
            i += 7;
          }
-         else if (operationType == OperationType.Close)
+         else if (operation.Type == OperationType.Close)
          {
-           p.Close();
+           path.Close();
          }
          else
          {

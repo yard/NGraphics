@@ -41,6 +41,7 @@
     <Compile Include="Interfaces\IImage.cs" />
     <Compile Include="Interfaces\IPlatform.cs" />
     <Compile Include="Log.cs" />
+    <Compile Include="Models\Operation.cs" />
     <Compile Include="NullPlatform.cs" />
     <Compile Include="Parsers\OperationParser.cs" />
     <Compile Include="Pen.cs" />
