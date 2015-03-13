@@ -95,8 +95,8 @@ namespace NGraphics.Test
 				Colors.Yellow, Colors.Blue);
 			var p = new Path ();
 			p.MoveTo (0, 0, false);
-			p.LineTo (size.Width, 0);
-			p.LineTo (size.Width / 2, size.Height);
+			p.LineTo (size.Width, 0,false);
+			p.LineTo (size.Width / 2, size.Height,false);
 			p.Close ();
 			p.Brush = b;
 			p.Draw (canvas);

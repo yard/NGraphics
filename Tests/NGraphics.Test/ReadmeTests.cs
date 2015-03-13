@@ -22,9 +22,9 @@ namespace NGraphics.Test
 
 			var p = new Path ();
 			p.MoveTo (0, 1,false);
-			p.LineTo (0, 0);
-			p.LineTo (0.5, 1);
-			p.LineTo (0.5, 0);
+			p.LineTo (0, 0, false);
+			p.LineTo (0.5, 1, false);
+			p.LineTo (0.5, 0,false);
 
 			var colors = new [] {
 				"#DCDCDD",
@@ -51,8 +51,8 @@ namespace NGraphics.Test
 			canvas.DrawRectangle (40, 50, 60, 70, brush: Brushes.Blue);
 			canvas.DrawPath (new PathOp[] {	
 				new MoveTo (100, 100, false),
-				new LineTo (50, 100),
-				new LineTo (50, 0),
+				new LineTo (50, 100,false),
+				new LineTo (50, 0, false),
 				new ClosePath ()
 			}, brush: Brushes.Gray);
 

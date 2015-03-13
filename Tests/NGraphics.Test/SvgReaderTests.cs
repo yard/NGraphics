@@ -27,89 +27,89 @@ namespace NGraphics.Test
 			c.GetImage ().SaveAsPng (GetPath (path));
 		}
 
+    [Test]
+    public void Elvis()
+    {
+      ReadAndDraw("Elvis.svg");
+    }
+
     //[Test]
-    //public void Elvis()
+    //public void MozillaEllipse ()
     //{
-    //  ReadAndDraw("Elvis.svg");
+    //  ReadAndDraw ("mozilla.ellipse.svg");
     //}
 
-		[Test]
-		public void MozillaEllipse ()
-		{
-			ReadAndDraw ("mozilla.ellipse.svg");
-		}
+    //[Test]
+    //public void MozillaPath ()
+    //{
+    //  ReadAndDraw ("mozilla.path.svg");
+    //}
 
-		[Test]
-		public void MozillaPath ()
-		{
-			ReadAndDraw ("mozilla.path.svg");
-		}
+    //[Test]
+    //public void MozillaTransform ()
+    //{
+    //  ReadAndDraw ("mozilla.transform.svg");
+    //}
 
-		[Test]
-		public void MozillaTransform ()
-		{
-			ReadAndDraw ("mozilla.transform.svg");
-		}
+    //[Test]
+    //public void MozillaBezierCurves1 ()
+    //{
+    //  ReadAndDraw ("mozilla.BezierCurves1.svg");
+    //}
 
-		[Test]
-		public void MozillaBezierCurves1 ()
-		{
-			ReadAndDraw ("mozilla.BezierCurves1.svg");
-		}
+    //[Test]
+    //public void MozillaBezierCurves2 ()
+    //{
+    //  ReadAndDraw ("mozilla.BezierCurves2.svg");
+    //}
 
-		[Test]
-		public void MozillaBezierCurves2 ()
-		{
-			ReadAndDraw ("mozilla.BezierCurves2.svg");
-		}
+    //[Test]
+    //public void MozillaText1 ()
+    //{
+    //  ReadAndDraw ("mozilla.Text1.svg");
+    //}
 
-		[Test]
-		public void MozillaText1 ()
-		{
-			ReadAndDraw ("mozilla.Text1.svg");
-		}
+    //[Test]
+    //public void MozillaText2 ()
+    //{
+    //  ReadAndDraw ("mozilla.Text2.svg");
+    //}
 
-		[Test]
-		public void MozillaText2 ()
-		{
-			ReadAndDraw ("mozilla.Text2.svg");
-		}
+    //[Test]
+    //public void MozillaText3 ()
+    //{
+    //  ReadAndDraw ("mozilla.Text3.svg");
+    //}
 
-		[Test]
-		public void MozillaText3 ()
-		{
-			ReadAndDraw ("mozilla.Text3.svg");
-		}
+    //[Test]
+    //public void MozillaText4 ()
+    //{
+    //  ReadAndDraw ("mozilla.Text4.svg");
+    //}
 
-		[Test]
-		public void MozillaText4 ()
-		{
-			ReadAndDraw ("mozilla.Text4.svg");
-		}
+    ////[Test]
+    ////public void Smile ()
+    ////{
+    ////  ReadAndDraw ("Smile.svg");
+    ////}
 
-		[Test]
-		public void Smile ()
-		{
-			ReadAndDraw ("Smile.svg");
-		}
+    //[Test]
+    //public void SunAtNight ()
+    //{
+    //  ReadAndDraw ("SunAtNight.svg");
+    //}
 
-		[Test]
-		public void SunAtNight ()
-		{
-			ReadAndDraw ("SunAtNight.svg");
-		}
+    //[Test]
+    //public void MocastIcon ()
+    //{
+    //  ReadAndDraw ("MocastIcon.svg");
+    //}
 
-		[Test]
-		public void MocastIcon ()
-		{
-			ReadAndDraw ("MocastIcon.svg");
-		}
-
-		[Test]
-		public void ErulisseuiinSpaceshipPack ()
-		{
-			ReadAndDraw ("ErulisseuiinSpaceshipPack.svg");
-		}
+    //[Test]
+    //public void ErulisseuiinSpaceshipPack ()
+    //{
+    //  ReadAndDraw ("ErulisseuiinSpaceshipPack.svg");
+    //}
 	}
 }
 

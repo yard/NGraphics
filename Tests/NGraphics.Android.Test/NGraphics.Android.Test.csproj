@@ -73,7 +73,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <ItemGroup>
-    <ProjectReference Include="..\NGraphics.Android\NGraphics.Android.csproj">
+    <ProjectReference Include="..\..\Platforms\NGraphics.Android\NGraphics.Android.csproj">
       <Project>{FE4491D7-0609-4D6F-957B-9DDA3FA03D9F}</Project>
       <Name>NGraphics.Android</Name>
     </ProjectReference>
