@@ -41,10 +41,18 @@ namespace NGraphics.Parsers
           return OperationType.MoveTo;
         case 'L':
           return OperationType.LineTo;
+        case 'H':
+          return OperationType.HorizontalLineTo;
+        case 'V':
+          return OperationType.VerticalLineTo;
         case 'C':
-          return OperationType.CurveTo;
+          return OperationType.CubicBezierCurve;
         case 'S':
-          return OperationType.ContinueCurveTo;
+          return OperationType.SmoothCubicBezierCurve;
+        case 'Q':
+          return OperationType.QuadraticBezierCurve;
+        case 'T':
+          return OperationType.SmoothQuadraticBezierCurve;
         case 'A':
           return OperationType.ArcTo;
         case 'Z':

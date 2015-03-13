@@ -37,7 +37,7 @@ namespace NGraphics
 		{
 			Point = point;
 		}
-		public LineTo (double x, double y)
+		public LineTo (double x, double y, bool isAbsolute)
 			: this (new Point (x, y))
 		{
 		}
@@ -151,9 +151,9 @@ namespace NGraphics
 		{
 			Add (new LineTo (point));
 		}
-		public void LineTo (double x, double y)
+		public void LineTo (double x, double y, bool isAbsolute)
 		{
-			Add (new LineTo (x, y));
+			Add (new LineTo (x, y, isAbsolute));
 		}
 
 		public void ArcTo (Size radius, bool largeArc, bool sweepClockwise, Point point)

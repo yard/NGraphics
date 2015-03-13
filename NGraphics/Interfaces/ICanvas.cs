@@ -138,7 +138,7 @@ namespace NGraphics.Interfaces
 		{
 			var p = new Path { Pen = new Pen (color, width) };
 			p.MoveTo (x1, y1, isAbsolute);
-			p.LineTo (x2, y2);
+			p.LineTo (x2, y2, isAbsolute);
 			p.Draw (canvas);				
 		}
 	}
