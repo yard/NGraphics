@@ -27,11 +27,11 @@ namespace NGraphics.Test
 			c.GetImage ().SaveAsPng (GetPath (path));
 		}
 
-    [Test]
-    public void Elvis()
-    {
-      ReadAndDraw("Elvis.svg");
-    }
+    //[Test]
+    //public void Elvis()
+    //{
+    //    //ReadAndDraw("mozilla.BezierCurves1.svg");
+    //}
 
     //[Test]
     //public void MozillaEllipse ()
@@ -51,17 +51,17 @@ namespace NGraphics.Test
     //  ReadAndDraw ("mozilla.transform.svg");
     //}
 
-    //[Test]
-    //public void MozillaBezierCurves1 ()
-    //{
-    //  ReadAndDraw ("mozilla.BezierCurves1.svg");
-    //}
+    [Test]
+    public void MozillaBezierCurves1()
+    {
+        ReadAndDraw("mozilla.BezierCurves1.svg");
+    }
 
-    //[Test]
-    //public void MozillaBezierCurves2 ()
-    //{
-    //  ReadAndDraw ("mozilla.BezierCurves2.svg");
-    //}
+    [Test]
+    public void MozillaBezierCurves2()
+    {
+        ReadAndDraw("mozilla.BezierCurves2.svg");
+    }
 
     //[Test]
     //public void MozillaText1 ()
