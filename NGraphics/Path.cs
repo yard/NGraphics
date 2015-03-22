@@ -38,7 +38,7 @@ namespace NGraphics
 			Point = point;
 		}
 		public LineTo (double x, double y, bool isAbsolute)
-			: this (new Point (x, y))
+			: this (new Point (x, y, isAbsolute))
 		{
 		}
 		public override Point GetContinueCurveControlPoint ()

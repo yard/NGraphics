@@ -14,11 +14,13 @@ namespace NGraphics
 
 		public double X;
 		public double Y;
+	    private readonly bool _isAbsolute;
 
-		public Point (double x, double y)
+	    public Point (double x, double y, bool isAbsolute = false)
 		{
 			X = x;
 			Y = y;
+	        _isAbsolute = isAbsolute;
 		}
 
 		public Point ReflectedAround (Point point)
