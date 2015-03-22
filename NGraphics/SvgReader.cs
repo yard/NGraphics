@@ -423,6 +423,14 @@ namespace NGraphics
 	                path.ContinueCurveTo(new Point(args[0],args[1]),new Point(args[2],args[3]) );
 	                break;
 	            }
+                    case OperationType.ArcTo:
+                {
+                    var xr = args[2];
+                    var largeArc = args[3] != 0;
+                    var sweepClockwise = args[4] != 0;
+                    path.ArcTo(new Size(args[0],args[1]), largeArc, sweepClockwise, new Point(args[5],args[6]));
+                    break;
+                }
                     case OperationType.Close:
 	            {
 	                path.Close();
