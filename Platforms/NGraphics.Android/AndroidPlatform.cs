@@ -298,9 +298,9 @@ namespace NGraphics.Android
 					}
                     var ct = op as CurveTo;
                     if (ct != null) {
-                        var p = ct.Point;
-                        var c1 = ct.Control1;
-                        var c2 = ct.Control2;
+                        var p = ct.SecondControlPoint;
+                        var c1 = ct.Start;
+                        var c2 = ct.FirstControlPoint;
 						path.CubicTo ((float)c1.X, (float)c1.Y, (float)c2.X, (float)c2.Y, (float)p.X, (float)p.Y);
 						bb.Add (p);
 						bb.Add (c1);

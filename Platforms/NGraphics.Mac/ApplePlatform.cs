@@ -320,9 +320,9 @@ namespace NGraphics
 					}
 					var ct = op as CurveTo;
 					if (ct != null) {
-						var p = ct.Point;
-						var c1 = ct.Control1;
-						var c2 = ct.Control2;
+						var p = ct.SecondControlPoint;
+						var c1 = ct.Start;
+						var c2 = ct.FirstControlPoint;
 						context.AddCurveToPoint ((nfloat)c1.X, (nfloat)c1.Y, (nfloat)c2.X, (nfloat)c2.Y, (nfloat)p.X, (nfloat)p.Y);
 						bb.Add (p);
 						bb.Add (c1);

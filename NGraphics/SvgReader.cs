@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
 using NGraphics.Codes;
+using NGraphics.ExtensionMethods;
 using NGraphics.Interfaces;
 using NGraphics.Parsers;
 
@@ -153,7 +154,8 @@ namespace NGraphics
                     if (dA != null && !string.IsNullOrWhiteSpace(dA.Value))
                     {
                         var p = new Path(pen, brush);
-                        ReadPath(p, dA.Value);
+                        SvgPathBuilder.Parse(p,dA.Value);
+                        //ReadPath(p, dA.Value);
                         r = p;
                     }
                 }
@@ -433,22 +435,21 @@ namespace NGraphics
 
         private void ReadPath(Path path, string pathDescriptor)
         {
-            var functions = Regex.Split(pathDescriptor, @"(?=[A-Za-z])").Where(c => !string.IsNullOrEmpty(c));
+            var segments = Regex.Split(pathDescriptor, @"(?=[A-Za-z])").Where(c => !string.IsNullOrEmpty(c));
 
-            foreach (var function in functions)
+            foreach (var segment in segments)
             {
-                var command = function[0];
-                var args =
-                    Regex.Split(function.Remove(0, 1), @"[\s,]|(?=-)")
-                        .Where(c => !string.IsNullOrEmpty(c))
-                        .Select(c => double.Parse(c))
-                        .ToList();
+                var command = segment[0];
 
-                ProcessCommand(path, command.ToString(), args);
+                if (char.IsWhiteSpace(command))
+                    continue;
+                var args = segment.ToPointValues();
+
+                ProcessCommand(path, command.ToString(), args, segments.ToList());
             }
         }
 
-        private void ProcessCommand(Path path, string command, List<double> args)
+        private void ProcessCommand(Path path, string command, List<double> args, List<string> segments)
         {
             var operation = OperationParser.Parse(command);
 
@@ -465,9 +466,30 @@ namespace NGraphics
                     path.LineTo(args[0], args[1], operation.IsAbsolute);
                     break;
                 }
+              case OperationType.HorizontalLineTo:
+                {
+                    path.LineTo(args[0], 0, operation.IsAbsolute);
+                    break;
+                }
+              case OperationType.VerticalLineTo:
+                {
+                    path.LineTo(0, args[0], operation.IsAbsolute);
+                    break;
+                }
+                
                 case OperationType.CubicBezierCurve:
                 {
-                    path.CurveTo(new Point(args[0], args[1]), new Point(args[2], args[3]), new Point(args[4], args[5]));
+                    var point1 = new Point(args[0], args[1]);
+                    var point2 = new Point(args[2], args[3]);
+                    var point3 = new Point(args[4], args[5]);
+
+                    if (operation.IsAbsolute)
+                    {
+                        point1.ToAbsolute(segments);
+                        point2.ToAbsolute(segments);
+                        point3.ToAbsolute(segments);
+                    }
+                    path.CurveTo(point1, point2, point3);
                     break;
                 }
                 case OperationType.SmoothCubicBezierCurve:

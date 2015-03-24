@@ -31,7 +31,7 @@ namespace NGraphics.Test
 		{
 			if (string.IsNullOrEmpty (path))
 				throw new ArgumentException ("path");
-			var ty = typeof(SvgReaderTests);
+			var ty = typeof(PathTests);
 			var ti = ty.GetTypeInfo ();
 			var assembly = ti.Assembly;
 			var resources = assembly.GetManifestResourceNames ();

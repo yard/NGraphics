@@ -165,7 +165,16 @@ namespace NGraphics.Net
 
 				var position = Point.Zero;
 
-				foreach (var op in ops) {
+				foreach (var op in ops)
+				{
+				    var start = op as StartFigure;
+
+				    if (start != null)
+				    {
+				        path.StartFigure();
+                        continue;
+				    }
+
 					var mt = op as MoveTo;
 					if (mt != null) {
 						var p = mt.Point;
@@ -175,8 +184,8 @@ namespace NGraphics.Net
 					}
 					var lt = op as LineTo;
 					if (lt != null) {
-						var p = lt.Point;
-						path.AddLine (Conversions.GetPointF (position), Conversions.GetPointF (p));
+						var p = lt.Start;
+						path.AddLine (Conversions.GetPointF (lt.Start), Conversions.GetPointF (lt.End));
 						position = p;
                         bb.Add (p);
                         continue;
@@ -191,15 +200,13 @@ namespace NGraphics.Net
                     }
                     var ct = op as CurveTo;
                     if (ct != null) {
-                        var p = ct.Point;
-                        var c1 = ct.Control1;
-                        var c2 = ct.Control2;
-                        path.AddBezier (Conversions.GetPointF (position), Conversions.GetPointF (c1),
-                            Conversions.GetPointF (c2), Conversions.GetPointF (p));
-                        position = p;
-                        bb.Add (p);
-                        bb.Add (c1);
-                        bb.Add (c2);
+                      
+                        path.AddBezier (Conversions.GetPointF (ct.Start), Conversions.GetPointF (ct.FirstControlPoint),
+                            Conversions.GetPointF (ct.SecondControlPoint), Conversions.GetPointF (ct.End));
+                        bb.Add(ct.Start);
+                        bb.Add(ct.FirstControlPoint);
+                        bb.Add(ct.SecondControlPoint);
+                        bb.Add(ct.End);
                         continue;
                     }
                     var cp = op as ClosePath;
@@ -211,14 +218,16 @@ namespace NGraphics.Net
 					throw new NotSupportedException ("Path Op " + op);
 				}
 
-				var frame = bb.BoundingBox;
-				if (brush != null) {
-					graphics.FillPath (brush.GetBrush (frame), path);
-				}
-				if (pen != null) {
-					var r = Conversions.GetRectangleF (frame);
-					graphics.DrawPath (pen.GetPen (), path);
-				}
+                var frame = bb.BoundingBox;
+                if (brush != null)
+                {
+                    graphics.FillPath(brush.GetBrush(frame), path);
+                }
+                if (pen != null)
+                {
+                    var r = Conversions.GetRectangleF(frame);
+                    graphics.DrawPath(pen.GetPen(), path);
+                }
 			}
 		}
 		public void DrawRectangle (Rect frame, Pen pen = null, Brush brush = null)

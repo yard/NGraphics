@@ -30,20 +30,36 @@ namespace NGraphics
 			return Point;
 		}
 	}
+
+    public class StartFigure : PathOp
+    {
+        public override Point GetContinueCurveControlPoint()
+        {
+            throw new NotImplementedException();
+        }
+    }
+
 	public class LineTo : PathOp
 	{
-		public Point Point;
+		public Point Start;
+		public Point End;
 		public LineTo (Point point)
 		{
-			Point = point;
+			Start = point;
 		}
+
+        public LineTo(Point start, Point end)
+        {
+            Start = start;
+            End = end;
+        }
 		public LineTo (double x, double y, bool isAbsolute)
 			: this (new Point (x, y, isAbsolute))
 		{
 		}
 		public override Point GetContinueCurveControlPoint ()
 		{
-			return Point;
+			return Start;
 		}
 	}
 	public class ArcTo : PathOp
@@ -92,18 +108,28 @@ namespace NGraphics
 	}
 	public class CurveTo : PathOp
 	{
-		public Point Control1;
-		public Point Control2;
-		public Point Point;
-		public CurveTo (Point control1, Point control2, Point point)
+		public Point Start;
+		public Point FirstControlPoint;
+		public Point SecondControlPoint;
+		public Point End;
+		public CurveTo (Point start, Point firstControlPoint, Point secondControlPoint)
 		{
-			Control1 = control1;
-			Control2 = control2;
-			Point = point;
+			Start = start;
+			FirstControlPoint = firstControlPoint;
+			SecondControlPoint = secondControlPoint;
 		}
+
+        public CurveTo(Point start, Point firstControlPoint, Point secondControlPoint, Point end)
+        {
+            Start = start;
+            FirstControlPoint = firstControlPoint;
+            SecondControlPoint = secondControlPoint;
+            End = end;
+        }
+
 		public override Point GetContinueCurveControlPoint ()
 		{
-			return Control2.ReflectedAround (Point);
+			return FirstControlPoint.ReflectedAround (SecondControlPoint);
 		}
 	}
 	public class ClosePath : PathOp
@@ -138,6 +164,7 @@ namespace NGraphics
 			Operations.Add (op);
 		}
 
+
 		public void MoveTo (Point point, bool isAbsolute)
 		{
 			Add (new MoveTo (point, isAbsolute));
@@ -147,10 +174,17 @@ namespace NGraphics
 			Add (new MoveTo (x, y, isAbsolute));
 		}
 
-		public void LineTo (Point point)
+		public void LineTo ( Point point)
 		{
 			Add (new LineTo (point));
 		}
+
+        public void LineTo(Point start, Point end)
+        {
+            Add(new LineTo(start, end));
+        }
+
+
 		public void LineTo (double x, double y, bool isAbsolute)
 		{
 			Add (new LineTo (x, y, isAbsolute));
@@ -165,6 +199,11 @@ namespace NGraphics
 			Add (new CurveTo (control1, control2, point));
 		}
 
+        public void CurveTo(Point control1, Point control2, Point point, Point point2)
+        {
+            Add(new CurveTo(control1, control2, point, point2));
+        }
+
 		public void ContinueCurveTo (Point control2, Point point)
 		{
 			if (Operations.Count == 0) {
@@ -174,6 +213,11 @@ namespace NGraphics
 			var control1 = prev.GetContinueCurveControlPoint ();
 			Add (new CurveTo (control1, control2, point));
 		}
+
+	    public void Start()
+	    {
+	        Add(new StartFigure());
+	    }
 
 		public void Close ()
 		{
@@ -191,7 +235,7 @@ namespace NGraphics
 				}
 				var lt = o as LineTo;
 				if (lt != null) {
-					verts.Add (lt.Point);
+					verts.Add (lt.Start);
 					continue;
 				}
 				var cp = o as ClosePath;

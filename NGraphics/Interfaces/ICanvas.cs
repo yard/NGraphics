@@ -124,7 +124,7 @@ namespace NGraphics.Interfaces
 		{
 			var p = new Path { Pen = pen };
 			p.MoveTo (start, isAbsolute);
-			p.LineTo (end);
+			p.LineTo ( end);
 			p.Draw (canvas);				
 		}
 		public static void DrawLine (this ICanvas canvas, Point start, Point end, Color color, bool isAbsolute, double width = 1.0)

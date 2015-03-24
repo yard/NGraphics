@@ -4,14 +4,16 @@
   {
     MoveTo,
     LineTo,
-
+    HorizontalLineTo,
+    VerticalLineTo,
+    
     CubicBezierCurve,
     SmoothCubicBezierCurve,
     ArcTo,
-    Close,
-    HorizontalLineTo,
-    VerticalLineTo,
-    QuadraticBezierCurve,
-    SmoothQuadraticBezierCurve
+    
+     QuadraticBezierCurve,
+    SmoothQuadraticBezierCurve,
+  
+    Close
   }
 }

@@ -35,9 +35,12 @@
     <Compile Include="PrimitivesTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="GraphicCanvasTests.cs" />
-    <Compile Include="SvgReaderTests.cs" />
     <Compile Include="PathTests.cs" />
     <Compile Include="ReadmeTests.cs" />
+    <Compile Include="SvgReader\ComplexPathsTests.cs" />
+    <Compile Include="SvgReader\MozillaDataTests.cs" />
+    <Compile Include="SvgReader\SvgReaderTestBase.cs" />
+    <Compile Include="SvgReader\TextTests.cs" />
     <Compile Include="TransformTests.cs" />
     <Compile Include="ColorsToImageTests.cs" />
     <Compile Include="BrushTests.cs" />
@@ -78,5 +81,40 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Inputs\Elvis.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Inputs\IPod.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Inputs\mozilla\paths-data-01-t.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Inputs\mozilla\paths-data-02-t.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Inputs\mozilla\paths-data-04-t.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Inputs\mozilla\paths-data-05-t.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Inputs\mozilla\paths-data-06-t.svg" />
+    <EmbeddedResource Include="Inputs\mozilla\paths-data-07-t.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Inputs\mozilla\paths-data-08-t.svg" />
+    <EmbeddedResource Include="Inputs\mozilla\paths-data-09-t.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Inputs\mozilla\paths-data-10-t.svg" />
+    <EmbeddedResource Include="Inputs\mozilla\paths-data-12-t.svg" />
+    <EmbeddedResource Include="Inputs\mozilla\paths-data-13-t.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Inputs\mozilla\paths-data-14-t.svg" />
+    <EmbeddedResource Include="Inputs\mozilla\paths-data-15-t.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Inputs\horseshoe.svg" />
   </ItemGroup>
 </Project>
