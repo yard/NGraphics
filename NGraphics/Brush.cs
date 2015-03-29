@@ -23,15 +23,18 @@ namespace NGraphics
 	public class SolidBrush : Brush
 	{
 		public Color Color;
+		public FillMode FillMode;
 
 		public SolidBrush ()
 		{
 			Color = Colors.Black;
+			FillMode = FillMode.Regular;
 		}
 
 		public SolidBrush (Color color)
 		{
 			Color = color;
+			FillMode = FillMode.Regular;
 		}
 	}
 

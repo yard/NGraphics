@@ -291,6 +291,19 @@ namespace NGraphics
                     sb.Color = sb.Color.WithAlpha(ReadNumber(fillOpacity));
             }
 
+			var fillRule = GetString(style, "fill-rule");
+			if (!string.IsNullOrWhiteSpace(fillRule))
+			{
+				if (brush == null)
+					brush = new SolidBrush();
+				var sb = brush as SolidBrush;
+				if (sb != null) {
+					if (fillRule.Equals ("evenodd")) {
+						sb.FillMode = FillMode.EvenOdd;
+					}
+				}
+			}
+
             //
             // Brush
             //
@@ -315,7 +328,7 @@ namespace NGraphics
                     }
                     else
                     {
-                        if (sb.Color.Alpha == 1)
+						if (sb.Color.Alpha == 1 || pen == null)
                             sb.Color = color;
                         else
                             sb.Color = color.WithAlpha(pen.Color.Alpha);
