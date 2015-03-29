@@ -293,6 +293,8 @@ namespace NGraphics
 
 				var bb = new BoundingBoxBuilder ();
 
+				var lines = new List<CGPoint>();
+
 				foreach (var op in ops) {
 					var mt = op as MoveTo;
 					if (mt != null) {
@@ -303,9 +305,14 @@ namespace NGraphics
 					}
 					var lt = op as LineTo;
 					if (lt != null) {
-						var p = lt.Point;
-						context.AddLineToPoint ((nfloat)p.X, (nfloat)p.Y);
-						bb.Add (p);
+						var start = lt.Start;
+						var end = lt.Start;
+
+						lines.Add(new CGPoint((nfloat)lt.Start.X, (nfloat)lt.Start.Y ));
+						lines.Add(new CGPoint((nfloat)lt.End.X, (nfloat)lt.End.Y ));
+
+						bb.Add (start);
+						bb.Add (end);
 						continue;
 					}
 					var at = op as ArcTo;
@@ -330,6 +337,7 @@ namespace NGraphics
 						continue;
 					}
 					var cp = op as ClosePath;
+				
 					if (cp != null) {
 						context.ClosePath ();
 						continue;
@@ -337,6 +345,8 @@ namespace NGraphics
 
 					throw new NotSupportedException ("Path Op " + op);
 				}
+
+				context.AddLines(lines.ToArray());
 
 				return bb.BoundingBox;
 
