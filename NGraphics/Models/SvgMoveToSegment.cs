@@ -16,7 +16,7 @@ namespace NGraphics.Models
 
         public override void AddToPath(Path graphicsPath)
         {
-            graphicsPath.Start();
+			graphicsPath.MoveTo(Start,End,false);
         }
 
         public override string ToString()
