@@ -56,7 +56,6 @@
     <Compile Include="Parsers\CoordinateParser.cs" />
     <Compile Include="Parsers\OperationParser.cs" />
     <Compile Include="Parsers\SvgNumber.cs" />
-    <Compile Include="Parsers\SvgPathParser.cs" />
     <Compile Include="PathBuilder.cs" />
     <Compile Include="Pen.cs" />
     <Compile Include="Point.cs" />
