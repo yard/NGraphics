@@ -140,18 +140,4 @@ namespace NGraphics.Models.Segments
                    End.ToSvgString();
         }
     }
-
-    [Flags]
-    public enum SvgArcSweep
-    {
-        Negative = 0,
-        Positive = 1
-    }
-
-    [Flags]
-    public enum SvgArcSize
-    {
-        Small = 0,
-        Large = 1
-    }
 }

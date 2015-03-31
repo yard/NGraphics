@@ -5,10 +5,6 @@ using NGraphics.Interfaces;
 
 namespace NGraphics.Models.Operations
 {
-    public abstract class PathOperation
-    {
-    }
-
     public class Path : Element
     {
         public Path(IEnumerable<PathOperation> operations, Pen pen = null, BaseBrush baseBrush = null)

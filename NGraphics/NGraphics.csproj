@@ -35,6 +35,7 @@
   <ItemGroup>
     <Compile Include="Models\Brushes\BaseBrush.cs" />
     <Compile Include="Codes\OperationType.cs" />
+    <Compile Include="Codes\Brushes.cs" />
     <Compile Include="Models\Brushes\GradientBrush.cs" />
     <Compile Include="Models\Brushes\GradientStop.cs" />
     <Compile Include="Models\Brushes\LinearGradientBrush.cs" />
@@ -54,6 +55,7 @@
     <Compile Include="Models\Operations\CurveTo.cs" />
     <Compile Include="Models\Operations\LineTo.cs" />
     <Compile Include="Models\Operations\StartFigure.cs" />
+    <Compile Include="Codes\Pens.cs" />
     <Compile Include="Models\Segments\SvgArcSegment.cs" />
     <Compile Include="Models\Segments\SvgClocePathSegment.cs" />
     <Compile Include="Models\Segments\SvgCubicCurveSegment.cs" />
