@@ -15,9 +15,6 @@ namespace NGraphics
 
     public class Pen
     {
-        public Color Color;
-        public double Width;
-
         public Pen()
         {
             Color = Colors.Black;
@@ -34,6 +31,9 @@ namespace NGraphics
             : this(new Color(colorString), width)
         {
         }
+
+        public Color Color;
+        public double Width;
 
         public Pen WithWidth(double width)
         {

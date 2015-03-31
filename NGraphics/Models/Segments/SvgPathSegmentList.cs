@@ -5,12 +5,12 @@ namespace NGraphics.Models.Segments
 {
     public sealed class SvgPathSegmentList : IList<SvgPathSegment>
     {
-        private readonly List<SvgPathSegment> _segments;
-
         public SvgPathSegmentList()
         {
             _segments = new List<SvgPathSegment>();
         }
+
+        private readonly List<SvgPathSegment> _segments;
 
         public SvgPathSegment Last
         {

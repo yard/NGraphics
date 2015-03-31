@@ -22,9 +22,6 @@ namespace NGraphics
 
     public class SolidBrush : Brush
     {
-        public Color Color;
-        public FillMode FillMode;
-
         public SolidBrush()
         {
             Color = Colors.Black;
@@ -36,13 +33,13 @@ namespace NGraphics
             Color = color;
             FillMode = FillMode.Regular;
         }
+
+        public Color Color;
+        public FillMode FillMode;
     }
 
     public class GradientStop
     {
-        public Color Color;
-        public double Offset;
-
         public GradientStop()
         {
         }
@@ -52,6 +49,9 @@ namespace NGraphics
             Offset = offset;
             Color = color;
         }
+
+        public Color Color;
+        public double Offset;
     }
 
     public abstract class GradientBrush : Brush
@@ -66,10 +66,6 @@ namespace NGraphics
 
     public class RadialGradientBrush : GradientBrush
     {
-        public Point RelativeCenter;
-        public Point RelativeFocus;
-        public double RelativeRadius;
-
         public RadialGradientBrush()
         {
         }
@@ -100,13 +96,14 @@ namespace NGraphics
             Stops.Add(new GradientStop(0.5, midColor));
             Stops.Add(new GradientStop(1, endColor));
         }
+
+        public Point RelativeCenter;
+        public Point RelativeFocus;
+        public double RelativeRadius;
     }
 
     public class LinearGradientBrush : GradientBrush
     {
-        public Point RelativeEnd;
-        public Point RelativeStart;
-
         public LinearGradientBrush()
         {
         }
@@ -134,5 +131,8 @@ namespace NGraphics
             Stops.Add(new GradientStop(0.5, midColor));
             Stops.Add(new GradientStop(1, endColor));
         }
+
+        public Point RelativeEnd;
+        public Point RelativeStart;
     }
 }

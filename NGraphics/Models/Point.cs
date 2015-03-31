@@ -8,19 +8,19 @@ namespace NGraphics
     /// </summary>
     public struct Point
     {
-        public static readonly Point Zero = new Point(0, 0);
-        public static readonly Point OneX = new Point(1, 0);
-        public static readonly Point OneY = new Point(0, 1);
-        private readonly bool _isAbsolute;
-        public double X;
-        public double Y;
-
         public Point(double x, double y, bool isAbsolute = false)
         {
             X = x;
             Y = y;
             _isAbsolute = isAbsolute;
         }
+
+        public static readonly Point Zero = new Point(0, 0);
+        public static readonly Point OneX = new Point(1, 0);
+        public static readonly Point OneY = new Point(0, 1);
+        private readonly bool _isAbsolute;
+        public double X;
+        public double Y;
 
         public double Distance
         {

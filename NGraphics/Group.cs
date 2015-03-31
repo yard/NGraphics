@@ -5,12 +5,12 @@ namespace NGraphics
 {
     public class Group : Element
     {
-        public readonly List<IDrawable> Children = new List<IDrawable>();
-
         public Group()
             : base(null, null)
         {
         }
+
+        public readonly List<IDrawable> Children = new List<IDrawable>();
 
         protected override void DrawElement(ICanvas canvas)
         {

@@ -12,11 +12,6 @@ namespace NGraphics
 
     public class MoveTo : PathOp
     {
-        public Point End;
-        public bool IsAbsolute;
-        public Point Point;
-        public Point Start;
-
         public MoveTo(Point point, bool isAbsolute)
         {
             Point = point;
@@ -35,6 +30,11 @@ namespace NGraphics
             IsAbsolute = isAbsolute;
         }
 
+        public Point End;
+        public bool IsAbsolute;
+        public Point Point;
+        public Point Start;
+
         public override Point GetContinueCurveControlPoint()
         {
             return Point;
@@ -51,9 +51,6 @@ namespace NGraphics
 
     public class LineTo : PathOp
     {
-        public Point End;
-        public Point Start;
-
         public LineTo(Point point)
         {
             Start = point;
@@ -70,6 +67,9 @@ namespace NGraphics
         {
         }
 
+        public Point End;
+        public Point Start;
+
         public override Point GetContinueCurveControlPoint()
         {
             return Start;
@@ -78,11 +78,6 @@ namespace NGraphics
 
     public class ArcTo : PathOp
     {
-        public bool LargeArc;
-        public Point Point;
-        public Size Radius;
-        public bool SweepClockwise;
-
         public ArcTo(Size radius, bool largeArc, bool sweepClockwise, Point point)
         {
             Radius = radius;
@@ -90,6 +85,11 @@ namespace NGraphics
             SweepClockwise = sweepClockwise;
             Point = point;
         }
+
+        public bool LargeArc;
+        public Point Point;
+        public Size Radius;
+        public bool SweepClockwise;
 
         public override Point GetContinueCurveControlPoint()
         {
@@ -126,11 +126,6 @@ namespace NGraphics
 
     public class CurveTo : PathOp
     {
-        public Point End;
-        public Point FirstControlPoint;
-        public Point SecondControlPoint;
-        public Point Start;
-
         public CurveTo(Point start, Point firstControlPoint, Point secondControlPoint)
         {
             Start = start;
@@ -145,6 +140,11 @@ namespace NGraphics
             SecondControlPoint = secondControlPoint;
             End = end;
         }
+
+        public Point End;
+        public Point FirstControlPoint;
+        public Point SecondControlPoint;
+        public Point Start;
 
         public override Point GetContinueCurveControlPoint()
         {
@@ -162,8 +162,6 @@ namespace NGraphics
 
     public class Path : Element
     {
-        public readonly List<PathOp> Operations = new List<PathOp>();
-
         public Path(IEnumerable<PathOp> operations, Pen pen = null, Brush brush = null)
             : base(pen, brush)
         {
@@ -174,6 +172,8 @@ namespace NGraphics
             : base(pen, brush)
         {
         }
+
+        public readonly List<PathOp> Operations = new List<PathOp>();
 
         protected override void DrawElement(ICanvas canvas)
         {

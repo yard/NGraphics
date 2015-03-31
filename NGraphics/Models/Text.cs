@@ -4,11 +4,6 @@ namespace NGraphics
 {
     public class Text : Element
     {
-        public TextAlignment Alignment;
-        public Font Font;
-        public Rect Frame;
-        public string String;
-
         public Text(string text, Rect frame, Font font, TextAlignment alignment = TextAlignment.Left, Pen pen = null,
             Brush brush = null)
             : base(pen, brush)
@@ -18,6 +13,11 @@ namespace NGraphics
             Font = font;
             Alignment = alignment;
         }
+
+        public TextAlignment Alignment;
+        public Font Font;
+        public Rect Frame;
+        public string String;
 
         protected override void DrawElement(ICanvas canvas)
         {

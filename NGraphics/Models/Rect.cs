@@ -5,11 +5,6 @@ namespace NGraphics
 {
     public struct Rect
     {
-        public double Height;
-        public double Width;
-        public double X;
-        public double Y;
-
         public Rect(double x, double y, double width, double height)
         {
             X = x;
@@ -27,6 +22,11 @@ namespace NGraphics
             : this(0, 0, size.Width, size.Height)
         {
         }
+
+        public double Height;
+        public double Width;
+        public double X;
+        public double Y;
 
         public double Right
         {

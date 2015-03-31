@@ -5,11 +5,6 @@ namespace NGraphics
 {
     public struct Size
     {
-        public static readonly Size Zero = new Size();
-        public static readonly Size One = new Size(1);
-        public double Height;
-        public double Width;
-
         public Size(double width, double height)
         {
             Width = width;
@@ -21,6 +16,11 @@ namespace NGraphics
             Width = size;
             Height = size;
         }
+
+        public static readonly Size Zero = new Size();
+        public static readonly Size One = new Size(1);
+        public double Height;
+        public double Width;
 
         public double Max
         {

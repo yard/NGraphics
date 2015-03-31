@@ -5,9 +5,6 @@ namespace NGraphics.Models.Segments
 {
     public sealed class SvgArcSegment : SvgPathSegment
     {
-        private const double RadiansPerDegree = Math.PI/180.0;
-        private const double DoublePI = Math.PI*2;
-
         public SvgArcSegment(Point start, float radiusX, float radiusY, float angle, SvgArcSize size, SvgArcSweep sweep,
             Point end)
             : base(start, end)
@@ -19,6 +16,8 @@ namespace NGraphics.Models.Segments
             Size = size;
         }
 
+        private const double RadiansPerDegree = Math.PI/180.0;
+        private const double DoublePI = Math.PI*2;
         public float RadiusX { get; set; }
         public float RadiusY { get; set; }
         public float Angle { get; set; }

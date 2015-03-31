@@ -5,8 +5,6 @@ namespace NGraphics
 {
     public class Rectangle : Element
     {
-        private readonly Rect frame;
-
         public Rectangle(Rect frame, Pen pen = null, Brush brush = null)
             : base(pen, brush)
         {
@@ -27,6 +25,8 @@ namespace NGraphics
             : this(Point.Zero, new Size(size))
         {
         }
+
+        private readonly Rect frame;
 
         protected override void DrawElement(ICanvas canvas)
         {

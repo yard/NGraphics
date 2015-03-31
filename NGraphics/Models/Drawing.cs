@@ -7,10 +7,6 @@ namespace NGraphics
 
     public class Drawing
     {
-        private readonly DrawingFunc func;
-        private readonly Size size;
-        private Graphic graphic;
-
         public Drawing(Size size, DrawingFunc func)
         {
             if (func == null)
@@ -20,6 +16,10 @@ namespace NGraphics
             this.size = size;
             this.func = func;
         }
+
+        private readonly DrawingFunc func;
+        private readonly Size size;
+        private Graphic graphic;
 
         public Graphic Graphic
         {

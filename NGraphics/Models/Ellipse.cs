@@ -5,8 +5,6 @@ namespace NGraphics
 {
     public class Ellipse : Element
     {
-        private readonly Rect frame;
-
         public Ellipse(Rect frame, Pen pen = null, Brush brush = null)
             : base(pen, brush)
         {
@@ -27,6 +25,8 @@ namespace NGraphics
             : this(Point.Zero, new Size(diameter))
         {
         }
+
+        private readonly Rect frame;
 
         protected override void DrawElement(ICanvas canvas)
         {

@@ -4,12 +4,6 @@ namespace NGraphics.Parsers
 {
     internal class CoordinateParser
     {
-        private readonly string _coords;
-        private NumState _currState = NumState.separator;
-        private NumState _newState = NumState.separator;
-        private bool _parseWorked = true;
-        private int i;
-
         public CoordinateParser(string coords)
         {
             Position = 0;
@@ -18,6 +12,11 @@ namespace NGraphics.Parsers
             if (char.IsLetter(coords[0])) i++;
         }
 
+        private readonly string _coords;
+        private NumState _currState = NumState.separator;
+        private NumState _newState = NumState.separator;
+        private bool _parseWorked = true;
+        private int i;
         public int Position { get; private set; }
 
         public bool HasMore
