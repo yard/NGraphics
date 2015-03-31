@@ -58,7 +58,7 @@ namespace NGraphics.Models.Segments
                 return tb - ta;
             }
 
-            return SvgArcSegment.DoublePI - (ta - tb);
+            return DoublePI - (ta - tb);
         }
 
         public override void AddToPath(Path graphicsPath)
@@ -74,8 +74,8 @@ namespace NGraphics.Models.Segments
                 return;
             }
 
-            double sinPhi = Math.Sin(this.Angle * SvgArcSegment.RadiansPerDegree);
-            double cosPhi = Math.Cos(this.Angle * SvgArcSegment.RadiansPerDegree);
+            double sinPhi = Math.Sin(this.Angle * RadiansPerDegree);
+            double cosPhi = Math.Cos(this.Angle * RadiansPerDegree);
 
             double x1dash = cosPhi * (this.Start.X - this.End.X) / 2.0 + sinPhi * (this.Start.Y - this.End.Y) / 2.0;
             double y1dash = -sinPhi * (this.Start.X - this.End.X) / 2.0 + cosPhi * (this.Start.Y - this.End.Y) / 2.0;
@@ -105,8 +105,8 @@ namespace NGraphics.Models.Segments
             double cx = cosPhi * cxdash - sinPhi * cydash + (this.Start.X + this.End.X) / 2.0;
             double cy = sinPhi * cxdash + cosPhi * cydash + (this.Start.Y + this.End.Y) / 2.0;
 
-            double theta1 = SvgArcSegment.CalculateVectorAngle(1.0, 0.0, (x1dash - cxdash) / rx, (y1dash - cydash) / ry);
-            double dtheta = SvgArcSegment.CalculateVectorAngle((x1dash - cxdash) / rx, (y1dash - cydash) / ry, (-x1dash - cxdash) / rx, (-y1dash - cydash) / ry);
+            double theta1 = CalculateVectorAngle(1.0, 0.0, (x1dash - cxdash) / rx, (y1dash - cydash) / ry);
+            double dtheta = CalculateVectorAngle((x1dash - cxdash) / rx, (y1dash - cydash) / ry, (-x1dash - cxdash) / rx, (-y1dash - cydash) / ry);
 
             if (this.Sweep == SvgArcSweep.Negative && dtheta > 0)
             {

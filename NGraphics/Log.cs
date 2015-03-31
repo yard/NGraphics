@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 
 namespace NGraphics
 {
@@ -6,7 +7,7 @@ namespace NGraphics
 	{
 		public static void Error (Exception ex)
 		{
-			System.Diagnostics.Debug.WriteLine ("ERROR: " + ex);
+			Debug.WriteLine ("ERROR: " + ex);
 		}
 	}
 }

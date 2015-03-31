@@ -1,5 +1,3 @@
-using System;
-
 namespace NGraphics
 {
 	public static class Pens

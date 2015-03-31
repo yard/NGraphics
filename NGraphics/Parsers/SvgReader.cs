@@ -5,8 +5,6 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
-using NGraphics.Codes;
-using NGraphics.ExtensionMethods;
 using NGraphics.Interfaces;
 using NGraphics.Models;
 using NGraphics.Parsers;

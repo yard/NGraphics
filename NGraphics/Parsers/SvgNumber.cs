@@ -27,7 +27,7 @@ namespace NGraphics.Parsers
 
         public SvgNumber(string str)
         {
-            _value = SvgNumber.ParseNumber(str);
+            _value = ParseNumber(str);
         }
 
         #endregion
@@ -53,7 +53,7 @@ namespace NGraphics.Parsers
 				sc = sc.Trim();
 				// remove the unit
 				Match match = reUnit.Match(sc);
-				return SvgNumber.ParseNumber(sc.Substring(0, sc.Length - match.Length)).ToString(Format) + match.Value;
+				return ParseNumber(sc.Substring(0, sc.Length - match.Length)).ToString(Format) + match.Value;
 			}
 			else
 			{
@@ -65,7 +65,7 @@ namespace NGraphics.Parsers
 		{
             try
             {
-                return Double.Parse(str, SvgNumber.Format);
+                return Double.Parse(str, Format);
             }
             catch (Exception e)
             {

@@ -1,10 +1,11 @@
 using System;
-using System.Globalization;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Runtime.InteropServices;
 
 namespace NGraphics
 {
-	[System.Runtime.InteropServices.StructLayout (System.Runtime.InteropServices.LayoutKind.Sequential)]
+	[StructLayout (LayoutKind.Sequential)]
 	public struct Color
 	{
 		public byte B;
@@ -157,24 +158,24 @@ namespace NGraphics
 
 		static Colors ()
 		{
-            names["clear"] = Colors.Clear;
-            names["black"] = Colors.Black;
-            names["darkgray"] = Colors.DarkGray;
-            names["gray"] = Colors.Gray;
-            names["lightgray"] = Colors.LightGray;
-            names["white"] = Colors.White;
-            names["red"] = Colors.Red;
-            names["orange"] = Colors.Orange;
-            names["yellow"] = Colors.Yellow;
-            names["green"] = Colors.Green;
-            names["blue"] = Colors.Blue;
-            names["transparent"] = Colors.Clear;
+            names["clear"] = Clear;
+            names["black"] = Black;
+            names["darkgray"] = DarkGray;
+            names["gray"] = Gray;
+            names["lightgray"] = LightGray;
+            names["white"] = White;
+            names["red"] = Red;
+            names["orange"] = Orange;
+            names["yellow"] = Yellow;
+            names["green"] = Green;
+            names["blue"] = Blue;
+            names["transparent"] = Clear;
 		}
 
 		public static bool TryParse (string colorString, out Color color)
 		{
 			if (string.IsNullOrWhiteSpace (colorString)) {
-				color = Colors.Clear;
+				color = Clear;
 				return false;
 			}
 
@@ -199,7 +200,7 @@ namespace NGraphics
 				return true;
 			}
 
-			color = Colors.Clear;
+			color = Clear;
 			return false;
 		}
 	}

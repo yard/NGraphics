@@ -33,9 +33,9 @@
     <DocumentationFile>bin\Release\NGraphics.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Brush.cs" />
+    <Compile Include="Models\Brush.cs" />
     <Compile Include="Codes\OperationType.cs" />
-    <Compile Include="Color.cs" />
+    <Compile Include="Models\Color.cs" />
     <Compile Include="ExtensionMethods\CharExtensions.cs" />
     <Compile Include="ExtensionMethods\StringExtensions.cs" />
     <Compile Include="Interfaces\IDrawable.cs" />
@@ -56,25 +56,25 @@
     <Compile Include="Parsers\CoordinateParser.cs" />
     <Compile Include="Parsers\OperationParser.cs" />
     <Compile Include="Parsers\SvgNumber.cs" />
-    <Compile Include="Pen.cs" />
-    <Compile Include="Point.cs" />
-    <Compile Include="Size.cs" />
+    <Compile Include="Models\Pen.cs" />
+    <Compile Include="Models\Point.cs" />
+    <Compile Include="Models\Size.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Interfaces\ICanvas.cs" />
     <Compile Include="Graphic.cs" />
-    <Compile Include="Ellipse.cs" />
+    <Compile Include="Models\Ellipse.cs" />
     <Compile Include="GraphicCanvas.cs" />
-    <Compile Include="Drawing.cs" />
-    <Compile Include="SvgReader.cs" />
+    <Compile Include="Models\Drawing.cs" />
+    <Compile Include="Parsers\SvgReader.cs" />
     <Compile Include="Parsers\SvgPathParser.cs" />
     <Compile Include="Group.cs" />
-    <Compile Include="Rect.cs" />
+    <Compile Include="Models\Rect.cs" />
     <Compile Include="Rectangle.cs" />
     <Compile Include="Path.cs" />
     <Compile Include="Transform.cs" />
-    <Compile Include="Text.cs" />
-    <Compile Include="Element.cs" />
-    <Compile Include="Font.cs" />
+    <Compile Include="Models\Text.cs" />
+    <Compile Include="Models\Element.cs" />
+    <Compile Include="Models\Font.cs" />
     <Compile Include="Models\FillMode.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />

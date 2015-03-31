@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using NGraphics.Interfaces;
 
@@ -54,7 +54,7 @@ namespace NGraphics
 			canvas.RestoreState ();
 		}
 
-		public static Graphic LoadSvg (System.IO.TextReader reader)
+		public static Graphic LoadSvg (TextReader reader)
 		{
 			var svgr = new SvgReader (reader);
 			return svgr.Graphic;

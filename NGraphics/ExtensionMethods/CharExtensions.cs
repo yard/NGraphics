@@ -1,6 +1,4 @@
-﻿using System.Resources;
-
-namespace NGraphics.ExtensionMethods
+﻿namespace NGraphics.ExtensionMethods
 {
   public static class CharExtensions
   {

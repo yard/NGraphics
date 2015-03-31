@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace NGraphics
+﻿namespace NGraphics
 {
 	public class Font
 	{
