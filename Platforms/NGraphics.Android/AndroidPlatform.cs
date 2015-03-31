@@ -265,7 +265,7 @@ namespace NGraphics.Android
 			graphics.DrawText (text, (float)point.X, (float)point.Y, paint);
 //			}
 		}
-		public void DrawPath (IEnumerable<PathOp> ops, Pen pen = null, Brush brush = null)
+		public void DrawPath (IEnumerable<PathOperation> ops, Pen pen = null, Brush brush = null)
 		{
 			if (pen == null && brush == null)
 				return;

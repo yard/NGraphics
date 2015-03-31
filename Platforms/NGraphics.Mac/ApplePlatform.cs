@@ -285,7 +285,7 @@ namespace NGraphics
 			}
 		}
 
-		public void DrawPath (IEnumerable<PathOp> ops, Pen pen = null, Brush brush = null)
+		public void DrawPath (IEnumerable<PathOperation> ops, Pen pen = null, Brush brush = null)
 		{
 			if (pen == null && brush == null)
 				return;

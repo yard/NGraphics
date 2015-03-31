@@ -157,7 +157,7 @@ namespace NGraphics.Net
             var fr = new Rect (point, new Size (sz.Width, sz.Height));
             graphics.DrawString (text, sdfont, Conversions.GetBrush (brush, fr), Conversions.GetPointF (point - new Point (0, sdfont.Height)));
 		}
-		public void DrawPath (IEnumerable<PathOp> ops, Pen pen = null, Brush brush = null)
+		public void DrawPath (IEnumerable<PathOperation> ops, Pen pen = null, Brush brush = null)
 		{
 			using (var path = new GraphicsPath ()) {
 
