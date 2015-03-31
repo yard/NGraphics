@@ -4,7 +4,7 @@ namespace NGraphics
     {
         public MoveTo(Point point, bool isAbsolute)
         {
-            Point = point;
+            Start = point;
             IsAbsolute = isAbsolute;
         }
 
@@ -20,11 +20,8 @@ namespace NGraphics
             IsAbsolute = isAbsolute;
         }
 
+        public Point Start;
         public Point End;
         public bool IsAbsolute;
-        public Point Point;
-        public Point Start;
-
-       
     }
 }

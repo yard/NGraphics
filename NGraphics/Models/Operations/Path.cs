@@ -97,7 +97,7 @@ namespace NGraphics
                 var mo = o as MoveTo;
                 if (mo != null)
                 {
-                    verts.Add(mo.Point);
+                    verts.Add(mo.Start);
                     continue;
                 }
                 var lt = o as LineTo;
