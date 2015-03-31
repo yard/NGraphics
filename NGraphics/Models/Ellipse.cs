@@ -1,7 +1,7 @@
 ﻿using System.Globalization;
 using NGraphics.Interfaces;
 
-namespace NGraphics
+namespace NGraphics.Models
 {
     public class Ellipse : Element
     {

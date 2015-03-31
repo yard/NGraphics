@@ -2,6 +2,8 @@
 using System.IO;
 using System.Linq;
 using NGraphics.Interfaces;
+using NGraphics.Models;
+using NGraphics.Parsers;
 
 namespace NGraphics
 {

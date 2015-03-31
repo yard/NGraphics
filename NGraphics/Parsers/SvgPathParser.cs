@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using NGraphics.Models;
+using NGraphics.Models.Operations;
 using NGraphics.Models.Segments;
 
 namespace NGraphics.Parsers

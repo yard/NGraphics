@@ -1,4 +1,5 @@
 ﻿using System;
+using NGraphics.Models.Operations;
 using NGraphics.Parsers;
 
 namespace NGraphics.Models.Segments

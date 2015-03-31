@@ -1,4 +1,6 @@
-﻿namespace NGraphics.Models.Segments
+﻿using NGraphics.Models.Operations;
+
+namespace NGraphics.Models.Segments
 {
     public sealed class SvgClosePathSegment : SvgPathSegment
     {

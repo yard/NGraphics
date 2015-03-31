@@ -7,9 +7,9 @@ using System.Text.RegularExpressions;
 using System.Xml.Linq;
 using NGraphics.Interfaces;
 using NGraphics.Models;
-using NGraphics.Parsers;
+using Path = NGraphics.Models.Operations.Path;
 
-namespace NGraphics
+namespace NGraphics.Parsers
 {
     public class SvgReader
     {

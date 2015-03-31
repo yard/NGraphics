@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using NGraphics.Interfaces;
+using NGraphics.Models;
 
 namespace NGraphics
 {

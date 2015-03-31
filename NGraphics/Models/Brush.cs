@@ -1,7 +1,6 @@
 using System.Collections.Generic;
-using NGraphics.Models;
 
-namespace NGraphics
+namespace NGraphics.Models
 {
     public abstract class Brush
     {

@@ -1,7 +1,7 @@
 using System;
 using NGraphics.Interfaces;
 
-namespace NGraphics
+namespace NGraphics.Models
 {
     public abstract class Element : IDrawable
     {

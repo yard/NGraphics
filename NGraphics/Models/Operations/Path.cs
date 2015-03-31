@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using NGraphics.Interfaces;
 
-namespace NGraphics
+namespace NGraphics.Models.Operations
 {
     public abstract class PathOperation
     {

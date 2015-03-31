@@ -1,6 +1,6 @@
 ﻿using NGraphics.Interfaces;
 
-namespace NGraphics
+namespace NGraphics.Models
 {
     public class Text : Element
     {
