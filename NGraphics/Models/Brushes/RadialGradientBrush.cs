@@ -1,4 +1,4 @@
-namespace NGraphics.Models
+namespace NGraphics.Models.Brushes
 {
     public class RadialGradientBrush : GradientBrush
     {

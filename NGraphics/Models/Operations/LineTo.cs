@@ -18,7 +18,7 @@ namespace NGraphics.Models.Operations
         {
         }
 
-        public Point Start;
         public Point End;
+        public Point Start;
     }
 }

@@ -7,9 +7,12 @@ using System.Linq;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.InteropServices;
+using NGraphics.Codes;
 using NGraphics.Interfaces;
 using NGraphics.Models;
+using NGraphics.Models.Brushes;
 using NGraphics.Models.Operations;
+using NGraphics.Models.Transforms;
 
 namespace NGraphics
 {
@@ -165,10 +168,10 @@ namespace NGraphics
 		{
 			context.SaveState ();
 		}
-		public void Transform (Transform transform)
+		public void Transform (TransformBase transform)
 		{
 			var t = transform;
-			var stack = new Stack<Transform> ();
+			var stack = new Stack<TransformBase> ();
 			while (t != null) {
 				stack.Push (t);
 				t = t.Previous;

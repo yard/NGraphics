@@ -5,9 +5,14 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
+using NGraphics.Codes;
 using NGraphics.Interfaces;
 using NGraphics.Models;
-using Path = NGraphics.Models.Operations.Path;
+using NGraphics.Models.Brushes;
+using NGraphics.Models.Elements;
+using NGraphics.Models.Transforms;
+using Group = NGraphics.Models.Elements.Group;
+using Path = NGraphics.Models.Elements.Path;
 
 namespace NGraphics.Parsers
 {
@@ -78,7 +83,8 @@ namespace NGraphics.Parsers
             AddElements(Graphic.Children, svg.Elements(), null, null);
         }
 
-        private void AddElements(IList<IDrawable> list, IEnumerable<XElement> es, Pen inheritPen, BaseBrush inheritBaseBrush)
+        private void AddElements(IList<IDrawable> list, IEnumerable<XElement> es, Pen inheritPen,
+            BaseBrush inheritBaseBrush)
         {
             foreach (var e in es)
                 AddElement(list, e, inheritPen, inheritBaseBrush);
@@ -368,7 +374,7 @@ namespace NGraphics.Parsers
             }
         }
 
-        private Transform ReadTransform(string raw)
+        private TransformBase ReadTransform(string raw)
         {
             if (string.IsNullOrWhiteSpace(raw))
                 return null;
@@ -377,12 +383,12 @@ namespace NGraphics.Parsers
 
             var calls = s.Split(new[] {')'}, StringSplitOptions.RemoveEmptyEntries);
 
-            Transform t = null;
+            TransformBase t = null;
 
             foreach (var c in calls)
             {
                 var args = c.Split(new[] {'(', ',', ' ', '\t', '\r', '\n'}, StringSplitOptions.RemoveEmptyEntries);
-                Transform nt = null;
+                TransformBase nt = null;
                 switch (args[0])
                 {
                     case "matrix":

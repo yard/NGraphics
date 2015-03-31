@@ -6,17 +6,19 @@ using System.Drawing.Imaging;
 using System.IO;
 using NGraphics.Interfaces;
 using NGraphics.Models;
+using NGraphics.Models.Brushes;
 using NGraphics.Models.Operations;
+using NGraphics.Models.Transforms;
 using BoundingBoxBuilder = NGraphics.Models.BoundingBoxBuilder;
 using Font = NGraphics.Models.Font;
-using GradientStop = NGraphics.Models.GradientStop;
-using LinearGradientBrush = NGraphics.Models.LinearGradientBrush;
+using GradientStop = NGraphics.Models.Brushes.GradientStop;
+using LinearGradientBrush = NGraphics.Models.Brushes.LinearGradientBrush;
 using Pen = NGraphics.Models.Pen;
 using Point = NGraphics.Models.Point;
 using Rect = NGraphics.Models.Rect;
 using Size = NGraphics.Models.Size;
-using SolidBrush = NGraphics.Models.SolidBrush;
-using TextAlignment = NGraphics.Models.TextAlignment;
+using SolidBrush = NGraphics.Models.Brushes.SolidBrush;
+using TextAlignment = NGraphics.Codes.TextAlignment;
 
 namespace NGraphics.Net
 {
@@ -119,10 +121,10 @@ namespace NGraphics.Net
 			var s = graphics.Save ();
 			stateStack.Push (s);
 		}
-		public void Transform (Transform transform)
+		public void Transform (TransformBase transform)
 		{
 			var t = transform;
-			var stack = new Stack<Transform> ();
+			var stack = new Stack<TransformBase> ();
 			while (t != null) {
 				stack.Push (t);
 				t = t.Previous;

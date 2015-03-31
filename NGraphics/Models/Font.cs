@@ -10,11 +10,4 @@
             get { return Family; }
         }
     }
-
-    public enum TextAlignment
-    {
-        Left,
-        Center,
-        Right
-    }
 }

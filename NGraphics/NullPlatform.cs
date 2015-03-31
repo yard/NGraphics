@@ -1,8 +1,11 @@
 using System.Collections.Generic;
 using System.IO;
+using NGraphics.Codes;
 using NGraphics.Interfaces;
 using NGraphics.Models;
+using NGraphics.Models.Brushes;
 using NGraphics.Models.Operations;
+using NGraphics.Models.Transforms;
 
 namespace NGraphics
 {
@@ -44,7 +47,7 @@ namespace NGraphics
             {
             }
 
-            public void Transform(Transform transform)
+            public void Transform(TransformBase transform)
             {
             }
 

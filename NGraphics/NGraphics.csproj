@@ -33,6 +33,7 @@
     <DocumentationFile>bin\Release\NGraphics.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Models\BoundingBoxBuilder.cs" />
     <Compile Include="Models\Brushes\BaseBrush.cs" />
     <Compile Include="Codes\OperationType.cs" />
     <Compile Include="Codes\Brushes.cs" />
@@ -48,16 +49,21 @@
     <Compile Include="Interfaces\IImage.cs" />
     <Compile Include="Interfaces\IPlatform.cs" />
     <Compile Include="Log.cs" />
+    <Compile Include="Codes\Colors.cs" />
     <Compile Include="Models\CssNumber.cs" />
+    <Compile Include="Models\DrawingFunc.cs" />
     <Compile Include="Models\Operation.cs" />
     <Compile Include="Models\Operations\ArcTo.cs" />
     <Compile Include="Models\Operations\ClosePath.cs" />
     <Compile Include="Models\Operations\CurveTo.cs" />
     <Compile Include="Models\Operations\LineTo.cs" />
+    <Compile Include="Models\Operations\PathOperation.cs" />
     <Compile Include="Models\Operations\StartFigure.cs" />
     <Compile Include="Codes\Pens.cs" />
     <Compile Include="Models\Segments\SvgArcSegment.cs" />
-    <Compile Include="Models\Segments\SvgClocePathSegment.cs" />
+    <Compile Include="Models\Segments\SvgArcSize.cs" />
+    <Compile Include="Models\Segments\SvgArcSweep.cs" />
+    <Compile Include="Models\Segments\SvgClosePathSegment.cs" />
     <Compile Include="Models\Segments\SvgCubicCurveSegment.cs" />
     <Compile Include="Models\Segments\SvgLineSegment.cs" />
     <Compile Include="Models\Segments\SvgMoveToSegment.cs" />
@@ -65,6 +71,11 @@
     <Compile Include="Models\Segments\SvgPathSegmentList.cs" />
     <Compile Include="Models\Segments\SvgQuadraticCurveSegment.cs" />
     <Compile Include="Models\Operations\MoveTo.cs" />
+    <Compile Include="Models\TextAlignment.cs" />
+    <Compile Include="Models\Transforms\MatrixTransform.cs" />
+    <Compile Include="Models\Transforms\Rotate.cs" />
+    <Compile Include="Models\Transforms\Scale.cs" />
+    <Compile Include="Models\Transforms\Translate.cs" />
     <Compile Include="NullPlatform.cs" />
     <Compile Include="Parsers\CoordinateParser.cs" />
     <Compile Include="Parsers\OperationParser.cs" />
@@ -75,18 +86,18 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Interfaces\ICanvas.cs" />
     <Compile Include="Graphic.cs" />
-    <Compile Include="Models\Ellipse.cs" />
+    <Compile Include="Models\Elements\Ellipse.cs" />
     <Compile Include="GraphicCanvas.cs" />
     <Compile Include="Models\Drawing.cs" />
     <Compile Include="Parsers\SvgReader.cs" />
     <Compile Include="Parsers\SvgPathParser.cs" />
-    <Compile Include="Group.cs" />
+    <Compile Include="Models\Elements\Group.cs" />
     <Compile Include="Models\Rect.cs" />
-    <Compile Include="Rectangle.cs" />
-    <Compile Include="Models\Operations\Path.cs" />
-    <Compile Include="Transform.cs" />
-    <Compile Include="Models\Text.cs" />
-    <Compile Include="Models\Element.cs" />
+    <Compile Include="Models\Elements\Rectangle.cs" />
+    <Compile Include="Models\Elements\Path.cs" />
+    <Compile Include="Models\Transforms\TransformBase.cs" />
+    <Compile Include="Models\Elements\Text.cs" />
+    <Compile Include="Models\Elements\Element.cs" />
     <Compile Include="Models\Font.cs" />
     <Compile Include="Models\FillMode.cs" />
   </ItemGroup>

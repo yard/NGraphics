@@ -1,4 +1,6 @@
-namespace NGraphics.Models
+using NGraphics.Models;
+
+namespace NGraphics.Codes
 {
     public static class Pens
     {

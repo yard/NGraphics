@@ -1,8 +1,7 @@
 using System.Collections.Generic;
 using NGraphics.Interfaces;
-using NGraphics.Models;
 
-namespace NGraphics
+namespace NGraphics.Models.Elements
 {
     public class Group : Element
     {

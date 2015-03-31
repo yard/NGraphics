@@ -1,3 +1,5 @@
+using NGraphics.Codes;
+
 namespace NGraphics.Models
 {
     public class Pen

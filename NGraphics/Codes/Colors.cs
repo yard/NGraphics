@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 using System.Globalization;
+using NGraphics.Models;
 
-namespace NGraphics.Models
+namespace NGraphics.Codes
 {
     public static class Colors
     {

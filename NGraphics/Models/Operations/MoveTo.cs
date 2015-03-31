@@ -20,8 +20,8 @@ namespace NGraphics.Models.Operations
             IsAbsolute = isAbsolute;
         }
 
-        public Point Start;
         public Point End;
         public bool IsAbsolute;
+        public Point Start;
     }
 }

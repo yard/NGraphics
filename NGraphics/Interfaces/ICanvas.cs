@@ -1,14 +1,18 @@
 using System;
 using System.Collections.Generic;
+using NGraphics.Codes;
 using NGraphics.Models;
+using NGraphics.Models.Brushes;
+using NGraphics.Models.Elements;
 using NGraphics.Models.Operations;
+using NGraphics.Models.Transforms;
 
 namespace NGraphics.Interfaces
 {
     public interface ICanvas
     {
         void SaveState();
-        void Transform(Transform transform);
+        void Transform(TransformBase transform);
         void RestoreState();
 
         void DrawText(string text, Rect frame, Font font, TextAlignment alignment = TextAlignment.Left, Pen pen = null,

@@ -1,4 +1,6 @@
-namespace NGraphics.Models
+using NGraphics.Models.Brushes;
+
+namespace NGraphics.Codes
 {
     public static class Brushes
     {

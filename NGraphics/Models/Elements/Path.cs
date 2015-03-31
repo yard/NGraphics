@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Globalization;
 using NGraphics.Interfaces;
+using NGraphics.Models.Brushes;
+using NGraphics.Models.Operations;
 
-namespace NGraphics.Models.Operations
+namespace NGraphics.Models.Elements
 {
     public class Path : Element
     {

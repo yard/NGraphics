@@ -21,6 +21,5 @@ namespace NGraphics.Models.Operations
         public Point FirstControlPoint;
         public Point SecondControlPoint;
         public Point Start;
-
     }
 }

@@ -1,7 +1,9 @@
 using System;
 using NGraphics.Interfaces;
+using NGraphics.Models.Brushes;
+using NGraphics.Models.Transforms;
 
-namespace NGraphics.Models
+namespace NGraphics.Models.Elements
 {
     public abstract class Element : IDrawable
     {
@@ -13,7 +15,7 @@ namespace NGraphics.Models
         }
 
         public string Id { get; set; }
-        public Transform Transform { get; set; }
+        public TransformBase Transform { get; set; }
         public Pen Pen { get; set; }
         public BaseBrush BaseBrush { get; set; }
 

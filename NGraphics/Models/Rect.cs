@@ -112,28 +112,4 @@ namespace NGraphics.Models
             return string.Format(CultureInfo.InvariantCulture, "Rect ({0}, {1}, {2}, {3})", X, Y, Width, Height);
         }
     }
-
-    public class BoundingBoxBuilder
-    {
-        private Rect bb;
-        private int nbb;
-
-        public Rect BoundingBox
-        {
-            get { return bb; }
-        }
-
-        public void Add(Point point)
-        {
-            if (nbb == 0)
-            {
-                bb = new Rect(point, Size.Zero);
-            }
-            else
-            {
-                bb = bb.Union(point);
-            }
-            nbb++;
-        }
-    }
 }

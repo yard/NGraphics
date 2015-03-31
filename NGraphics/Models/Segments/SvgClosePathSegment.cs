@@ -1,4 +1,4 @@
-﻿using NGraphics.Models.Operations;
+﻿using NGraphics.Models.Elements;
 
 namespace NGraphics.Models.Segments
 {

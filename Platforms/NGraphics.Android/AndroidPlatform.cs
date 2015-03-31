@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.IO;
 using Android.Graphics;
 using Android.Text;
+using NGraphics.Codes;
 using NGraphics.Interfaces;
 using NGraphics.Models;
+using NGraphics.Models.Brushes;
 using NGraphics.Models.Operations;
+using NGraphics.Models.Transforms;
 using Color = NGraphics.Models.Color;
 using Point = NGraphics.Models.Point;
 using Rect = NGraphics.Models.Rect;
@@ -110,10 +113,10 @@ namespace NGraphics.Android
 		{
 			graphics.Save (SaveFlags.Matrix|SaveFlags.Clip);
 		}
-		public void Transform (Transform transform)
+		public void Transform (TransformBase transform)
 		{
 			var t = transform;
-			var stack = new Stack<Transform> ();
+			var stack = new Stack<TransformBase> ();
 			while (t != null) {
 				stack.Push (t);
 				t = t.Previous;

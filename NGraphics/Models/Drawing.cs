@@ -1,10 +1,7 @@
 using System;
-using NGraphics.Interfaces;
 
 namespace NGraphics.Models
 {
-    public delegate void DrawingFunc(ICanvas surface);
-
     public class Drawing
     {
         public Drawing(Size size, DrawingFunc func)
