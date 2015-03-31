@@ -9,6 +9,7 @@ using System.IO;
 using System.Runtime.InteropServices;
 using NGraphics.Interfaces;
 using NGraphics.Models;
+using NGraphics.Models.Operations;
 
 namespace NGraphics
 {
@@ -215,14 +216,14 @@ namespace NGraphics
 			return new CGGradient (cs, comps, locs);
 		}
 
-		public void DrawText (string text, Rect frame, Font font, TextAlignment alignment = TextAlignment.Left, Pen pen = null, Brush brush = null)
+		public void DrawText (string text, Rect frame, Font font, TextAlignment alignment = TextAlignment.Left, Pen pen = null, BaseBrush baseBrush = null)
 		{
 			if (string.IsNullOrEmpty (text))
 				return;
 			if (font == null)
 				throw new ArgumentNullException ("font");
 
-			SetBrush (brush);
+			SetBrush (baseBrush);
 
 			context.SelectFont (font.Name, (nfloat)font.Size, CGTextEncoding.MacRoman);
 			context.ShowTextAtPoint ((nfloat)frame.X, (nfloat)frame.Y, text);
@@ -240,12 +241,12 @@ namespace NGraphics
 //			}
 		}
 
-		void DrawElement (Func<Rect> add, Pen pen = null, Brush brush = null)
+		void DrawElement (Func<Rect> add, Pen pen = null, BaseBrush baseBrush = null)
 		{
-			if (pen == null && brush == null)
+			if (pen == null && baseBrush == null)
 				return;
 
-			var lgb = brush as LinearGradientBrush;
+			var lgb = baseBrush as LinearGradientBrush;
 			if (lgb != null) {
 				var cg = CreateGradient (lgb.Stops);
 				context.SaveState ();
@@ -257,10 +258,10 @@ namespace NGraphics
 				var end = Conversions.GetCGPoint (frame.Position + lgb.RelativeEnd * size);
 				context.DrawLinearGradient (cg, start, end, options);
 				context.RestoreState ();
-				brush = null;
+				baseBrush = null;
 			}
 
-			var rgb = brush as RadialGradientBrush;
+			var rgb = baseBrush as RadialGradientBrush;
 			if (rgb != null) {
 				var cg = CreateGradient (rgb.Stops);
 				context.SaveState ();
@@ -273,21 +274,21 @@ namespace NGraphics
 				var end = Conversions.GetCGPoint (frame.Position + rgb.RelativeFocus * size);
 				context.DrawRadialGradient (cg, start, 0, end, r, options);
 				context.RestoreState ();
-				brush = null;
+				baseBrush = null;
 			}
 
-			if (pen != null || brush != null)
+			if (pen != null || baseBrush != null)
 			{
-				var mode = SetPenAndBrush (pen, brush);
+				var mode = SetPenAndBrush (pen, baseBrush);
 
 				add ();
 				context.DrawPath (mode);
 			}
 		}
 
-		public void DrawPath (IEnumerable<PathOperation> ops, Pen pen = null, Brush brush = null)
+		public void DrawPath (IEnumerable<PathOperation> ops, Pen pen = null, BaseBrush baseBrush = null)
 		{
-			if (pen == null && brush == null)
+			if (pen == null && baseBrush == null)
 				return;
 
 			DrawElement (() => {
@@ -351,27 +352,27 @@ namespace NGraphics
 
 				return bb.BoundingBox;
 
-			}, pen, brush);
+			}, pen, baseBrush);
 		}
-		public void DrawRectangle (Rect frame, Pen pen = null, Brush brush = null)
+		public void DrawRectangle (Rect frame, Pen pen = null, BaseBrush baseBrush = null)
 		{
-			if (pen == null && brush == null)
+			if (pen == null && baseBrush == null)
 				return;
 
 			DrawElement (() => {
 				context.AddRect (Conversions.GetCGRect (frame));
 				return frame;
-			}, pen, brush);
+			}, pen, baseBrush);
 		}
-		public void DrawEllipse (Rect frame, Pen pen = null, Brush brush = null)
+		public void DrawEllipse (Rect frame, Pen pen = null, BaseBrush baseBrush = null)
 		{
-			if (pen == null && brush == null)
+			if (pen == null && baseBrush == null)
 				return;
 
 			DrawElement (() => {
 				context.AddEllipseInRect (Conversions.GetCGRect (frame));
 				return frame;
-			}, pen, brush);
+			}, pen, baseBrush);
 		}
 		public void DrawImage (IImage image, Rect frame)
 		{
@@ -388,11 +389,11 @@ namespace NGraphics
 			}
 		}
 
-		CGPathDrawingMode SetPenAndBrush (Pen pen, Brush brush)
+		CGPathDrawingMode SetPenAndBrush (Pen pen, BaseBrush baseBrush)
 		{
 			var mode = CGPathDrawingMode.Fill;
 
-			var sb = brush as SolidBrush;
+			var sb = baseBrush as SolidBrush;
 
 			if (sb != null) {
 				if (sb.FillMode == FillMode.EvenOdd) {
@@ -400,8 +401,8 @@ namespace NGraphics
 				}
 			}
 
-			if (brush != null) {
-				SetBrush (brush);
+			if (baseBrush != null) {
+				SetBrush (baseBrush);
 				if (pen != null) {
 					mode = CGPathDrawingMode.FillStroke;
 
@@ -414,7 +415,7 @@ namespace NGraphics
 			}
 			if (pen != null) {
 				SetPen (pen);
-				if (brush == null)
+				if (baseBrush == null)
 					mode = CGPathDrawingMode.Stroke;
 			}
 			return mode;
@@ -426,9 +427,9 @@ namespace NGraphics
 			context.SetLineWidth ((nfloat)pen.Width);
 		}
 
-		void SetBrush (Brush brush)
+		void SetBrush (BaseBrush baseBrush)
 		{
-			var sb = brush as SolidBrush;
+			var sb = baseBrush as SolidBrush;
 			if (sb != null) {
 				context.SetFillColor ((nfloat)sb.Color.Red, (nfloat)sb.Color.Green, (nfloat)sb.Color.Blue, (nfloat)sb.Color.Alpha);
 			}

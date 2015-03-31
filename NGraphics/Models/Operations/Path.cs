@@ -11,14 +11,14 @@ namespace NGraphics.Models.Operations
 
     public class Path : Element
     {
-        public Path(IEnumerable<PathOperation> operations, Pen pen = null, Brush brush = null)
-            : base(pen, brush)
+        public Path(IEnumerable<PathOperation> operations, Pen pen = null, BaseBrush baseBrush = null)
+            : base(pen, baseBrush)
         {
             Operations.AddRange(operations);
         }
 
-        public Path(Pen pen = null, Brush brush = null)
-            : base(pen, brush)
+        public Path(Pen pen = null, BaseBrush baseBrush = null)
+            : base(pen, baseBrush)
         {
         }
 
@@ -26,7 +26,7 @@ namespace NGraphics.Models.Operations
 
         protected override void DrawElement(ICanvas canvas)
         {
-            canvas.DrawPath(Operations, Pen, Brush);
+            canvas.DrawPath(Operations, Pen, BaseBrush);
         }
 
         private void Add(PathOperation operation)

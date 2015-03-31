@@ -6,14 +6,14 @@ namespace NGraphics
 {
     public class Rectangle : Element
     {
-        public Rectangle(Rect frame, Pen pen = null, Brush brush = null)
-            : base(pen, brush)
+        public Rectangle(Rect frame, Pen pen = null, BaseBrush baseBrush = null)
+            : base(pen, baseBrush)
         {
             this.frame = frame;
         }
 
-        public Rectangle(Point position, Size size, Pen pen = null, Brush brush = null)
-            : this(new Rect(position, size), pen, brush)
+        public Rectangle(Point position, Size size, Pen pen = null, BaseBrush baseBrush = null)
+            : this(new Rect(position, size), pen, baseBrush)
         {
         }
 
@@ -31,7 +31,7 @@ namespace NGraphics
 
         protected override void DrawElement(ICanvas canvas)
         {
-            canvas.DrawRectangle(frame, Pen, Brush);
+            canvas.DrawRectangle(frame, Pen, BaseBrush);
         }
 
         public override string ToString()

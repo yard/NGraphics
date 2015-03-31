@@ -5,6 +5,18 @@ using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
 using NGraphics.Interfaces;
+using NGraphics.Models;
+using NGraphics.Models.Operations;
+using BoundingBoxBuilder = NGraphics.Models.BoundingBoxBuilder;
+using Font = NGraphics.Models.Font;
+using GradientStop = NGraphics.Models.GradientStop;
+using LinearGradientBrush = NGraphics.Models.LinearGradientBrush;
+using Pen = NGraphics.Models.Pen;
+using Point = NGraphics.Models.Point;
+using Rect = NGraphics.Models.Rect;
+using Size = NGraphics.Models.Size;
+using SolidBrush = NGraphics.Models.SolidBrush;
+using TextAlignment = NGraphics.Models.TextAlignment;
 
 namespace NGraphics.Net
 {
@@ -12,7 +24,7 @@ namespace NGraphics.Net
 	{
 		public string Name { get { return "Net"; } }
 
-		public IImageCanvas CreateImageCanvas (Size size, double scale = 1.0, bool transparency = true)
+		public IImageCanvas CreateImageCanvas (Models.Size size, double scale = 1.0, bool transparency = true)
 		{
 			var pixelWidth = (int)Math.Ceiling (size.Width * scale);
 			var pixelHeight = (int)Math.Ceiling (size.Height * scale);
@@ -33,14 +45,14 @@ namespace NGraphics.Net
 			return new ImageImage (image);
 		}
 
-		public IImage CreateImage (Color[] colors, int width, double scale = 1.0)
+		public IImage CreateImage (Models.Color[] colors, int width, double scale = 1.0)
 		{
 			var pixelWidth = width;
 			var pixelHeight = colors.Length / width;
 			var format = PixelFormat.Format32bppArgb;
 			Bitmap bitmap;
 			unsafe {
-				fixed (Color *c = colors) {
+				fixed (Models.Color *c = colors) {
 					bitmap = new Bitmap (pixelWidth, pixelHeight, pixelWidth*4, format, new IntPtr (c));
 				}
 			}
@@ -147,17 +159,17 @@ namespace NGraphics.Net
 			}
 		}
 
-		public void DrawText (string text, Rect frame, Font font, TextAlignment alignment = TextAlignment.Left, Pen pen = null, Brush brush = null)
+		public void DrawText (string text, Rect frame, Font font, TextAlignment alignment = TextAlignment.Left, Pen pen = null, BaseBrush baseBrush = null)
 		{
-			if (brush == null)
+			if (baseBrush == null)
 				return;
 			var sdfont = new System.Drawing.Font (font.Family, (float)font.Size, FontStyle.Regular, GraphicsUnit.Pixel);
 			var sz = graphics.MeasureString (text, sdfont);
 			var point = frame.Position;
             var fr = new Rect (point, new Size (sz.Width, sz.Height));
-            graphics.DrawString (text, sdfont, Conversions.GetBrush (brush, fr), Conversions.GetPointF (point - new Point (0, sdfont.Height)));
+            graphics.DrawString (text, sdfont, Conversions.GetBrush (baseBrush, fr), Conversions.GetPointF (point - new Point (0, sdfont.Height)));
 		}
-		public void DrawPath (IEnumerable<PathOperation> ops, Pen pen = null, Brush brush = null)
+		public void DrawPath (IEnumerable<PathOperation> ops, Pen pen = null, BaseBrush baseBrush = null)
 		{
 			using (var path = new GraphicsPath ()) {
 
@@ -177,7 +189,7 @@ namespace NGraphics.Net
 
 					var mt = op as MoveTo;
 					if (mt != null) {
-						var p = mt.Point;
+						var p = mt.Start;
 						position = p;
                         bb.Add (p);
 						continue;
@@ -219,9 +231,9 @@ namespace NGraphics.Net
 				}
 
                 var frame = bb.BoundingBox;
-                if (brush != null)
+                if (baseBrush != null)
                 {
-                    graphics.FillPath(brush.GetBrush(frame), path);
+                    graphics.FillPath(baseBrush.GetBrush(frame), path);
                 }
                 if (pen != null)
                 {
@@ -230,20 +242,20 @@ namespace NGraphics.Net
                 }
 			}
 		}
-		public void DrawRectangle (Rect frame, Pen pen = null, Brush brush = null)
+		public void DrawRectangle (Rect frame, Pen pen = null, BaseBrush baseBrush = null)
 		{
-			if (brush != null) {
-				graphics.FillRectangle (brush.GetBrush (frame), Conversions.GetRectangleF (frame));
+			if (baseBrush != null) {
+				graphics.FillRectangle (baseBrush.GetBrush (frame), Conversions.GetRectangleF (frame));
 			}
 			if (pen != null) {
 				var r = Conversions.GetRectangleF (frame);
 				graphics.DrawRectangle (pen.GetPen (), r.X, r.Y, r.Width, r.Height);
 			}
 		}
-		public void DrawEllipse (Rect frame, Pen pen = null, Brush brush = null)
+		public void DrawEllipse (Rect frame, Pen pen = null, BaseBrush baseBrush = null)
 		{
-			if (brush != null) {
-				graphics.FillEllipse (brush.GetBrush (frame), Conversions.GetRectangleF (frame));
+			if (baseBrush != null) {
+				graphics.FillEllipse (baseBrush.GetBrush (frame), Conversions.GetRectangleF (frame));
 			}
 			if (pen != null) {
 				graphics.DrawEllipse (pen.GetPen (), Conversions.GetRectangleF (frame));
@@ -260,7 +272,7 @@ namespace NGraphics.Net
 
 	public static class Conversions
 	{
-		public static System.Drawing.Color GetColor (this Color color)
+		public static System.Drawing.Color GetColor (this Models.Color color)
 		{
 			return System.Drawing.Color.FromArgb (color.A, color.R, color.G, color.B);
 		}
@@ -314,14 +326,14 @@ namespace NGraphics.Net
             return blend;
         }
 
-		public static System.Drawing.Brush GetBrush (this Brush brush, Rect frame)
+		public static System.Drawing.Brush GetBrush (this BaseBrush baseBrush, Rect frame)
 		{
-			var cb = brush as SolidBrush;
+			var cb = baseBrush as SolidBrush;
 			if (cb != null) {
 				return new System.Drawing.SolidBrush (cb.Color.GetColor ());
 			}
 
-            var lgb = brush as LinearGradientBrush;
+            var lgb = baseBrush as LinearGradientBrush;
             if (lgb != null) {
                 var s = frame.Position + lgb.RelativeStart * frame.Size;
                 var e = frame.Position + lgb.RelativeEnd * frame.Size;
@@ -333,7 +345,7 @@ namespace NGraphics.Net
                 return b;
             }
 
-            var rgb = brush as RadialGradientBrush;
+            var rgb = baseBrush as RadialGradientBrush;
             if (rgb != null) {
                 var r = rgb.RelativeRadius * frame.Size.Max;
                 var c = frame.Position + rgb.RelativeCenter * frame.Size;
@@ -347,7 +359,7 @@ namespace NGraphics.Net
                 return b;
             }
 
-			throw new NotImplementedException ("Brush " + brush);
+			throw new NotImplementedException ("Brush " + baseBrush);
 		}
 
         public static PointF GetPointF (Point point)

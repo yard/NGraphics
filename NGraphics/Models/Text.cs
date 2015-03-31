@@ -5,8 +5,8 @@ namespace NGraphics.Models
     public class Text : Element
     {
         public Text(string text, Rect frame, Font font, TextAlignment alignment = TextAlignment.Left, Pen pen = null,
-            Brush brush = null)
-            : base(pen, brush)
+            BaseBrush baseBrush = null)
+            : base(pen, baseBrush)
         {
             String = text;
             Frame = frame;
@@ -21,7 +21,7 @@ namespace NGraphics.Models
 
         protected override void DrawElement(ICanvas canvas)
         {
-            canvas.DrawText(String, Frame, Font, Alignment, Pen, Brush);
+            canvas.DrawText(String, Frame, Font, Alignment, Pen, BaseBrush);
         }
     }
 }

@@ -4,6 +4,11 @@ using System.IO;
 using Android.Graphics;
 using Android.Text;
 using NGraphics.Interfaces;
+using NGraphics.Models;
+using NGraphics.Models.Operations;
+using Color = NGraphics.Models.Color;
+using Point = NGraphics.Models.Point;
+using Rect = NGraphics.Models.Rect;
 
 namespace NGraphics.Android
 {
@@ -168,23 +173,23 @@ namespace NGraphics.Android
 			paint.StrokeWidth = (float)pen.Width;
 			return paint;
 		}
-		Paint GetBrushPaint (Brush brush, Rect frame)
+		Paint GetBrushPaint (BaseBrush baseBrush, Rect frame)
 		{
 			var paint = new Paint (PaintFlags.AntiAlias);
-			AddBrushPaint (paint, brush, frame);
+			AddBrushPaint (paint, baseBrush, frame);
 			return paint;
 		}
-		void AddBrushPaint (Paint paint, Brush brush, Rect bb)
+		void AddBrushPaint (Paint paint, BaseBrush baseBrush, Rect bb)
 		{
 			paint.SetStyle (Paint.Style.Fill);
 
-			var sb = brush as SolidBrush;
+			var sb = baseBrush as SolidBrush;
 			if (sb != null) {
 				paint.SetARGB (sb.Color.A, sb.Color.R, sb.Color.G, sb.Color.B);
 				return;
 			}
 
-			var lgb = brush as LinearGradientBrush;
+			var lgb = baseBrush as LinearGradientBrush;
 			if (lgb != null) {
 				var n = lgb.Stops.Count;
 				if (n >= 2) {
@@ -208,7 +213,7 @@ namespace NGraphics.Android
 				return;
 			}
 
-			var rgb = brush as RadialGradientBrush;
+			var rgb = baseBrush as RadialGradientBrush;
 			if (rgb != null) {
 				var n = rgb.Stops.Count;
 				if (n >= 2) {
@@ -233,12 +238,12 @@ namespace NGraphics.Android
 				return;
 			}
 
-			throw new NotSupportedException ("Brush " + brush);
+			throw new NotSupportedException ("Brush " + baseBrush);
 		}
 
-		public void DrawText (string text, Rect frame, Font font, TextAlignment alignment = TextAlignment.Left, Pen pen = null, Brush brush = null)
+		public void DrawText (string text, Rect frame, Font font, TextAlignment alignment = TextAlignment.Left, Pen pen = null, BaseBrush baseBrush = null)
 		{
-			if (brush == null)
+			if (baseBrush == null)
 				return;
 
 //			if (frame.Width < double.MaxValue) {
@@ -261,13 +266,13 @@ namespace NGraphics.Android
 			var h = fm.Ascent + fm.Descent;
 			var point = frame.Position;
 			var fr = new Rect (point, new Size (w, h));
-			AddBrushPaint (paint, brush, fr);
+			AddBrushPaint (paint, baseBrush, fr);
 			graphics.DrawText (text, (float)point.X, (float)point.Y, paint);
 //			}
 		}
-		public void DrawPath (IEnumerable<PathOperation> ops, Pen pen = null, Brush brush = null)
+		public void DrawPath (IEnumerable<PathOperation> ops, Pen pen = null, BaseBrush baseBrush = null)
 		{
-			if (pen == null && brush == null)
+			if (pen == null && baseBrush == null)
 				return;
 
 			using (var path = new global::Android.Graphics.Path ()) {
@@ -318,8 +323,8 @@ namespace NGraphics.Android
 
 				var frame = bb.BoundingBox;
 
-				if (brush != null) {
-					var paint = GetBrushPaint (brush, frame);
+				if (baseBrush != null) {
+					var paint = GetBrushPaint (baseBrush, frame);
 					graphics.DrawPath (path, paint);
 				}
 				if (pen != null) {
@@ -328,10 +333,10 @@ namespace NGraphics.Android
 				}
 			}
 		}
-		public void DrawRectangle (Rect frame, Pen pen = null, Brush brush = null)
+		public void DrawRectangle (Rect frame, Pen pen = null, BaseBrush baseBrush = null)
 		{
-			if (brush != null) {
-				var paint = GetBrushPaint (brush, frame);
+			if (baseBrush != null) {
+				var paint = GetBrushPaint (baseBrush, frame);
 				graphics.DrawRect ((float)(frame.X), (float)(frame.Y), (float)(frame.X + frame.Width), (float)(frame.Y + frame.Height), paint);
 			}
 			if (pen != null) {
@@ -340,10 +345,10 @@ namespace NGraphics.Android
 			}
 
 		}
-		public void DrawEllipse (Rect frame, Pen pen = null, Brush brush = null)
+		public void DrawEllipse (Rect frame, Pen pen = null, BaseBrush baseBrush = null)
 		{
-			if (brush != null) {
-				var paint = GetBrushPaint (brush, frame);
+			if (baseBrush != null) {
+				var paint = GetBrushPaint (baseBrush, frame);
 				graphics.DrawOval (Conversions.GetRectF (frame), paint);
 			}
 			if (pen != null) {

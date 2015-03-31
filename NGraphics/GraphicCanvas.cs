@@ -31,24 +31,24 @@ namespace NGraphics
         }
 
         public void DrawText(string text, Rect frame, Font font, TextAlignment alignment = TextAlignment.Left,
-            Pen pen = null, Brush brush = null)
+            Pen pen = null, BaseBrush baseBrush = null)
         {
             throw new NotImplementedException();
         }
 
-        public void DrawPath(IEnumerable<PathOperation> commands, Pen pen = null, Brush brush = null)
+        public void DrawPath(IEnumerable<PathOperation> commands, Pen pen = null, BaseBrush baseBrush = null)
         {
-            Graphic.Children.Add(new Path(commands, pen, brush));
+            Graphic.Children.Add(new Path(commands, pen, baseBrush));
         }
 
-        public void DrawRectangle(Rect frame, Pen pen = null, Brush brush = null)
+        public void DrawRectangle(Rect frame, Pen pen = null, BaseBrush baseBrush = null)
         {
-            Graphic.Children.Add(new Rectangle(frame, pen, brush));
+            Graphic.Children.Add(new Rectangle(frame, pen, baseBrush));
         }
 
-        public void DrawEllipse(Rect frame, Pen pen = null, Brush brush = null)
+        public void DrawEllipse(Rect frame, Pen pen = null, BaseBrush baseBrush = null)
         {
-            Graphic.Children.Add(new Ellipse(frame, pen, brush));
+            Graphic.Children.Add(new Ellipse(frame, pen, baseBrush));
         }
 
         public void DrawImage(IImage image, Rect frame)

@@ -33,8 +33,13 @@
     <DocumentationFile>bin\Release\NGraphics.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Models\Brush.cs" />
+    <Compile Include="Models\Brushes\BaseBrush.cs" />
     <Compile Include="Codes\OperationType.cs" />
+    <Compile Include="Models\Brushes\GradientBrush.cs" />
+    <Compile Include="Models\Brushes\GradientStop.cs" />
+    <Compile Include="Models\Brushes\LinearGradientBrush.cs" />
+    <Compile Include="Models\Brushes\RadialGradientBrush.cs" />
+    <Compile Include="Models\Brushes\SolidBrush.cs" />
     <Compile Include="Models\Color.cs" />
     <Compile Include="ExtensionMethods\CharExtensions.cs" />
     <Compile Include="ExtensionMethods\StringExtensions.cs" />

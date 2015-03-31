@@ -78,31 +78,31 @@ namespace NGraphics.Parsers
             AddElements(Graphic.Children, svg.Elements(), null, null);
         }
 
-        private void AddElements(IList<IDrawable> list, IEnumerable<XElement> es, Pen inheritPen, Brush inheritBrush)
+        private void AddElements(IList<IDrawable> list, IEnumerable<XElement> es, Pen inheritPen, BaseBrush inheritBaseBrush)
         {
             foreach (var e in es)
-                AddElement(list, e, inheritPen, inheritBrush);
+                AddElement(list, e, inheritPen, inheritBaseBrush);
         }
 
-        private void AddElement(IList<IDrawable> list, XElement e, Pen inheritPen, Brush inheritBrush)
+        private void AddElement(IList<IDrawable> list, XElement e, Pen inheritPen, BaseBrush inheritBaseBrush)
         {
             //
             // Style
             //
             Element r = null;
             Pen pen = null;
-            Brush brush = null;
-            ApplyStyle(e.Attributes().ToDictionary(k => k.Name.LocalName, v => v.Value), ref pen, ref brush);
+            BaseBrush baseBrush = null;
+            ApplyStyle(e.Attributes().ToDictionary(k => k.Name.LocalName, v => v.Value), ref pen, ref baseBrush);
             var style = ReadString(e.Attribute("style"));
             if (!string.IsNullOrWhiteSpace(style))
             {
-                ApplyStyle(style, ref pen, ref brush);
+                ApplyStyle(style, ref pen, ref baseBrush);
             }
             pen = pen ?? inheritPen;
-            brush = brush ?? inheritBrush;
-            if (pen == null && brush == null)
+            baseBrush = baseBrush ?? inheritBaseBrush;
+            if (pen == null && baseBrush == null)
             {
-                brush = Brushes.Black;
+                baseBrush = Brushes.Black;
             }
             //var id = ReadString (e.Attribute ("id"));
 
@@ -118,7 +118,7 @@ namespace NGraphics.Parsers
                     var text = e.Value.Trim();
                     var font = new Font();
                     r = new Text(text, new Rect(new Point(x, y), new Size(double.MaxValue, double.MaxValue)), font,
-                        TextAlignment.Left, pen, brush);
+                        TextAlignment.Left, pen, baseBrush);
                 }
                     break;
                 case "rect":
@@ -127,7 +127,7 @@ namespace NGraphics.Parsers
                     var y = ReadNumber(e.Attribute("y"));
                     var width = ReadNumber(e.Attribute("width"));
                     var height = ReadNumber(e.Attribute("height"));
-                    r = new Rectangle(new Point(x, y), new Size(width, height), pen, brush);
+                    r = new Rectangle(new Point(x, y), new Size(width, height), pen, baseBrush);
                 }
                     break;
                 case "ellipse":
@@ -136,7 +136,7 @@ namespace NGraphics.Parsers
                     var cy = ReadNumber(e.Attribute("cy"));
                     var rx = ReadNumber(e.Attribute("rx"));
                     var ry = ReadNumber(e.Attribute("ry"));
-                    r = new Ellipse(new Point(cx - rx, cy - ry), new Size(2*rx, 2*ry), pen, brush);
+                    r = new Ellipse(new Point(cx - rx, cy - ry), new Size(2*rx, 2*ry), pen, baseBrush);
                 }
                     break;
                 case "circle":
@@ -144,7 +144,7 @@ namespace NGraphics.Parsers
                     var cx = ReadNumber(e.Attribute("cx"));
                     var cy = ReadNumber(e.Attribute("cy"));
                     var rr = ReadNumber(e.Attribute("r"));
-                    r = new Ellipse(new Point(cx - rr, cy - rr), new Size(2*rr, 2*rr), pen, brush);
+                    r = new Ellipse(new Point(cx - rr, cy - rr), new Size(2*rr, 2*rr), pen, baseBrush);
                 }
                     break;
                 case "path":
@@ -152,7 +152,7 @@ namespace NGraphics.Parsers
                     var dA = e.Attribute("d");
                     if (dA != null && !string.IsNullOrWhiteSpace(dA.Value))
                     {
-                        var p = new Path(pen, brush);
+                        var p = new Path(pen, baseBrush);
                         SvgPathParser.Parse(p, dA.Value);
                         r = p;
                     }
@@ -161,7 +161,7 @@ namespace NGraphics.Parsers
                 case "g":
                 {
                     var g = new Group();
-                    AddElements(g.Children, e.Elements(), pen, brush);
+                    AddElements(g.Children, e.Elements(), pen, baseBrush);
                     r = g;
                 }
                     break;
@@ -174,7 +174,7 @@ namespace NGraphics.Parsers
                         if (defs.TryGetValue(href.Trim().Replace("#", ""), out useE))
                         {
                             var useList = new List<IDrawable>();
-                            AddElement(useList, useE, pen, brush);
+                            AddElement(useList, useE, pen, baseBrush);
                             r = useList.OfType<Element>().FirstOrDefault();
                         }
                     }
@@ -204,7 +204,7 @@ namespace NGraphics.Parsers
             }
         }
 
-        private void ApplyStyle(string style, ref Pen pen, ref Brush brush)
+        private void ApplyStyle(string style, ref Pen pen, ref BaseBrush baseBrush)
         {
             var d = new Dictionary<string, string>();
             var kvs = style.Split(new[] {';'}, StringSplitOptions.RemoveEmptyEntries);
@@ -218,7 +218,7 @@ namespace NGraphics.Parsers
                     d[k] = v;
                 }
             }
-            ApplyStyle(d, ref pen, ref brush);
+            ApplyStyle(d, ref pen, ref baseBrush);
         }
 
         private string GetString(Dictionary<string, string> style, string name, string defaultValue = "")
@@ -229,7 +229,7 @@ namespace NGraphics.Parsers
             return defaultValue;
         }
 
-        private void ApplyStyle(Dictionary<string, string> style, ref Pen pen, ref Brush brush)
+        private void ApplyStyle(Dictionary<string, string> style, ref Pen pen, ref BaseBrush baseBrush)
         {
             //
             // Pen attributes
@@ -282,9 +282,9 @@ namespace NGraphics.Parsers
             var fillOpacity = GetString(style, "fill-opacity");
             if (!string.IsNullOrWhiteSpace(fillOpacity))
             {
-                if (brush == null)
-                    brush = new SolidBrush();
-                var sb = brush as SolidBrush;
+                if (baseBrush == null)
+                    baseBrush = new SolidBrush();
+                var sb = baseBrush as SolidBrush;
                 if (sb != null)
                     sb.Color = sb.Color.WithAlpha(ReadNumber(fillOpacity));
             }
@@ -292,9 +292,9 @@ namespace NGraphics.Parsers
             var fillRule = GetString(style, "fill-rule");
             if (!string.IsNullOrWhiteSpace(fillRule))
             {
-                if (brush == null)
-                    brush = new SolidBrush();
-                var sb = brush as SolidBrush;
+                if (baseBrush == null)
+                    baseBrush = new SolidBrush();
+                var sb = baseBrush as SolidBrush;
                 if (sb != null)
                 {
                     if (fillRule.Equals("evenodd"))
@@ -314,17 +314,17 @@ namespace NGraphics.Parsers
             }
             else if (fill == "none")
             {
-                brush = null;
+                baseBrush = null;
             }
             else
             {
                 Color color;
                 if (Colors.TryParse(fill, out color))
                 {
-                    var sb = brush as SolidBrush;
+                    var sb = baseBrush as SolidBrush;
                     if (sb == null)
                     {
-                        brush = new SolidBrush(color);
+                        baseBrush = new SolidBrush(color);
                     }
                     else
                     {
@@ -346,10 +346,10 @@ namespace NGraphics.Parsers
                             switch (defE.Name.LocalName)
                             {
                                 case "linearGradient":
-                                    brush = CreateLinearGradientBrush(defE);
+                                    baseBrush = CreateLinearGradientBrush(defE);
                                     break;
                                 case "radialGradient":
-                                    brush = CreateRadialGradientBrush(defE);
+                                    baseBrush = CreateRadialGradientBrush(defE);
                                     break;
                                 default:
                                     throw new NotSupportedException("Fill " + defE.Name);

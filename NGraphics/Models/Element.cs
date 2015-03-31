@@ -5,17 +5,17 @@ namespace NGraphics.Models
 {
     public abstract class Element : IDrawable
     {
-        public Element(Pen pen, Brush brush)
+        public Element(Pen pen, BaseBrush baseBrush)
         {
             Id = Guid.NewGuid().ToString();
             Pen = pen;
-            Brush = brush;
+            BaseBrush = baseBrush;
         }
 
         public string Id { get; set; }
         public Transform Transform { get; set; }
         public Pen Pen { get; set; }
-        public Brush Brush { get; set; }
+        public BaseBrush BaseBrush { get; set; }
 
         #region IDrawable implementation
 

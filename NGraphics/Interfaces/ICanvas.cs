@@ -12,11 +12,11 @@ namespace NGraphics.Interfaces
         void RestoreState();
 
         void DrawText(string text, Rect frame, Font font, TextAlignment alignment = TextAlignment.Left, Pen pen = null,
-            Brush brush = null);
+            BaseBrush baseBrush = null);
 
-        void DrawPath(IEnumerable<PathOperation> ops, Pen pen = null, Brush brush = null);
-        void DrawRectangle(Rect frame, Pen pen = null, Brush brush = null);
-        void DrawEllipse(Rect frame, Pen pen = null, Brush brush = null);
+        void DrawPath(IEnumerable<PathOperation> ops, Pen pen = null, BaseBrush baseBrush = null);
+        void DrawRectangle(Rect frame, Pen pen = null, BaseBrush baseBrush = null);
+        void DrawEllipse(Rect frame, Pen pen = null, BaseBrush baseBrush = null);
         void DrawImage(IImage image, Rect frame);
     }
 
@@ -83,25 +83,25 @@ namespace NGraphics.Interfaces
         }
 
         public static void DrawRectangle(this ICanvas canvas, double x, double y, double width, double height,
-            Pen pen = null, Brush brush = null)
+            Pen pen = null, BaseBrush baseBrush = null)
         {
-            canvas.DrawRectangle(new Rect(x, y, width, height), pen, brush);
+            canvas.DrawRectangle(new Rect(x, y, width, height), pen, baseBrush);
         }
 
         public static void DrawRectangle(this ICanvas canvas, Point position, Size size, Pen pen = null,
-            Brush brush = null)
+            BaseBrush baseBrush = null)
         {
-            canvas.DrawRectangle(new Rect(position, size), pen, brush);
+            canvas.DrawRectangle(new Rect(position, size), pen, baseBrush);
         }
 
         public static void FillRectangle(this ICanvas canvas, Rect frame, Color color)
         {
-            canvas.DrawRectangle(frame, brush: new SolidBrush(color));
+            canvas.DrawRectangle(frame, baseBrush: new SolidBrush(color));
         }
 
-        public static void FillRectangle(this ICanvas canvas, Rect frame, Brush brush)
+        public static void FillRectangle(this ICanvas canvas, Rect frame, BaseBrush baseBrush)
         {
-            canvas.DrawRectangle(frame, brush: brush);
+            canvas.DrawRectangle(frame, baseBrush: baseBrush);
         }
 
         public static void StrokeRectangle(this ICanvas canvas, Rect frame, Color color, double width = 1.0)
@@ -110,25 +110,25 @@ namespace NGraphics.Interfaces
         }
 
         public static void DrawEllipse(this ICanvas canvas, double x, double y, double width, double height,
-            Pen pen = null, Brush brush = null)
+            Pen pen = null, BaseBrush baseBrush = null)
         {
-            canvas.DrawEllipse(new Rect(x, y, width, height), pen, brush);
+            canvas.DrawEllipse(new Rect(x, y, width, height), pen, baseBrush);
         }
 
         public static void DrawEllipse(this ICanvas canvas, Point position, Size size, Pen pen = null,
-            Brush brush = null)
+            BaseBrush baseBrush = null)
         {
-            canvas.DrawEllipse(new Rect(position, size), pen, brush);
+            canvas.DrawEllipse(new Rect(position, size), pen, baseBrush);
         }
 
         public static void FillEllipse(this ICanvas canvas, Rect frame, Color color)
         {
-            canvas.DrawEllipse(frame, brush: new SolidBrush(color));
+            canvas.DrawEllipse(frame, baseBrush: new SolidBrush(color));
         }
 
-        public static void FillEllipse(this ICanvas canvas, Rect frame, Brush brush)
+        public static void FillEllipse(this ICanvas canvas, Rect frame, BaseBrush baseBrush)
         {
-            canvas.DrawEllipse(frame, brush: brush);
+            canvas.DrawEllipse(frame, baseBrush: baseBrush);
         }
 
         public static void StrokeEllipse(this ICanvas canvas, Rect frame, Color color, double width = 1.0)
@@ -136,9 +136,9 @@ namespace NGraphics.Interfaces
             canvas.DrawEllipse(frame, new Pen(color, width));
         }
 
-        public static void DrawPath(this ICanvas canvas, Action<Path> draw, Pen pen = null, Brush brush = null)
+        public static void DrawPath(this ICanvas canvas, Action<Path> draw, Pen pen = null, BaseBrush baseBrush = null)
         {
-            var p = new Path(pen, brush);
+            var p = new Path(pen, baseBrush);
             draw(p);
             p.Draw(canvas);
         }

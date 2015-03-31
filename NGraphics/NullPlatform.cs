@@ -53,19 +53,19 @@ namespace NGraphics
             }
 
             public void DrawText(string text, Rect frame, Font font, TextAlignment alignment = TextAlignment.Left,
-                Pen pen = null, Brush brush = null)
+                Pen pen = null, BaseBrush baseBrush = null)
             {
             }
 
-            public void DrawPath(IEnumerable<PathOperation> ops, Pen pen = null, Brush brush = null)
+            public void DrawPath(IEnumerable<PathOperation> ops, Pen pen = null, BaseBrush baseBrush = null)
             {
             }
 
-            public void DrawRectangle(Rect frame, Pen pen = null, Brush brush = null)
+            public void DrawRectangle(Rect frame, Pen pen = null, BaseBrush baseBrush = null)
             {
             }
 
-            public void DrawEllipse(Rect frame, Pen pen = null, Brush brush = null)
+            public void DrawEllipse(Rect frame, Pen pen = null, BaseBrush baseBrush = null)
             {
             }
 
