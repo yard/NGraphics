@@ -7,7 +7,6 @@ namespace NGraphics
 {
     public abstract class PathOperation
     {
-        public abstract Point GetContinueCurveControlPoint();
     }
 
     public class Path : Element
@@ -78,18 +77,6 @@ namespace NGraphics
         public void CurveTo(Point control1, Point control2, Point point, Point point2)
         {
             Add(new CurveTo(control1, control2, point, point2));
-        }
-
-        public void ContinueCurveTo(Point control2, Point point)
-        {
-            if (Operations.Count == 0)
-            {
-                throw new InvalidOperationException(
-                    "Cannot continue a curve until the path has begun with another operation.");
-            }
-            var prev = Operations[Operations.Count - 1];
-            var control1 = prev.GetContinueCurveControlPoint();
-            Add(new CurveTo(control1, control2, point));
         }
 
         public void Start()

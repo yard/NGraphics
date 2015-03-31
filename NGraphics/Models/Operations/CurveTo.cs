@@ -22,9 +22,5 @@ namespace NGraphics
         public Point SecondControlPoint;
         public Point Start;
 
-        public override Point GetContinueCurveControlPoint()
-        {
-            return FirstControlPoint.ReflectedAround(SecondControlPoint);
-        }
     }
 }

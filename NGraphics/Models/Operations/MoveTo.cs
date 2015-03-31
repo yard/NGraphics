@@ -25,9 +25,6 @@ namespace NGraphics
         public Point Point;
         public Point Start;
 
-        public override Point GetContinueCurveControlPoint()
-        {
-            return Point;
-        }
+       
     }
 }

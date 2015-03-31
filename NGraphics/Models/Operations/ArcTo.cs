@@ -17,11 +17,6 @@ namespace NGraphics
         public Size Radius;
         public bool SweepClockwise;
 
-        public override Point GetContinueCurveControlPoint()
-        {
-            return Point;
-        }
-
         public void GetCircles(Point prevPoint, out Point circle1Center, out Point circle2Center)
         {
             //Following explanation at http://mathforum.org/library/drmath/view/53027.html'
