@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Runtime.InteropServices;
 using NGraphics.Interfaces;
+using NGraphics.Models;
 
 namespace NGraphics
 {
