@@ -1,4 +1,6 @@
-﻿namespace NGraphics.Models
+﻿using NGraphics.Parsers;
+
+namespace NGraphics.Models.Segments
 {
     public sealed class SvgLineSegment : SvgPathSegment
     {

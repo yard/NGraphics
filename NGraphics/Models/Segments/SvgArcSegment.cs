@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using NGraphics.Parsers;
 
-namespace NGraphics.Models
+namespace NGraphics.Models.Segments
 {
     public sealed class SvgArcSegment : SvgPathSegment
     {
