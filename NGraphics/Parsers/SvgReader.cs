@@ -13,12 +13,6 @@ namespace NGraphics
 {
     public class SvgReader
     {
-        private static readonly char[] WSC = {',', ' ', '\t', '\n', '\r'};
-        private static readonly char[] WS = {' ', '\t', '\n', '\r'};
-        private readonly Dictionary<string, XElement> defs = new Dictionary<string, XElement>();
-        private readonly Regex fillUrlRe = new Regex(@"url\s*\(\s*#([^\)]+)\)");
-        private readonly IFormatProvider icult = CultureInfo.InvariantCulture;
-        private readonly Regex keyValueRe = new Regex(@"\s*(\w+)\s*:\s*(.*)");
 //		readonly XNamespace ns;
 
         public SvgReader(TextReader reader)
@@ -26,6 +20,12 @@ namespace NGraphics
             Read(XDocument.Load(reader));
         }
 
+        private static readonly char[] WSC = {',', ' ', '\t', '\n', '\r'};
+        private static readonly char[] WS = {' ', '\t', '\n', '\r'};
+        private readonly Dictionary<string, XElement> defs = new Dictionary<string, XElement>();
+        private readonly Regex fillUrlRe = new Regex(@"url\s*\(\s*#([^\)]+)\)");
+        private readonly IFormatProvider icult = CultureInfo.InvariantCulture;
+        private readonly Regex keyValueRe = new Regex(@"\s*(\w+)\s*:\s*(.*)");
         public Graphic Graphic { get; private set; }
 
         private void Read(XDocument doc)

@@ -44,6 +44,11 @@
     <Compile Include="Log.cs" />
     <Compile Include="Models\CssNumber.cs" />
     <Compile Include="Models\Operation.cs" />
+    <Compile Include="Models\Operations\ArcTo.cs" />
+    <Compile Include="Models\Operations\ClosePath.cs" />
+    <Compile Include="Models\Operations\CurveTo.cs" />
+    <Compile Include="Models\Operations\LineTo.cs" />
+    <Compile Include="Models\Operations\StartFigure.cs" />
     <Compile Include="Models\Segments\SvgArcSegment.cs" />
     <Compile Include="Models\Segments\SvgClocePathSegment.cs" />
     <Compile Include="Models\Segments\SvgCubicCurveSegment.cs" />
@@ -52,6 +57,7 @@
     <Compile Include="Models\Segments\SvgPathSegment.cs" />
     <Compile Include="Models\Segments\SvgPathSegmentList.cs" />
     <Compile Include="Models\Segments\SvgQuadraticCurveSegment.cs" />
+    <Compile Include="Models\Operations\MoveTo.cs" />
     <Compile Include="NullPlatform.cs" />
     <Compile Include="Parsers\CoordinateParser.cs" />
     <Compile Include="Parsers\OperationParser.cs" />
@@ -70,7 +76,7 @@
     <Compile Include="Group.cs" />
     <Compile Include="Models\Rect.cs" />
     <Compile Include="Rectangle.cs" />
-    <Compile Include="Path.cs" />
+    <Compile Include="Models\Operations\Path.cs" />
     <Compile Include="Transform.cs" />
     <Compile Include="Models\Text.cs" />
     <Compile Include="Models\Element.cs" />

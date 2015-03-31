@@ -12,7 +12,7 @@ namespace NGraphics.Interfaces
         void DrawText(string text, Rect frame, Font font, TextAlignment alignment = TextAlignment.Left, Pen pen = null,
             Brush brush = null);
 
-        void DrawPath(IEnumerable<PathOp> ops, Pen pen = null, Brush brush = null);
+        void DrawPath(IEnumerable<PathOperation> ops, Pen pen = null, Brush brush = null);
         void DrawRectangle(Rect frame, Pen pen = null, Brush brush = null);
         void DrawEllipse(Rect frame, Pen pen = null, Brush brush = null);
         void DrawImage(IImage image, Rect frame);

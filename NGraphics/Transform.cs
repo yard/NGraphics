@@ -5,13 +5,12 @@ namespace NGraphics
 {
     public abstract class Transform
     {
-        public Transform Previous;
-
         protected Transform(Transform previous = null)
         {
             Previous = previous;
         }
 
+        public Transform Previous;
         protected abstract string ToCode();
 
         public override string ToString()
@@ -27,8 +26,6 @@ namespace NGraphics
 
     public class MatrixTransform : Transform
     {
-        public double[] Elements;
-
         public MatrixTransform(Transform previous = null)
             : base(previous)
         {
@@ -45,6 +42,8 @@ namespace NGraphics
             Array.Copy(elements, Elements, 6);
         }
 
+        public double[] Elements;
+
         protected override string ToCode()
         {
             return string.Format(CultureInfo.InvariantCulture, "matrix(...)");
@@ -53,8 +52,6 @@ namespace NGraphics
 
     public class Translate : Transform
     {
-        public Size Size;
-
         public Translate(Size size, Transform previous = null)
             : base(previous)
         {
@@ -72,6 +69,8 @@ namespace NGraphics
         {
         }
 
+        public Size Size;
+
         protected override string ToCode()
         {
             return string.Format(CultureInfo.InvariantCulture, "translate({0}, {1})", Size.Width, Size.Height);
@@ -80,8 +79,6 @@ namespace NGraphics
 
     public class Scale : Transform
     {
-        public Size Size;
-
         public Scale(Size size, Transform previous = null)
             : base(previous)
         {
@@ -93,6 +90,8 @@ namespace NGraphics
         {
         }
 
+        public Size Size;
+
         protected override string ToCode()
         {
             return string.Format(CultureInfo.InvariantCulture, "scale({0}, {1})", Size.Width, Size.Height);
@@ -101,11 +100,6 @@ namespace NGraphics
 
     public class Rotate : Transform
     {
-        /// <summary>
-        ///     The angle in degrees.
-        /// </summary>
-        public double Angle;
-
         /// <summary>
         ///     Initializes a new instance of the <see cref="NGraphics.Rotate" /> class.
         /// </summary>
@@ -116,6 +110,11 @@ namespace NGraphics
         {
             Angle = angle;
         }
+
+        /// <summary>
+        ///     The angle in degrees.
+        /// </summary>
+        public double Angle;
 
         protected override string ToCode()
         {

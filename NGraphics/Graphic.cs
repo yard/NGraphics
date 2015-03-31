@@ -7,12 +7,6 @@ namespace NGraphics
 {
     public class Graphic : IDrawable
     {
-        public readonly List<IDrawable> Children = new List<IDrawable>();
-        public string Description = "";
-        public Size Size;
-        public string Title = "";
-        public Rect ViewBox;
-
         public Graphic(Size size, Rect viewBox)
         {
             Size = size;
@@ -23,6 +17,12 @@ namespace NGraphics
             : this(size, new Rect(Point.Zero, size))
         {
         }
+
+        public readonly List<IDrawable> Children = new List<IDrawable>();
+        public string Description = "";
+        public Size Size;
+        public string Title = "";
+        public Rect ViewBox;
 
         public void Draw(ICanvas canvas)
         {

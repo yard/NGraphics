@@ -34,7 +34,7 @@ namespace NGraphics
             throw new NotImplementedException();
         }
 
-        public void DrawPath(IEnumerable<PathOp> commands, Pen pen = null, Brush brush = null)
+        public void DrawPath(IEnumerable<PathOperation> commands, Pen pen = null, Brush brush = null)
         {
             Graphic.Children.Add(new Path(commands, pen, brush));
         }
