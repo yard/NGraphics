@@ -1,15 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Globalization;
 using System.Linq;
-using System.Text.RegularExpressions;
-using System.Threading;
-using NGraphics.Models;
-using NGraphics.Parsers;
+using NGraphics.Models.Segments;
 
-namespace NGraphics
+namespace NGraphics.Parsers
 {
         public static class PointFExtensions
         {
@@ -19,7 +13,7 @@ namespace NGraphics
             }
         }
 
-        public class SvgPathBuilder 
+        public class SvgPathParser 
         {
             /// <summary>
             /// Parses the specified string into a collection of path segments.

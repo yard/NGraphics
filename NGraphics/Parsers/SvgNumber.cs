@@ -1,11 +1,9 @@
 using System;
-using System.Diagnostics;
 using System.Globalization;
 using System.Text.RegularExpressions;
 using NGraphics.Models;
 
-
-namespace SharpVectors.Dom.Svg
+namespace NGraphics.Parsers
 {
     public sealed class SvgNumber 
     {
