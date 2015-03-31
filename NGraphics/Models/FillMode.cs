@@ -1,10 +1,8 @@
 ﻿namespace NGraphics.Models
 {
-	public enum FillMode 
-	{
-		EvenOdd,
-		Regular
-	}
+    public enum FillMode
+    {
+        EvenOdd,
+        Regular
+    }
 }
-
-

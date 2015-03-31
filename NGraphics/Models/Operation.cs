@@ -3,15 +3,15 @@ using NGraphics.ExtensionMethods;
 
 namespace NGraphics.Models
 {
-  public class Operation
-  {
-    public char OriginalValue { get; set; }
-
-    public bool IsAbsolute
+    public class Operation
     {
-      get { return OriginalValue.IsAbsolute(); }
-    }
+        public char OriginalValue { get; set; }
 
-    public OperationType Type { get; set; }
-  }
+        public bool IsAbsolute
+        {
+            get { return OriginalValue.IsAbsolute(); }
+        }
+
+        public OperationType Type { get; set; }
+    }
 }

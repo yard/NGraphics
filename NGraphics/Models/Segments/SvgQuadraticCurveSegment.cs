@@ -4,20 +4,21 @@ namespace NGraphics.Models.Segments
 {
     public sealed class SvgQuadraticCurveSegment : SvgPathSegment
     {
-        private Point _controlPoint;
-
-        public Point ControlPoint
+        public SvgQuadraticCurveSegment(Point start, Point controlPoint, Point end)
         {
-            get { return this._controlPoint; }
-            set { this._controlPoint = value; }
+            Start = start;
+            ControlPoint = controlPoint;
+            End = end;
         }
+
+        public Point ControlPoint { get; set; }
 
         private Point FirstControlPoint
         {
             get
             {
-                double x1 = Start.X + (this.ControlPoint.X - Start.X) * 2 / 3;
-                double y1 = Start.Y + (this.ControlPoint.Y - Start.Y) * 2 / 3;
+                var x1 = Start.X + (ControlPoint.X - Start.X)*2/3;
+                var y1 = Start.Y + (ControlPoint.Y - Start.Y)*2/3;
 
                 return new Point(x1, y1);
             }
@@ -27,29 +28,21 @@ namespace NGraphics.Models.Segments
         {
             get
             {
-                double x2 = this.ControlPoint.X + (this.End.X - this.ControlPoint.X) / 3;
-                double y2 = this.ControlPoint.Y + (this.End.Y - this.ControlPoint.Y) / 3;
+                var x2 = ControlPoint.X + (End.X - ControlPoint.X)/3;
+                var y2 = ControlPoint.Y + (End.Y - ControlPoint.Y)/3;
 
                 return new Point(x2, y2);
             }
         }
 
-        public SvgQuadraticCurveSegment(Point start, Point controlPoint, Point end)
-        {
-            this.Start = start;
-            this._controlPoint = controlPoint;
-            this.End = end;
-        }
-
         public override void AddToPath(Path graphicsPath)
         {
-            graphicsPath.CurveTo(this.Start, this.FirstControlPoint, this.SecondControlPoint, this.End);
+            graphicsPath.CurveTo(Start, FirstControlPoint, SecondControlPoint, End);
         }
 
         public override string ToString()
         {
-            return "Q" + this.ControlPoint.ToSvgString() + " " + this.End.ToSvgString();
+            return "Q" + ControlPoint.ToSvgString() + " " + End.ToSvgString();
         }
-
     }
 }

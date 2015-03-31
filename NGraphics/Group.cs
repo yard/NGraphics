@@ -3,21 +3,21 @@ using NGraphics.Interfaces;
 
 namespace NGraphics
 {
-	public class Group : Element
-	{
-		public readonly List<IDrawable> Children = new List<IDrawable> ();
+    public class Group : Element
+    {
+        public readonly List<IDrawable> Children = new List<IDrawable>();
 
-		public Group ()
-			: base (null, null)
-		{			
-		}
+        public Group()
+            : base(null, null)
+        {
+        }
 
-		protected override void DrawElement (ICanvas canvas)
-		{
-			foreach (var c in Children) {
-				c.Draw (canvas);
-			}
-		}
-	}
-	
+        protected override void DrawElement(ICanvas canvas)
+        {
+            foreach (var c in Children)
+            {
+                c.Draw(canvas);
+            }
+        }
+    }
 }

@@ -3,127 +3,136 @@ using NGraphics.Models;
 
 namespace NGraphics
 {
-	public abstract class Brush
-	{
-	}
+    public abstract class Brush
+    {
+    }
 
-	public static class Brushes
-	{
-		public static readonly SolidBrush Black = new SolidBrush (Colors.Black);
-		public static readonly SolidBrush DarkGray = new SolidBrush (Colors.DarkGray);
-		public static readonly SolidBrush Gray = new SolidBrush (Colors.Gray);
-		public static readonly SolidBrush LightGray = new SolidBrush (Colors.LightGray);
-		public static readonly SolidBrush White = new SolidBrush (Colors.White);
-		public static readonly SolidBrush Red = new SolidBrush (Colors.Red);
-		public static readonly SolidBrush Yellow = new SolidBrush (Colors.Yellow);
-		public static readonly SolidBrush Green = new SolidBrush (Colors.Green);
-		public static readonly SolidBrush Blue = new SolidBrush (Colors.Blue);
-	}
+    public static class Brushes
+    {
+        public static readonly SolidBrush Black = new SolidBrush(Colors.Black);
+        public static readonly SolidBrush DarkGray = new SolidBrush(Colors.DarkGray);
+        public static readonly SolidBrush Gray = new SolidBrush(Colors.Gray);
+        public static readonly SolidBrush LightGray = new SolidBrush(Colors.LightGray);
+        public static readonly SolidBrush White = new SolidBrush(Colors.White);
+        public static readonly SolidBrush Red = new SolidBrush(Colors.Red);
+        public static readonly SolidBrush Yellow = new SolidBrush(Colors.Yellow);
+        public static readonly SolidBrush Green = new SolidBrush(Colors.Green);
+        public static readonly SolidBrush Blue = new SolidBrush(Colors.Blue);
+    }
 
-	public class SolidBrush : Brush
-	{
-		public Color Color;
-		public FillMode FillMode;
+    public class SolidBrush : Brush
+    {
+        public Color Color;
+        public FillMode FillMode;
 
-		public SolidBrush ()
-		{
-			Color = Colors.Black;
-			FillMode = FillMode.Regular;
-		}
+        public SolidBrush()
+        {
+            Color = Colors.Black;
+            FillMode = FillMode.Regular;
+        }
 
-		public SolidBrush (Color color)
-		{
-			Color = color;
-			FillMode = FillMode.Regular;
-		}
-	}
+        public SolidBrush(Color color)
+        {
+            Color = color;
+            FillMode = FillMode.Regular;
+        }
+    }
 
-	public class GradientStop
-	{
-		public double Offset;
-		public Color Color;
-		public GradientStop ()
-		{			
-		}
-		public GradientStop (double offset, Color color)
-		{
-			Offset = offset;
-			Color = color;
-		}
-	}
+    public class GradientStop
+    {
+        public Color Color;
+        public double Offset;
 
-	public abstract class GradientBrush : Brush
-	{
-		public readonly List<GradientStop> Stops = new List<GradientStop> ();
-		public void AddStop (double offset, Color color)
-		{
-			Stops.Add (new GradientStop (offset, color));
-		}
-	}
+        public GradientStop()
+        {
+        }
 
-	public class RadialGradientBrush : GradientBrush
-	{
-		public Point RelativeCenter;
-		public Point RelativeFocus;
-		public double RelativeRadius;
+        public GradientStop(double offset, Color color)
+        {
+            Offset = offset;
+            Color = color;
+        }
+    }
 
-		public RadialGradientBrush ()
-		{
-		}
-		public RadialGradientBrush (Point relCenter, double relRadius, params GradientStop[] stops)
-		{
-			RelativeCenter = relCenter;
-			RelativeFocus = relCenter;
-			RelativeRadius = relRadius;
-			Stops.AddRange (stops);
-		}
-		public RadialGradientBrush (Point relCenter, double relRadius, Color startColor, Color endColor)
-		{
-			RelativeCenter = relCenter;
-			RelativeFocus = relCenter;
-			RelativeRadius = relRadius;
-			Stops.Add (new GradientStop (0, startColor));
-			Stops.Add (new GradientStop (1, endColor));
-		}
-		public RadialGradientBrush (Point relCenter, double relRadius, Color startColor, Color midColor, Color endColor)
-		{
-			RelativeCenter = relCenter;
-			RelativeFocus = relCenter;
-			RelativeRadius = relRadius;
-			Stops.Add (new GradientStop (0, startColor));
-			Stops.Add (new GradientStop (0.5, midColor));
-			Stops.Add (new GradientStop (1, endColor));
-		}
-	}
+    public abstract class GradientBrush : Brush
+    {
+        public readonly List<GradientStop> Stops = new List<GradientStop>();
 
-	public class LinearGradientBrush : GradientBrush
-	{
-		public Point RelativeStart;
-		public Point RelativeEnd;
+        public void AddStop(double offset, Color color)
+        {
+            Stops.Add(new GradientStop(offset, color));
+        }
+    }
 
-		public LinearGradientBrush ()
-		{
-		}
-		public LinearGradientBrush (Point relStart, Point relEnd, params GradientStop[] stops)
-		{
-			RelativeStart = relStart;
-			RelativeEnd = relEnd;
-			Stops.AddRange (stops);
-		}
-		public LinearGradientBrush (Point relStart, Point relEnd, Color startColor, Color endColor)
-		{
-			RelativeStart = relStart;
-			RelativeEnd = relEnd;
-			Stops.Add (new GradientStop (0, startColor));
-			Stops.Add (new GradientStop (1, endColor));
-		}
-		public LinearGradientBrush (Point relStart, Point relEnd, Color startColor, Color midColor, Color endColor)
-		{
-			RelativeStart = relStart;
-			RelativeEnd = relEnd;
-			Stops.Add (new GradientStop (0, startColor));
-			Stops.Add (new GradientStop (0.5, midColor));
-			Stops.Add (new GradientStop (1, endColor));
-		}
-	}
+    public class RadialGradientBrush : GradientBrush
+    {
+        public Point RelativeCenter;
+        public Point RelativeFocus;
+        public double RelativeRadius;
+
+        public RadialGradientBrush()
+        {
+        }
+
+        public RadialGradientBrush(Point relCenter, double relRadius, params GradientStop[] stops)
+        {
+            RelativeCenter = relCenter;
+            RelativeFocus = relCenter;
+            RelativeRadius = relRadius;
+            Stops.AddRange(stops);
+        }
+
+        public RadialGradientBrush(Point relCenter, double relRadius, Color startColor, Color endColor)
+        {
+            RelativeCenter = relCenter;
+            RelativeFocus = relCenter;
+            RelativeRadius = relRadius;
+            Stops.Add(new GradientStop(0, startColor));
+            Stops.Add(new GradientStop(1, endColor));
+        }
+
+        public RadialGradientBrush(Point relCenter, double relRadius, Color startColor, Color midColor, Color endColor)
+        {
+            RelativeCenter = relCenter;
+            RelativeFocus = relCenter;
+            RelativeRadius = relRadius;
+            Stops.Add(new GradientStop(0, startColor));
+            Stops.Add(new GradientStop(0.5, midColor));
+            Stops.Add(new GradientStop(1, endColor));
+        }
+    }
+
+    public class LinearGradientBrush : GradientBrush
+    {
+        public Point RelativeEnd;
+        public Point RelativeStart;
+
+        public LinearGradientBrush()
+        {
+        }
+
+        public LinearGradientBrush(Point relStart, Point relEnd, params GradientStop[] stops)
+        {
+            RelativeStart = relStart;
+            RelativeEnd = relEnd;
+            Stops.AddRange(stops);
+        }
+
+        public LinearGradientBrush(Point relStart, Point relEnd, Color startColor, Color endColor)
+        {
+            RelativeStart = relStart;
+            RelativeEnd = relEnd;
+            Stops.Add(new GradientStop(0, startColor));
+            Stops.Add(new GradientStop(1, endColor));
+        }
+
+        public LinearGradientBrush(Point relStart, Point relEnd, Color startColor, Color midColor, Color endColor)
+        {
+            RelativeStart = relStart;
+            RelativeEnd = relEnd;
+            Stops.Add(new GradientStop(0, startColor));
+            Stops.Add(new GradientStop(0.5, midColor));
+            Stops.Add(new GradientStop(1, endColor));
+        }
+    }
 }

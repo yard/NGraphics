@@ -4,21 +4,20 @@ namespace NGraphics.Models
 {
     public sealed class CssNumber
     {
-      private static NumberFormatInfo format;
+        private static NumberFormatInfo format;
 
-      public static NumberFormatInfo Format
-      {
-        get
+        public static NumberFormatInfo Format
         {
-          if (format == null)
-          {
-            format = new NumberFormatInfo();
-            format.NumberDecimalSeparator = ".";
-          }
+            get
+            {
+                if (format == null)
+                {
+                    format = new NumberFormatInfo();
+                    format.NumberDecimalSeparator = ".";
+                }
 
-          return format;
+                return format;
+            }
         }
-      }
     }
-
 }

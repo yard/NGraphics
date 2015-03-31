@@ -5,16 +5,29 @@ using NGraphics.Models;
 
 namespace NGraphics.Parsers
 {
-    public sealed class SvgNumber 
+    public sealed class SvgNumber
     {
+        #region Public Static Properties
+
+        public static NumberFormatInfo Format
+        {
+            get { return CssNumber.Format; }
+        }
+
+        #endregion
+
+        #region ISvgNumber Nembers
+
+        public double Value { get; set; }
+
+        #endregion
+
         #region Private Fields
 
-        private double _value;
-
-        private static string numberPattern = @"(?<number>(\+|-)?\d*\.?\d+((e|E)(\+|-)?\d+)?)";
+        private static readonly string numberPattern = @"(?<number>(\+|-)?\d*\.?\d+((e|E)(\+|-)?\d+)?)";
         private static Regex reNumber = new Regex("^" + numberPattern + "$");
 
-        private static Regex reUnit = new Regex("[a-z]+$");
+        private static readonly Regex reUnit = new Regex("[a-z]+$");
 
         #endregion
 
@@ -22,24 +35,12 @@ namespace NGraphics.Parsers
 
         public SvgNumber(float val)
         {
-            _value = val;
+            Value = val;
         }
 
         public SvgNumber(string str)
         {
-            _value = ParseNumber(str);
-        }
-
-        #endregion
-
-        #region Public Static Properties
-
-        public static NumberFormatInfo Format
-		{
-			get
-			{
-				return CssNumber.Format;
-			}
+            Value = ParseNumber(str);
         }
 
         #endregion
@@ -47,22 +48,19 @@ namespace NGraphics.Parsers
         #region Public Static Methods
 
         public static string ScientificToDec(string sc)
-		{
-			if (sc.IndexOfAny(new char[]{'e','E'})>-1)
-			{
-				sc = sc.Trim();
-				// remove the unit
-				Match match = reUnit.Match(sc);
-				return ParseNumber(sc.Substring(0, sc.Length - match.Length)).ToString(Format) + match.Value;
-			}
-			else
-			{
-				return sc;
-			}
-		}
+        {
+            if (sc.IndexOfAny(new[] {'e', 'E'}) > -1)
+            {
+                sc = sc.Trim();
+                // remove the unit
+                var match = reUnit.Match(sc);
+                return ParseNumber(sc.Substring(0, sc.Length - match.Length)).ToString(Format) + match.Value;
+            }
+            return sc;
+        }
 
-		public static double ParseNumber(string str)
-		{
+        public static double ParseNumber(string str)
+        {
             try
             {
                 return Double.Parse(str, Format);
@@ -72,7 +70,7 @@ namespace NGraphics.Parsers
                 throw new Exception(
                     "Input string was not in a correct format: " + str, e);
             }
-		}
+        }
 
         //public static double ParseNumber(string str)
         //{
@@ -129,49 +127,33 @@ namespace NGraphics.Parsers
         //}
 
         public static double CalcAngleDiff(double a1, double a2)
-		{
-			while(a1 < 0) a1 += 360;
-			a1 %= 360;
+        {
+            while (a1 < 0) a1 += 360;
+            a1 %= 360;
 
-			while(a2 < 0) a2 += 360;
-			a2 %= 360;
+            while (a2 < 0) a2 += 360;
+            a2 %= 360;
 
-            double diff = (a1 - a2);
+            var diff = (a1 - a2);
 
-			while(diff<0) diff += 360;
-			diff %= 360;
-            
-			return diff;
-		}
+            while (diff < 0) diff += 360;
+            diff %= 360;
+
+            return diff;
+        }
 
         public static double CalcAngleBisection(double a1, double a2)
-		{
-            double diff = CalcAngleDiff(a1, a2);
-            double bisect = a1 - diff / 2F;
+        {
+            var diff = CalcAngleDiff(a1, a2);
+            var bisect = a1 - diff/2F;
 
-			while (bisect < 0) 
+            while (bisect < 0)
                 bisect += 360;
 
-			bisect %= 360;
-			return bisect;
-		}
+            bisect %= 360;
+            return bisect;
+        }
 
-		#endregion
-
-		#region ISvgNumber Nembers
-
-        public double Value
-		{
-			get
-			{
-				return _value;
-			}
-			set
-			{
-				this._value = value;
-			}
-		}
-
-		#endregion
-	}
+        #endregion
+    }
 }
