@@ -91,11 +91,7 @@ namespace NGraphics.Parsers
 
     private void AddElement(IList<IDrawable> list, XElement e, Pen inheritPen, BaseBrush inheritBaseBrush)
     {
-      //
-      // Style
-      //
-      Element r = null;
-
+      Element element = null;
 
       var styleAttributedDictionary = e.Attributes().ToDictionary(k => k.Name.LocalName, v => v.Value);
 
@@ -103,10 +99,12 @@ namespace NGraphics.Parsers
       var baseBrush = GetBrush(styleAttributedDictionary, pen);
 
       var style = ReadString(e.Attribute("style"));
+      
       if (!string.IsNullOrWhiteSpace(style))
       {
         ApplyStyle(style, ref pen, ref baseBrush);
       }
+      
       pen = pen ?? inheritPen;
       baseBrush = baseBrush ?? inheritBaseBrush;
       if (pen == null && baseBrush == null)
@@ -126,7 +124,7 @@ namespace NGraphics.Parsers
           var y = ReadNumber(e.Attribute("y"));
           var text = e.Value.Trim();
           var font = new Font();
-          r = new Text(text, new Rect(new Point(x, y), new Size(double.MaxValue, double.MaxValue)), font,
+          element = new Text(text, new Rect(new Point(x, y), new Size(double.MaxValue, double.MaxValue)), font,
             TextAlignment.Left, pen, baseBrush);
         }
           break;
@@ -136,7 +134,7 @@ namespace NGraphics.Parsers
           var y = ReadNumber(e.Attribute("y"));
           var width = ReadNumber(e.Attribute("width"));
           var height = ReadNumber(e.Attribute("height"));
-          r = new Rectangle(new Point(x, y), new Size(width, height), pen, baseBrush);
+          element = new Rectangle(new Point(x, y), new Size(width, height), pen, baseBrush);
         }
           break;
         case "ellipse":
@@ -145,7 +143,7 @@ namespace NGraphics.Parsers
           var cy = ReadNumber(e.Attribute("cy"));
           var rx = ReadNumber(e.Attribute("rx"));
           var ry = ReadNumber(e.Attribute("ry"));
-          r = new Ellipse(new Point(cx - rx, cy - ry), new Size(2*rx, 2*ry), pen, baseBrush);
+          element = new Ellipse(new Point(cx - rx, cy - ry), new Size(2*rx, 2*ry), pen, baseBrush);
         }
           break;
         case "circle":
@@ -153,7 +151,7 @@ namespace NGraphics.Parsers
           var cx = ReadNumber(e.Attribute("cx"));
           var cy = ReadNumber(e.Attribute("cy"));
           var rr = ReadNumber(e.Attribute("r"));
-          r = new Ellipse(new Point(cx - rr, cy - rr), new Size(2*rr, 2*rr), pen, baseBrush);
+          element = new Ellipse(new Point(cx - rr, cy - rr), new Size(2*rr, 2*rr), pen, baseBrush);
         }
           break;
         case "path":
@@ -163,7 +161,7 @@ namespace NGraphics.Parsers
           {
             var p = new Path(pen, baseBrush);
             SvgPathParser.Parse(p, dA.Value);
-            r = p;
+            element = p;
           }
         }
           break;
@@ -171,7 +169,7 @@ namespace NGraphics.Parsers
         {
           var g = new Group();
           AddElements(g.Children, e.Elements(), pen, baseBrush);
-          r = g;
+          element = g;
         }
           break;
         case "use":
@@ -184,7 +182,7 @@ namespace NGraphics.Parsers
             {
               var useList = new List<IDrawable>();
               AddElement(useList, useE, pen, baseBrush);
-              r = useList.OfType<Element>().FirstOrDefault();
+              element = useList.OfType<Element>().FirstOrDefault();
             }
           }
         }
@@ -206,18 +204,18 @@ namespace NGraphics.Parsers
           throw new NotSupportedException("SVG element \"" + e.Name.LocalName + "\" is not supported");
       }
 
-      if (r != null)
+      if (element != null)
       {
-        r.Transform = ReadTransform(ReadString(e.Attribute("transform")));
-        list.Add(r);
+        element.Transform = ReadTransform(ReadString(e.Attribute("transform")));
+        list.Add(element);
       }
     }
-
 
     private void ApplyStyle(string style, ref Pen pen, ref BaseBrush baseBrush)
     {
       var d = new Dictionary<string, string>();
       var kvs = style.Split(new[] {';'}, StringSplitOptions.RemoveEmptyEntries);
+    
       foreach (var kv in kvs)
       {
         var m = keyValueRe.Match(kv);
@@ -241,14 +239,11 @@ namespace NGraphics.Parsers
       return defaultValue;
     }
 
-    private BaseBrush GetBrush(Dictionary<string, string> style, Pen pen)
+    private BaseBrush GetBrush(Dictionary<string, string> styleAttributes, Pen pen)
     {
       BaseBrush baseBrush = null;
 
-      //
-      // Brush attributes
-      //
-      var fillOpacity = GetString(style, "fill-opacity");
+      var fillOpacity = GetString(styleAttributes, "fill-opacity");
       if (!string.IsNullOrWhiteSpace(fillOpacity))
       {
         if (baseBrush == null)
@@ -258,7 +253,7 @@ namespace NGraphics.Parsers
           sb.Color = sb.Color.WithAlpha(ReadNumber(fillOpacity));
       }
 
-      var fillRule = GetString(style, "fill-rule");
+      var fillRule = GetString(styleAttributes, "fill-rule");
       if (!string.IsNullOrWhiteSpace(fillRule))
       {
         if (baseBrush == null)
@@ -272,11 +267,8 @@ namespace NGraphics.Parsers
           }
         }
       }
-
-      //
-      // Brush
-      //
-      var fill = GetString(style, "fill").Trim();
+      
+      var fill = GetString(styleAttributes, "fill").Trim();
       if (string.IsNullOrEmpty(fill))
       {
         // No change
@@ -339,13 +331,11 @@ namespace NGraphics.Parsers
       return baseBrush;
     }
 
-    private Pen GetPen(Dictionary<string, string> style)
+    private Pen GetPen(Dictionary<string, string> styleAttributes)
     {
       Pen pen = null;
-//
-      // Pen attributes
-      //
-      var strokeWidth = GetString(style, "stroke-width");
+  
+      var strokeWidth = GetString(styleAttributes, "stroke-width");
       if (!string.IsNullOrWhiteSpace(strokeWidth))
       {
         if (pen == null)
@@ -353,7 +343,7 @@ namespace NGraphics.Parsers
         pen.Width = ReadNumber(strokeWidth);
       }
 
-      var strokeOpacity = GetString(style, "stroke-opacity");
+      var strokeOpacity = GetString(styleAttributes, "stroke-opacity");
       if (!string.IsNullOrWhiteSpace(strokeOpacity))
       {
         if (pen == null)
@@ -361,10 +351,8 @@ namespace NGraphics.Parsers
         pen.Color = pen.Color.WithAlpha(ReadNumber(strokeOpacity));
       }
 
-      //
-      // Pen
-      //
-      var stroke = GetString(style, "stroke").Trim();
+      var stroke = GetString(styleAttributes, "stroke").Trim();
+      
       if (string.IsNullOrEmpty(stroke))
       {
         // No change
