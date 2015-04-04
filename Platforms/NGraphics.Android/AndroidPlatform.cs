@@ -285,14 +285,14 @@ namespace NGraphics.Android
 				foreach (var op in ops) {
 					var mt = op as MoveTo;
 					if (mt != null) {
-						var p = mt.Point;
+						var p = mt.Start;
 						path.MoveTo ((float)p.X, (float)p.Y);
 						bb.Add (p);
 						continue;
 					}
 					var lt = op as LineTo;
 					if (lt != null) {
-						var p = lt.Point;
+						var p = lt.Start;
 						path.LineTo ((float)p.X, (float)p.Y);
 						bb.Add (p);
 						continue;

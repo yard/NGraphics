@@ -303,7 +303,7 @@ namespace NGraphics
 				foreach (var op in ops) {
 					var mt = op as MoveTo;
 					if (mt != null) {
-						var p = mt.Point;
+						var p = mt.Start;
 						context.MoveTo ((nfloat)p.X, (nfloat)p.Y);
 						bb.Add (p);
 						continue;
