@@ -1,6 +1,6 @@
 .DS_Store
 .com.apple.timemachine.supported
-
+Resource.designer.cs
 bin
 obj
 packages
