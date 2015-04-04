@@ -18,18 +18,20 @@ namespace NGraphics.Parsers
 {
   public class SvgReader
   {
+    private readonly StylesParser _stylesParser;
 //		readonly XNamespace ns;
 
-    public SvgReader(TextReader reader)
+    public SvgReader(TextReader reader, StylesParser stylesParser, ValuesParser valuesParser)
     {
+      _stylesParser = stylesParser;
+      _valuesParser = valuesParser;
       Read(XDocument.Load(reader));
     }
 
     private static readonly char[] WS = {' ', '\t', '\n', '\r'};
     private readonly Dictionary<string, XElement> defs = new Dictionary<string, XElement>();
-    private readonly Regex fillUrlRe = new Regex(@"url\s*\(\s*#([^\)]+)\)");
-    private readonly IFormatProvider icult = CultureInfo.InvariantCulture;
     private readonly Regex keyValueRe = new Regex(@"\s*(\w+)\s*:\s*(.*)");
+    private readonly ValuesParser _valuesParser;
     public Graphic Graphic { get; private set; }
 
     private void Read(XDocument doc)
@@ -54,8 +56,8 @@ namespace NGraphics.Parsers
       //
       var widthA = svg.Attribute("width");
       var heightA = svg.Attribute("height");
-      var width = ReadNumber(widthA);
-      var height = ReadNumber(heightA);
+      var width = _valuesParser.ReadNumber(widthA);
+      var height = _valuesParser.ReadNumber(heightA);
       var size = new Size(width, height);
 
       var viewBox = new Rect(size);
@@ -95,8 +97,8 @@ namespace NGraphics.Parsers
 
       var styleAttributedDictionary = e.Attributes().ToDictionary(k => k.Name.LocalName, v => v.Value);
 
-      var pen = GetPen(styleAttributedDictionary);
-      var baseBrush = GetBrush(styleAttributedDictionary, pen);
+      var pen = _stylesParser.GetPen(styleAttributedDictionary);
+      var baseBrush = _stylesParser.GetBrush(styleAttributedDictionary,defs, pen);
 
       var style = ReadString(e.Attribute("style"));
       
@@ -117,8 +119,8 @@ namespace NGraphics.Parsers
       {
         case "text":
         {
-          var x = ReadNumber(e.Attribute("x"));
-          var y = ReadNumber(e.Attribute("y"));
+          var x = _valuesParser.ReadNumber(e.Attribute("x"));
+          var y = _valuesParser.ReadNumber(e.Attribute("y"));
           var text = e.Value.Trim();
           var font = new Font();
           element = new Text(text, new Rect(new Point(x, y), new Size(double.MaxValue, double.MaxValue)), font,
@@ -127,27 +129,27 @@ namespace NGraphics.Parsers
           break;
         case "rect":
         {
-          var x = ReadNumber(e.Attribute("x"));
-          var y = ReadNumber(e.Attribute("y"));
-          var width = ReadNumber(e.Attribute("width"));
-          var height = ReadNumber(e.Attribute("height"));
+          var x = _valuesParser.ReadNumber(e.Attribute("x"));
+          var y = _valuesParser.ReadNumber(e.Attribute("y"));
+          var width = _valuesParser.ReadNumber(e.Attribute("width"));
+          var height = _valuesParser.ReadNumber(e.Attribute("height"));
           element = new Rectangle(new Point(x, y), new Size(width, height), pen, baseBrush);
         }
           break;
         case "ellipse":
         {
-          var cx = ReadNumber(e.Attribute("cx"));
-          var cy = ReadNumber(e.Attribute("cy"));
-          var rx = ReadNumber(e.Attribute("rx"));
-          var ry = ReadNumber(e.Attribute("ry"));
+          var cx = _valuesParser.ReadNumber(e.Attribute("cx"));
+          var cy = _valuesParser.ReadNumber(e.Attribute("cy"));
+          var rx = _valuesParser.ReadNumber(e.Attribute("rx"));
+          var ry = _valuesParser.ReadNumber(e.Attribute("ry"));
           element = new Ellipse(new Point(cx - rx, cy - ry), new Size(2*rx, 2*ry), pen, baseBrush);
         }
           break;
         case "circle":
         {
-          var cx = ReadNumber(e.Attribute("cx"));
-          var cy = ReadNumber(e.Attribute("cy"));
-          var rr = ReadNumber(e.Attribute("r"));
+          var cx = _valuesParser.ReadNumber(e.Attribute("cx"));
+          var cy = _valuesParser.ReadNumber(e.Attribute("cy"));
+          var rr = _valuesParser.ReadNumber(e.Attribute("r"));
           element = new Ellipse(new Point(cx - rr, cy - rr), new Size(2*rr, 2*rr), pen, baseBrush);
         }
           break;
@@ -224,157 +226,10 @@ namespace NGraphics.Parsers
         }
       }
 
-      pen = GetPen(d);
-      baseBrush = GetBrush(d, pen);
+      pen = _stylesParser.GetPen(d);
+      baseBrush = _stylesParser.GetBrush(d,defs, pen);
     }
-
-    private string GetString(Dictionary<string, string> style, string name, string defaultValue = "")
-    {
-      string v;
-      if (style.TryGetValue(name, out v))
-        return v;
-      return defaultValue;
-    }
-
-    private BaseBrush GetBrush(Dictionary<string, string> styleAttributes, Pen pen)
-    {
-      BaseBrush baseBrush = null;
-
-      var fillOpacity = GetString(styleAttributes, "fill-opacity");
-      if (!string.IsNullOrWhiteSpace(fillOpacity))
-      {
-        if (baseBrush == null)
-          baseBrush = new SolidBrush();
-        var sb = baseBrush as SolidBrush;
-        if (sb != null)
-          sb.Color = sb.Color.WithAlpha(ReadNumber(fillOpacity));
-      }
-
-      var fillRule = GetString(styleAttributes, "fill-rule");
-      if (!string.IsNullOrWhiteSpace(fillRule))
-      {
-        if (baseBrush == null)
-          baseBrush = new SolidBrush();
-        var sb = baseBrush as SolidBrush;
-        if (sb != null)
-        {
-          if (fillRule.Equals("evenodd"))
-          {
-            sb.FillMode = FillMode.EvenOdd;
-          }
-        }
-      }
-      
-      var fill = GetString(styleAttributes, "fill").Trim();
-      if (string.IsNullOrEmpty(fill))
-      {
-        // No change
-      }
-      else if (fill == "none")
-      {
-        baseBrush = null;
-      }
-      else
-      {
-        Color color;
-        if (Colors.TryParse(fill, out color))
-        {
-          var sb = baseBrush as SolidBrush;
-          if (sb == null)
-          {
-            baseBrush = new SolidBrush(color);
-          }
-          else
-          {
-            if (sb.Color.Alpha == 1 || pen == null)
-              sb.Color = color;
-            else
-              sb.Color = color.WithAlpha(pen.Color.Alpha);
-          }
-        }
-        else
-        {
-          var urlM = fillUrlRe.Match(fill);
-          if (urlM.Success)
-          {
-            var id = urlM.Groups[1].Value.Trim();
-            XElement defE;
-            if (defs.TryGetValue(id, out defE))
-            {
-              switch (defE.Name.LocalName)
-              {
-                case "linearGradient":
-                  baseBrush = CreateLinearGradientBrush(defE);
-                  break;
-                case "radialGradient":
-                  baseBrush = CreateRadialGradientBrush(defE);
-                  break;
-                default:
-                  throw new NotSupportedException("Fill " + defE.Name);
-              }
-            }
-            else
-            {
-              throw new Exception("Invalid fill url reference: " + id);
-            }
-          }
-          else
-          {
-            throw new NotSupportedException("Fill " + fill);
-          }
-        }
-      }
-
-      return baseBrush;
-    }
-
-    private Pen GetPen(Dictionary<string, string> styleAttributes)
-    {
-      Pen pen = null;
-  
-      var strokeWidth = GetString(styleAttributes, "stroke-width");
-      if (!string.IsNullOrWhiteSpace(strokeWidth))
-      {
-        if (pen == null)
-          pen = new Pen();
-        pen.Width = ReadNumber(strokeWidth);
-      }
-
-      var strokeOpacity = GetString(styleAttributes, "stroke-opacity");
-      if (!string.IsNullOrWhiteSpace(strokeOpacity))
-      {
-        if (pen == null)
-          pen = new Pen();
-        pen.Color = pen.Color.WithAlpha(ReadNumber(strokeOpacity));
-      }
-
-      var stroke = GetString(styleAttributes, "stroke").Trim();
-      
-      if (string.IsNullOrEmpty(stroke))
-      {
-        // No change
-      }
-      else if (stroke == "none")
-      {
-        pen = null;
-      }
-      else
-      {
-        if (pen == null)
-          pen = new Pen();
-        Color color;
-        if (Colors.TryParse(stroke, out color))
-        {
-          if (pen.Color.Alpha == 1)
-            pen.Color = color;
-          else
-            pen.Color = color.WithAlpha(pen.Color.Alpha);
-        }
-      }
-
-      return pen;
-    }
-
+   
     private TransformBase ReadTransform(string raw)
     {
       if (string.IsNullOrWhiteSpace(raw))
@@ -396,7 +251,7 @@ namespace NGraphics.Parsers
             if (args.Length == 7)
             {
               var m = new MatrixTransform(t);
-              nt = new Translate(new Size(ReadNumber(args[1]), ReadNumber(args[2])), t);
+              nt = new Translate(new Size(_valuesParser.ReadNumber(args[1]), _valuesParser.ReadNumber(args[2])), t);
             }
             else
             {
@@ -407,30 +262,30 @@ namespace NGraphics.Parsers
           case "translate":
             if (args.Length >= 3)
             {
-              nt = new Translate(new Size(ReadNumber(args[1]), ReadNumber(args[2])), t);
+              nt = new Translate(new Size(_valuesParser.ReadNumber(args[1]), _valuesParser.ReadNumber(args[2])), t);
             }
             else if (args.Length >= 2)
             {
-              nt = new Translate(new Size(ReadNumber(args[1]), 0), t);
+              nt = new Translate(new Size(_valuesParser.ReadNumber(args[1]), 0), t);
             }
             break;
           case "scale":
             if (args.Length >= 3)
             {
-              nt = new Scale(new Size(ReadNumber(args[1]), ReadNumber(args[2])), t);
+              nt = new Scale(new Size(_valuesParser.ReadNumber(args[1]), _valuesParser.ReadNumber(args[2])), t);
             }
             else if (args.Length >= 2)
             {
-              var sx = ReadNumber(args[1]);
+              var sx = _valuesParser.ReadNumber(args[1]);
               nt = new Scale(new Size(sx, sx), t);
             }
             break;
           case "rotate":
-            var a = ReadNumber(args[1]);
+            var a = _valuesParser.ReadNumber(args[1]);
             if (args.Length >= 4)
             {
-              var x = ReadNumber(args[2]);
-              var y = ReadNumber(args[3]);
+              var x = _valuesParser.ReadNumber(args[2]);
+              var y = _valuesParser.ReadNumber(args[3]);
               var t1 = new Translate(new Size(x, y), t);
               var t2 = new Rotate(a, t1);
               var t3 = new Translate(new Size(-x, -y), t2);
@@ -467,120 +322,18 @@ namespace NGraphics.Parsers
       return a.Value ?? defaultValue;
     }
 
-    private RadialGradientBrush CreateRadialGradientBrush(XElement e)
-    {
-      var b = new RadialGradientBrush();
-
-      b.RelativeCenter.X = ReadNumber(e.Attribute("cx"));
-      b.RelativeCenter.Y = ReadNumber(e.Attribute("cy"));
-      b.RelativeFocus.X = ReadNumber(e.Attribute("fx"));
-      b.RelativeFocus.Y = ReadNumber(e.Attribute("fy"));
-      b.RelativeRadius = ReadNumber(e.Attribute("r"));
-
-      ReadStops(e, b.Stops);
-
-      return b;
-    }
-
-    private LinearGradientBrush CreateLinearGradientBrush(XElement e)
-    {
-      var b = new LinearGradientBrush();
-
-      b.RelativeStart.X = ReadNumber(e.Attribute("x1"));
-      b.RelativeStart.Y = ReadNumber(e.Attribute("y1"));
-      b.RelativeEnd.X = ReadNumber(e.Attribute("x2"));
-      b.RelativeEnd.Y = ReadNumber(e.Attribute("y2"));
-
-      ReadStops(e, b.Stops);
-
-      return b;
-    }
-
-    private void ReadStops(XElement e, List<GradientStop> stops)
-    {
-      var ns = e.Name.Namespace;
-      foreach (var se in e.Elements(ns + "stop"))
-      {
-        var s = new GradientStop();
-        s.Offset = ReadNumber(se.Attribute("offset"));
-        s.Color = ReadColor(se, "stop-color");
-        stops.Add(s);
-      }
-      stops.Sort((x, y) => x.Offset.CompareTo(y.Offset));
-    }
-
-    private Color ReadColor(XElement e, string attrib)
-    {
-      var a = e.Attribute(attrib);
-      if (a == null)
-        return Colors.Black;
-      return ReadColor(a.Value);
-    }
-
-    private Color ReadColor(string raw)
-    {
-      if (string.IsNullOrWhiteSpace(raw))
-        return Colors.Clear;
-
-      var s = raw.Trim();
-
-      if (s.Length == 7 && s[0] == '#')
-      {
-        var r = int.Parse(s.Substring(1, 2), NumberStyles.HexNumber, icult);
-        var g = int.Parse(s.Substring(3, 2), NumberStyles.HexNumber, icult);
-        var b = int.Parse(s.Substring(5, 2), NumberStyles.HexNumber, icult);
-
-        return new Color(r/255.0, g/255.0, b/255.0, 1);
-      }
-
-      throw new NotSupportedException("Color " + s);
-    }
-
-    private double ReadNumber(XAttribute a)
-    {
-      if (a == null)
-        return 0;
-      return ReadNumber(a.Value);
-    }
-
-    private double ReadNumber(string raw)
-    {
-      if (string.IsNullOrWhiteSpace(raw))
-        return 0;
-
-      var s = raw.Trim();
-      var m = 1.0;
-
-      if (s.EndsWith("px"))
-      {
-        s = s.Substring(0, s.Length - 2);
-      }
-      else if (s.EndsWith("%"))
-      {
-        s = s.Substring(0, s.Length - 1);
-        m = 0.01;
-      }
-
-      double v;
-      if (!double.TryParse(s, NumberStyles.Float, icult, out v))
-      {
-        v = 0;
-      }
-      return m*v;
-    }
-
     private Rect ReadRectangle(string s)
     {
       var r = new Rect();
       var p = s.Split(WS, StringSplitOptions.RemoveEmptyEntries);
       if (p.Length > 0)
-        r.X = ReadNumber(p[0]);
+        r.X = _valuesParser.ReadNumber(p[0]);
       if (p.Length > 1)
-        r.Y = ReadNumber(p[1]);
+        r.Y = _valuesParser.ReadNumber(p[1]);
       if (p.Length > 2)
-        r.Width = ReadNumber(p[2]);
+        r.Width = _valuesParser.ReadNumber(p[2]);
       if (p.Length > 3)
-        r.Height = ReadNumber(p[3]);
+        r.Height = _valuesParser.ReadNumber(p[3]);
       return r;
     }
   }

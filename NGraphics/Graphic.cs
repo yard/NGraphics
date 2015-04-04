@@ -60,7 +60,8 @@ namespace NGraphics
 
         public static Graphic LoadSvg(TextReader reader)
         {
-            var svgr = new SvgReader(reader);
+          var valuesParser = new ValuesParser();
+            var svgr = new SvgReader(reader, new StylesParser(valuesParser),valuesParser);
             return svgr.Graphic;
         }
 
