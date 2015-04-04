@@ -107,10 +107,7 @@ namespace NGraphics.Parsers
       
       pen = pen ?? inheritPen;
       baseBrush = baseBrush ?? inheritBaseBrush;
-      if (pen == null && baseBrush == null)
-      {
-        baseBrush = Brushes.Black;
-      }
+
       //var id = ReadString (e.Attribute ("id"));
 
       //
