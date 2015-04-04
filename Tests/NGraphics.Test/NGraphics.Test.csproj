@@ -32,6 +32,7 @@
   <ItemGroup>
     <Compile Include="ImageSurfaceTest.cs" />
     <Compile Include="DrawingTest.cs" />
+    <Compile Include="Parsers\StylesParserTests.cs" />
     <Compile Include="PrimitivesTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="GraphicCanvasTests.cs" />
@@ -74,6 +75,12 @@
     <EmbeddedResource Include="Inputs\cat.png" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="FluentAssertions">
+      <HintPath>..\..\packages\FluentAssertions.3.3.0\lib\portable-net40+sl5+win8+wp8+wpa81\FluentAssertions.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentAssertions.Core">
+      <HintPath>..\..\packages\FluentAssertions.3.3.0\lib\portable-net40+sl5+win8+wp8+wpa81\FluentAssertions.Core.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.framework">
       <HintPath>..\..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
       <Private>True</Private>
