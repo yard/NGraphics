@@ -9,13 +9,13 @@ using NGraphics.Models.Brushes;
 
 namespace NGraphics.Parsers
 {
-  public class StylesParser
+  public class StylesParser : IStylesParser
   {
     private readonly IFormatProvider icult = CultureInfo.InvariantCulture;
     private readonly Regex fillUrlRe = new Regex(@"url\s*\(\s*#([^\)]+)\)");
-    private readonly ValuesParser _valuesParser;
+    private readonly IValuesParser _valuesParser;
 
-    public StylesParser(ValuesParser valuesParser)
+    public StylesParser(IValuesParser valuesParser)
     {
       _valuesParser = valuesParser;
     }
@@ -180,7 +180,6 @@ namespace NGraphics.Parsers
       stops.Sort((x, y) => x.Offset.CompareTo(y.Offset));
     }
 
-
     private Color ReadColor(XElement e, string attrib)
     {
       var a = e.Attribute(attrib);
@@ -188,7 +187,6 @@ namespace NGraphics.Parsers
         return Colors.Black;
       return ReadColor(a.Value);
     }
-
 
     private Color ReadColor(string raw)
     {

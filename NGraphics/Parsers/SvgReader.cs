@@ -18,10 +18,11 @@ namespace NGraphics.Parsers
 {
   public class SvgReader
   {
-    private readonly StylesParser _stylesParser;
-//		readonly XNamespace ns;
+    private readonly IStylesParser _stylesParser;
+    private readonly IValuesParser _valuesParser;
+    //		readonly XNamespace ns;
 
-    public SvgReader(TextReader reader, StylesParser stylesParser, ValuesParser valuesParser)
+    public SvgReader(TextReader reader, IStylesParser stylesParser, IValuesParser valuesParser)
     {
       _stylesParser = stylesParser;
       _valuesParser = valuesParser;
@@ -31,7 +32,6 @@ namespace NGraphics.Parsers
     private static readonly char[] WS = {' ', '\t', '\n', '\r'};
     private readonly Dictionary<string, XElement> defs = new Dictionary<string, XElement>();
     private readonly Regex keyValueRe = new Regex(@"\s*(\w+)\s*:\s*(.*)");
-    private readonly ValuesParser _valuesParser;
     public Graphic Graphic { get; private set; }
 
     private void Read(XDocument doc)

@@ -79,6 +79,8 @@
     <Compile Include="Models\Transforms\Translate.cs" />
     <Compile Include="NullPlatform.cs" />
     <Compile Include="Parsers\CoordinateParser.cs" />
+    <Compile Include="Parsers\IStylesParser.cs" />
+    <Compile Include="Parsers\IValuesParser.cs" />
     <Compile Include="Parsers\OperationParser.cs" />
     <Compile Include="Parsers\StylesParser.cs" />
     <Compile Include="Parsers\SvgNumber.cs" />

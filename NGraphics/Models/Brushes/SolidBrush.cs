@@ -7,13 +7,13 @@ namespace NGraphics.Models.Brushes
         public SolidBrush()
         {
             Color = Colors.Black;
-            FillMode = FillMode.Regular;
+            FillMode = FillMode.NonZero;
         }
 
         public SolidBrush(Color color)
         {
             Color = color;
-            FillMode = FillMode.Regular;
+            FillMode = FillMode.NonZero;
         }
 
         public Color Color;

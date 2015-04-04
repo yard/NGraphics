@@ -3,6 +3,6 @@
     public enum FillMode
     {
         EvenOdd,
-        Regular
+        NonZero
     }
 }

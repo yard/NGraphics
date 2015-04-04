@@ -4,7 +4,7 @@ using System.Xml.Linq;
 
 namespace NGraphics.Parsers
 {
-  public class ValuesParser
+  public class ValuesParser : IValuesParser
   {
     private readonly IFormatProvider icult = CultureInfo.InvariantCulture;
 
