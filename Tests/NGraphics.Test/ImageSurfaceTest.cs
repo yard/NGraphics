@@ -102,7 +102,7 @@ namespace NGraphics.Test
 			p.LineTo (size.Width, 0,false);
 			p.LineTo (size.Width / 2, size.Height,false);
 			p.Close ();
-			p.Brush = b;
+			p.BaseBrush = b;
 			p.Draw (canvas);
 			canvas.GetImage ().SaveAsPng (GetPath ("ImageCanvas.TriWithRadGrad"));
 		}
