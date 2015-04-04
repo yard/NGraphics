@@ -96,9 +96,13 @@ namespace NGraphics.Parsers
             // Style
             //
             Element r = null;
-            Pen pen = null;
-            BaseBrush baseBrush = null;
-            ApplyStyle(e.Attributes().ToDictionary(k => k.Name.LocalName, v => v.Value), ref pen, ref baseBrush);
+
+
+          var styleAttributedDictionary = e.Attributes().ToDictionary(k => k.Name.LocalName, v => v.Value);
+
+          var pen = GetPen(styleAttributedDictionary);
+            var baseBrush = GetBrush(styleAttributedDictionary,pen);
+
             var style = ReadString(e.Attribute("style"));
             if (!string.IsNullOrWhiteSpace(style))
             {
@@ -210,7 +214,9 @@ namespace NGraphics.Parsers
             }
         }
 
-        private void ApplyStyle(string style, ref Pen pen, ref BaseBrush baseBrush)
+     
+
+      private void ApplyStyle(string style, ref Pen pen, ref BaseBrush baseBrush)
         {
             var d = new Dictionary<string, string>();
             var kvs = style.Split(new[] {';'}, StringSplitOptions.RemoveEmptyEntries);
@@ -224,7 +230,9 @@ namespace NGraphics.Parsers
                     d[k] = v;
                 }
             }
-            ApplyStyle(d, ref pen, ref baseBrush);
+
+        pen = GetPen(d);
+         baseBrush = GetBrush(d, pen);
         }
 
         private string GetString(Dictionary<string, string> style, string name, string defaultValue = "")
@@ -235,54 +243,11 @@ namespace NGraphics.Parsers
             return defaultValue;
         }
 
-        private void ApplyStyle(Dictionary<string, string> style, ref Pen pen, ref BaseBrush baseBrush)
+        private BaseBrush GetBrush(Dictionary<string, string> style, Pen pen)
         {
-            //
-            // Pen attributes
-            //
-            var strokeWidth = GetString(style, "stroke-width");
-            if (!string.IsNullOrWhiteSpace(strokeWidth))
-            {
-                if (pen == null)
-                    pen = new Pen();
-                pen.Width = ReadNumber(strokeWidth);
-            }
+          BaseBrush baseBrush = null;
 
-            var strokeOpacity = GetString(style, "stroke-opacity");
-            if (!string.IsNullOrWhiteSpace(strokeOpacity))
-            {
-                if (pen == null)
-                    pen = new Pen();
-                pen.Color = pen.Color.WithAlpha(ReadNumber(strokeOpacity));
-            }
-
-            //
-            // Pen
-            //
-            var stroke = GetString(style, "stroke").Trim();
-            if (string.IsNullOrEmpty(stroke))
-            {
-                // No change
-            }
-            else if (stroke == "none")
-            {
-                pen = null;
-            }
-            else
-            {
-                if (pen == null)
-                    pen = new Pen();
-                Color color;
-                if (Colors.TryParse(stroke, out color))
-                {
-                    if (pen.Color.Alpha == 1)
-                        pen.Color = color;
-                    else
-                        pen.Color = color.WithAlpha(pen.Color.Alpha);
-                }
-            }
-
-            //
+          //
             // Brush attributes
             //
             var fillOpacity = GetString(style, "fill-opacity");
@@ -372,9 +337,62 @@ namespace NGraphics.Parsers
                     }
                 }
             }
+
+          return baseBrush;
         }
 
-        private TransformBase ReadTransform(string raw)
+      private Pen GetPen(Dictionary<string, string> style)
+      {
+        Pen pen = null;
+//
+        // Pen attributes
+        //
+        var strokeWidth = GetString(style, "stroke-width");
+        if (!string.IsNullOrWhiteSpace(strokeWidth))
+        {
+          if (pen == null)
+            pen = new Pen();
+          pen.Width = ReadNumber(strokeWidth);
+        }
+
+        var strokeOpacity = GetString(style, "stroke-opacity");
+        if (!string.IsNullOrWhiteSpace(strokeOpacity))
+        {
+          if (pen == null)
+            pen = new Pen();
+          pen.Color = pen.Color.WithAlpha(ReadNumber(strokeOpacity));
+        }
+
+        //
+        // Pen
+        //
+        var stroke = GetString(style, "stroke").Trim();
+        if (string.IsNullOrEmpty(stroke))
+        {
+          // No change
+        }
+        else if (stroke == "none")
+        {
+          pen = null;
+        }
+        else
+        {
+          if (pen == null)
+            pen = new Pen();
+          Color color;
+          if (Colors.TryParse(stroke, out color))
+          {
+            if (pen.Color.Alpha == 1)
+              pen.Color = color;
+            else
+              pen.Color = color.WithAlpha(pen.Color.Alpha);
+          }
+        }
+
+        return pen;
+      }
+
+      private TransformBase ReadTransform(string raw)
         {
             if (string.IsNullOrWhiteSpace(raw))
                 return null;
