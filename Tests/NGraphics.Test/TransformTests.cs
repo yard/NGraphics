@@ -2,7 +2,9 @@
 using System.IO;
 using System;
 using System.Reflection;
+using NGraphics.Codes;
 using NGraphics.Interfaces;
+using NGraphics.Models;
 
 namespace NGraphics.Test
 {
@@ -17,7 +19,7 @@ namespace NGraphics.Test
 			canvas.Rotate (30);
 			canvas.Translate (50, 50);
 
-			canvas.DrawRectangle (0, 0, 150, 75, brush: Brushes.Red);
+			canvas.DrawRectangle (0, 0, 150, 75, baseBrush: Brushes.Red);
 
 			canvas.GetImage ().SaveAsPng (GetPath ("TransformRotateTranslate.png"));
 		}
@@ -30,7 +32,7 @@ namespace NGraphics.Test
 			canvas.Translate (50, 50);
 			canvas.Rotate (30);
 
-			canvas.DrawRectangle (0, 0, 150, 75, brush: Brushes.Red);
+			canvas.DrawRectangle (0, 0, 150, 75, baseBrush: Brushes.Red);
 
 			canvas.GetImage ().SaveAsPng (GetPath ("TransformTranslateRotate.png"));
 		}

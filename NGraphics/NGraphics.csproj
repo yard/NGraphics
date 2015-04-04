@@ -33,6 +33,8 @@
     <DocumentationFile>bin\Release\NGraphics.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Codes\FillMode.cs" />
+    <Compile Include="Codes\TextAlignment.cs" />
     <Compile Include="Models\BoundingBoxBuilder.cs" />
     <Compile Include="Models\Brushes\BaseBrush.cs" />
     <Compile Include="Codes\OperationType.cs" />
@@ -71,7 +73,6 @@
     <Compile Include="Models\Segments\SvgPathSegmentList.cs" />
     <Compile Include="Models\Segments\SvgQuadraticCurveSegment.cs" />
     <Compile Include="Models\Operations\MoveTo.cs" />
-    <Compile Include="Models\TextAlignment.cs" />
     <Compile Include="Models\Transforms\MatrixTransform.cs" />
     <Compile Include="Models\Transforms\Rotate.cs" />
     <Compile Include="Models\Transforms\Scale.cs" />
@@ -99,7 +100,6 @@
     <Compile Include="Models\Elements\Text.cs" />
     <Compile Include="Models\Elements\Element.cs" />
     <Compile Include="Models\Font.cs" />
-    <Compile Include="Models\FillMode.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup />

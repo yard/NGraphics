@@ -4,7 +4,11 @@ using NGraphics;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
+using NGraphics.Codes;
 using NGraphics.Interfaces;
+using NGraphics.Models;
+using NGraphics.Models.Brushes;
+using Path = NGraphics.Models.Elements.Path;
 
 namespace NGraphics.Test
 {

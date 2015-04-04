@@ -2,6 +2,9 @@
 using System.IO;
 using System;
 using System.Reflection;
+using NGraphics.Codes;
+using NGraphics.Models;
+using NGraphics.Models.Brushes;
 
 namespace NGraphics.Test
 {
@@ -20,7 +23,7 @@ namespace NGraphics.Test
 				Colors.Green,
 				Colors.LightGray);				
 
-			canvas.DrawRectangle (rect, brush: brush);
+			canvas.DrawRectangle (rect, baseBrush: brush);
 
 			canvas.GetImage ().SaveAsPng (GetPath ("Brush.RectLinearGradient.png"));
 		}

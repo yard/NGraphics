@@ -1,4 +1,5 @@
-﻿using NGraphics.Interfaces;
+﻿using NGraphics.Codes;
+using NGraphics.Interfaces;
 using NGraphics.Models.Brushes;
 
 namespace NGraphics.Models.Elements

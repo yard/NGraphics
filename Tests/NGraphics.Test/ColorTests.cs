@@ -3,6 +3,7 @@ using System.IO;
 using System;
 using System.Reflection;
 using NGraphics.Interfaces;
+using NGraphics.Models;
 
 namespace NGraphics.Test
 {
