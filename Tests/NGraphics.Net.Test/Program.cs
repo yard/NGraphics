@@ -2,6 +2,7 @@
 using System.IO;
 using NGraphics.Test;
 using System.Linq;
+using System.Threading;
 
 namespace NGraphics.Net.Test
 {
@@ -45,8 +46,8 @@ namespace NGraphics.Net.Test
 				}
 			}
 
-			Console.WriteLine ("Done...Press enter to exit.");
-      Console.ReadLine();
+			Console.WriteLine ("Done...");
+      Thread.Sleep(TimeSpan.FromSeconds(1));
 		}
 	}
 }

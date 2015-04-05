@@ -124,4 +124,8 @@
   <ItemGroup>
     <EmbeddedResource Include="Inputs\horseshoe.svg" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Inputs\mozilla\paths-data-16-t.svg" />
+    <Content Include="Inputs\Readme.txt" />
+  </ItemGroup>
 </Project>

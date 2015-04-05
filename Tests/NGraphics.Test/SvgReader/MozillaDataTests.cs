@@ -84,6 +84,12 @@ namespace NGraphics.Test.SvgReader
         }
 
         [Test]
+        public void MozillaPath_Data_16()
+        {
+          ReadAndDraw("mozilla.paths-data-16-t.svg");
+        }
+
+        [Test]
         public void MozillaTransform()
         {
             ReadAndDraw("mozilla.transform.svg");
