@@ -35,10 +35,10 @@ namespace NGraphics.Test.SvgReader
             ReadAndDraw("horseshoe.svg");
         }
 
-        //[Test]
-        //public void ErulisseuiinSpaceshipPack()
-        //{
-        //    ReadAndDraw("ErulisseuiinSpaceshipPack.svg");
-        //}
+        [Test]
+        public void ErulisseuiinSpaceshipPack()
+        {
+            ReadAndDraw("ErulisseuiinSpaceshipPack.svg");
+        }
     }
 }

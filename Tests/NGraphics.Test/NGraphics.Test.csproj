@@ -39,7 +39,7 @@
     <Compile Include="PathTests.cs" />
     <Compile Include="ReadmeTests.cs" />
     <Compile Include="SvgReader\ComplexPathsTests.cs" />
-    <Compile Include="SvgReader\MozillaDataTests.cs" />
+    <Compile Include="SvgReader\W3CPathDataTests.cs" />
     <Compile Include="SvgReader\SvgReaderTestBase.cs" />
     <Compile Include="SvgReader\TextTests.cs" />
     <Compile Include="TransformTests.cs" />
@@ -59,17 +59,13 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Inputs\mozilla\ellipse.svg" />
     <EmbeddedResource Include="Inputs\SunAtNight.svg" />
     <EmbeddedResource Include="Inputs\MocastIcon.svg" />
-    <EmbeddedResource Include="Inputs\mozilla\path.svg" />
-    <EmbeddedResource Include="Inputs\mozilla\transform.svg" />
-    <EmbeddedResource Include="Inputs\mozilla\BezierCurves1.svg" />
-    <EmbeddedResource Include="Inputs\mozilla\BezierCurves2.svg" />
-    <EmbeddedResource Include="Inputs\mozilla\Text1.svg" />
-    <EmbeddedResource Include="Inputs\mozilla\Text2.svg" />
-    <EmbeddedResource Include="Inputs\mozilla\Text3.svg" />
-    <EmbeddedResource Include="Inputs\mozilla\Text4.svg" />
+    <EmbeddedResource Include="Inputs\W3C\transform.svg" />
+    <EmbeddedResource Include="Inputs\W3C\Text\Text1.svg" />
+    <EmbeddedResource Include="Inputs\W3C\Text\Text2.svg" />
+    <EmbeddedResource Include="Inputs\W3C\Text\Text3.svg" />
+    <EmbeddedResource Include="Inputs\W3C\Text\Text4.svg" />
     <EmbeddedResource Include="Inputs\Smile.svg" />
     <EmbeddedResource Include="Inputs\ErulisseuiinSpaceshipPack.svg" />
     <EmbeddedResource Include="Inputs\cat.png" />
@@ -93,44 +89,45 @@
     <EmbeddedResource Include="Inputs\IPod.svg" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Inputs\mozilla\paths-data-01-t.svg" />
+    <EmbeddedResource Include="Inputs\W3C\Path\paths-data-01-t.svg" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Inputs\mozilla\paths-data-02-t.svg" />
+    <EmbeddedResource Include="Inputs\W3C\Path\paths-data-02-t.svg" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Inputs\mozilla\paths-data-04-t.svg" />
+    <EmbeddedResource Include="Inputs\W3C\Path\paths-data-04-t.svg" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Inputs\mozilla\paths-data-05-t.svg" />
+    <EmbeddedResource Include="Inputs\W3C\Path\paths-data-05-t.svg" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Inputs\mozilla\paths-data-06-t.svg" />
-    <EmbeddedResource Include="Inputs\mozilla\paths-data-07-t.svg" />
+    <EmbeddedResource Include="Inputs\W3C\Path\paths-data-06-t.svg" />
+    <EmbeddedResource Include="Inputs\W3C\Path\paths-data-07-t.svg" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Inputs\mozilla\paths-data-08-t.svg" />
-    <EmbeddedResource Include="Inputs\mozilla\paths-data-09-t.svg" />
+    <EmbeddedResource Include="Inputs\W3C\Path\paths-data-08-t.svg" />
+    <EmbeddedResource Include="Inputs\W3C\Path\paths-data-09-t.svg" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Inputs\mozilla\paths-data-10-t.svg" />
-    <EmbeddedResource Include="Inputs\mozilla\paths-data-12-t.svg" />
-    <EmbeddedResource Include="Inputs\mozilla\paths-data-13-t.svg" />
+    <EmbeddedResource Include="Inputs\W3C\Path\paths-data-10-t.svg" />
+    <EmbeddedResource Include="Inputs\W3C\Path\paths-data-12-t.svg" />
+    <EmbeddedResource Include="Inputs\W3C\Path\paths-data-13-t.svg" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Inputs\mozilla\paths-data-14-t.svg" />
-    <EmbeddedResource Include="Inputs\mozilla\paths-data-15-t.svg" />
+    <EmbeddedResource Include="Inputs\W3C\Path\paths-data-14-t.svg" />
+    <EmbeddedResource Include="Inputs\W3C\Path\paths-data-15-t.svg" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Inputs\horseshoe.svg" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Inputs\mozilla\paths-data-17-f.svg" />
-    <EmbeddedResource Include="Inputs\mozilla\paths-data-18-f.svg" />
-    <EmbeddedResource Include="Inputs\mozilla\paths-data-19-f.svg" />
-    <EmbeddedResource Include="Inputs\mozilla\paths-data-20-f.svg" />
-    <EmbeddedResource Include="Inputs\mozilla\paths-data-03-f.svg" />
-    <EmbeddedResource Include="Inputs\mozilla\paths-data-16-t.svg" />
+    <EmbeddedResource Include="Inputs\W3C\Path\paths-data-17-f.svg" />
+    <EmbeddedResource Include="Inputs\W3C\Path\paths-data-18-f.svg" />
+    <EmbeddedResource Include="Inputs\W3C\Path\paths-data-19-f.svg" />
+    <EmbeddedResource Include="Inputs\W3C\Path\paths-data-20-f.svg" />
+    <EmbeddedResource Include="Inputs\W3C\Path\paths-data-03-f.svg" />
+    <EmbeddedResource Include="Inputs\W3C\Path\paths-data-16-t.svg" />
     <Content Include="Inputs\Readme.txt" />
   </ItemGroup>
+  <ItemGroup />
 </Project>
