@@ -21,11 +21,13 @@ namespace NGraphics.Codes
             names["green"] = Green;
             names["blue"] = Blue;
             names["gold"] = Yellow;
+            names["fuchsia"] = Fuchsia;
             names["transparent"] = Clear;
         }
 
         public static readonly Color Clear = new Color(0, 0, 0, 0);
         public static readonly Color Black = new Color(0, 0, 0, 1);
+        public static readonly Color Fuchsia = new Color(255, 0, 255);
         public static readonly Color DarkGray = new Color(0.25, 0.25, 0.25, 1);
         public static readonly Color Gray = new Color(0.5, 0.5, 0.5, 1);
         public static readonly Color LightGray = new Color(0.75, 0.75, 0.75, 1);
