@@ -305,7 +305,22 @@ namespace NGraphics.Net
 
     public static System.Drawing.Pen GetPen(this Pen pen)
     {
-      return new System.Drawing.Pen(GetColor(pen.Color), (float) pen.Width);
+      var windowsPen =  new System.Drawing.Pen(GetColor(pen.Color), (float) pen.Width);
+
+      switch (pen.LineJoin)
+      {
+        case SvgStrokeLineJoin.Round:
+          windowsPen.LineJoin = LineJoin.Round;
+          break;
+        case SvgStrokeLineJoin.Bevel:
+          windowsPen.LineJoin = LineJoin.Bevel;
+          break;
+        case SvgStrokeLineJoin.Miter:
+          windowsPen.LineJoin = LineJoin.Miter;
+          break;
+      }
+
+      return windowsPen;
     }
 
     private static ColorBlend BuildBlend(List<GradientStop> stops, bool reverse = false)
