@@ -17,18 +17,31 @@ namespace NGraphics.Net.Test
 			Environment.CurrentDirectory = PlatformTest.ResultsDirectory;
 
 			var tat = typeof(NUnit.Framework.TestAttribute);
-			var tfat = typeof(NUnit.Framework.TestFixtureAttribute);
+      var tfat = typeof(NUnit.Framework.TestFixtureAttribute);
+      var testSetupAttr = typeof(NUnit.Framework.SetUpAttribute);
 
 			var types = typeof (DrawingTest).Assembly.GetTypes ();
-			var tfts = types.Where (t => t.GetCustomAttributes (tfat, false).Length > 0);
+			var testFixtures = types.Where (t => t.GetCustomAttributes (tfat, false).Length > 0);
 
-			foreach (var t in tfts) {
-				var test = Activator.CreateInstance (t);
-				var ms = t.GetMethods ().Where (m => m.GetCustomAttributes (tat, true).Length > 0);
-				foreach (var m in ms) {
-					Console.WriteLine ("Running {0}...", m);
+			foreach (var testFixture in testFixtures) {
+				var testFixtureInstance = Activator.CreateInstance (testFixture);
+        var tests = testFixture.GetMethods().Where(m => m.GetCustomAttributes(tat, true).Length > 0);
+        var testSetup = testFixture.GetMethods().Where(m => m.GetCustomAttributes(testSetupAttr, true).Length > 0).ToList();
 
-					m.Invoke (test, null);
+				foreach (var test in tests) {
+
+          if (testSetup.Any())
+          {
+            testSetup.First().Invoke(testFixtureInstance, null);
+          }
+
+          //if (test.Name.Equals("Smile"))
+          //{
+            Console.WriteLine("Running {0}...", test);
+
+            test.Invoke(testFixtureInstance, null);
+          //}
+				
 				}
 			}
 
