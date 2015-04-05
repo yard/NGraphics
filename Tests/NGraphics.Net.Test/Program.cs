@@ -45,7 +45,8 @@ namespace NGraphics.Net.Test
 				}
 			}
 
-			Console.WriteLine ("Done");
+			Console.WriteLine ("Done...Press enter to exit.");
+      Console.ReadLine();
 		}
 	}
 }
