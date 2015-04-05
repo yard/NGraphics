@@ -16,6 +16,13 @@ namespace NGraphics.Test.SvgReader
         {
             ReadAndDraw("mozilla.paths-data-02-t.svg");
         }
+
+        [Test]
+        public void MozillaPath_Data_03()
+        {
+          ReadAndDraw("mozilla.paths-data-03-f.svg");
+        }
+
         [Test]
         public void MozillaPath_Data_04()
         {
@@ -87,6 +94,30 @@ namespace NGraphics.Test.SvgReader
         public void MozillaPath_Data_16()
         {
           ReadAndDraw("mozilla.paths-data-16-t.svg");
+        }
+
+        [Test]
+        public void MozillaPath_Data_17()
+        {
+          ReadAndDraw("mozilla.paths-data-17-f.svg");
+        }
+
+        [Test]
+        public void MozillaPath_Data_18()
+        {
+          ReadAndDraw("mozilla.paths-data-18-f.svg");
+        }
+
+        [Test]
+        public void MozillaPath_Data_19()
+        {
+          ReadAndDraw("mozilla.paths-data-19-f.svg");
+        }
+
+        [Test]
+        public void MozillaPath_Data_20()
+        {
+          ReadAndDraw("mozilla.paths-data-20-f.svg");
         }
 
         [Test]

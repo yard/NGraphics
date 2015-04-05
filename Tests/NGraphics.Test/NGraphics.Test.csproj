@@ -125,6 +125,11 @@
     <EmbeddedResource Include="Inputs\horseshoe.svg" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Inputs\mozilla\paths-data-17-f.svg" />
+    <EmbeddedResource Include="Inputs\mozilla\paths-data-18-f.svg" />
+    <EmbeddedResource Include="Inputs\mozilla\paths-data-19-f.svg" />
+    <EmbeddedResource Include="Inputs\mozilla\paths-data-20-f.svg" />
+    <EmbeddedResource Include="Inputs\mozilla\paths-data-03-f.svg" />
     <EmbeddedResource Include="Inputs\mozilla\paths-data-16-t.svg" />
     <Content Include="Inputs\Readme.txt" />
   </ItemGroup>

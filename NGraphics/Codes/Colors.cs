@@ -15,6 +15,7 @@ namespace NGraphics.Codes
             names["lightgray"] = LightGray;
             names["white"] = White;
             names["red"] = Red;
+            names["lime"] = Green;
             names["orange"] = Orange;
             names["yellow"] = Yellow;
             names["green"] = Green;
