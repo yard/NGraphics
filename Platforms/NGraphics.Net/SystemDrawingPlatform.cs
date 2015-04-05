@@ -320,6 +320,18 @@ namespace NGraphics.Net
           break;
       }
 
+      switch (pen.LineCap)
+      {
+        case SvgStrokeLineCap.Round:
+          windowsPen.StartCap = LineCap.Round;
+          windowsPen.EndCap = LineCap.Round;
+          break;
+        case SvgStrokeLineCap.Square:
+          windowsPen.StartCap = LineCap.Square;
+          windowsPen.EndCap = LineCap.Square;
+          break;
+      }
+
       return windowsPen;
     }
 

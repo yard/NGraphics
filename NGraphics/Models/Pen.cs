@@ -9,6 +9,7 @@ namespace NGraphics.Models
             Color = Colors.Black;
             Width = 1;
             LineJoin = SvgStrokeLineJoin.Miter;
+            LineCap = SvgStrokeLineCap.Square;
         }
 
         public Pen(Color color, double width = 1.0)
@@ -16,6 +17,7 @@ namespace NGraphics.Models
             Color = color;
             Width = width;
             LineJoin = SvgStrokeLineJoin.Miter;
+            LineCap = SvgStrokeLineCap.Square;
         }
 
         public Pen(string colorString, double width = 1.0)
@@ -26,6 +28,7 @@ namespace NGraphics.Models
         public Color Color;
         public double Width;
         public SvgStrokeLineJoin LineJoin;
+        public SvgStrokeLineCap LineCap;
 
         public Pen WithWidth(double width)
         {

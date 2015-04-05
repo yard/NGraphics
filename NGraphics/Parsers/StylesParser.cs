@@ -40,13 +40,13 @@ namespace NGraphics.Parsers
         pen.Color = pen.Color.WithAlpha(_valuesParser.ReadNumber(strokeOpacity));
       }
 
-      var lineCap = GetString(styleAttributes, "stroke-linejoin");
-      if (!string.IsNullOrWhiteSpace(lineCap))
+      var linejoin = GetString(styleAttributes, "stroke-linejoin");
+      if (!string.IsNullOrWhiteSpace(linejoin))
       {
         if (pen == null)
           pen = new Pen();
 
-        switch (lineCap)
+        switch (linejoin)
         {
           case "round":
             pen.LineJoin = SvgStrokeLineJoin.Round;
@@ -56,6 +56,23 @@ namespace NGraphics.Parsers
             break;
           case "miter":
             pen.LineJoin = SvgStrokeLineJoin.Miter;
+            break;
+        }
+      }
+
+      var lineCap = GetString(styleAttributes, "stroke-linecap");
+      if (!string.IsNullOrWhiteSpace(lineCap))
+      {
+        if (pen == null)
+          pen = new Pen();
+
+        switch (lineCap)
+        {
+          case "round":
+            pen.LineCap = SvgStrokeLineCap.Round;
+            break;
+          case "butt":
+            pen.LineCap = SvgStrokeLineCap.Butt;
             break;
         }
       }
