@@ -34,6 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Codes\FillMode.cs" />
+    <Compile Include="Codes\SvgStrokeLineJoin.cs" />
     <Compile Include="Codes\TextAlignment.cs" />
     <Compile Include="Models\BoundingBoxBuilder.cs" />
     <Compile Include="Models\Brushes\BaseBrush.cs" />

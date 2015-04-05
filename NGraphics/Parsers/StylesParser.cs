@@ -40,6 +40,26 @@ namespace NGraphics.Parsers
         pen.Color = pen.Color.WithAlpha(_valuesParser.ReadNumber(strokeOpacity));
       }
 
+      var lineCap = GetString(styleAttributes, "stroke-linejoin");
+      if (!string.IsNullOrWhiteSpace(lineCap))
+      {
+        if (pen == null)
+          pen = new Pen();
+
+        switch (lineCap)
+        {
+          case "round":
+            pen.LineJoin = SvgStrokeLineJoin.Round;
+            break;
+          case "bevel":
+            pen.LineJoin = SvgStrokeLineJoin.Bevel;
+            break;
+          case "miter":
+            pen.LineJoin = SvgStrokeLineJoin.Miter;
+            break;
+        }
+      }
+
       var stroke = GetString(styleAttributes, "stroke").Trim();
 
       if (string.IsNullOrEmpty(stroke))
