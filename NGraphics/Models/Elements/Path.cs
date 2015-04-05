@@ -24,7 +24,7 @@ namespace NGraphics.Models.Elements
 
         protected override void DrawElement(ICanvas canvas)
         {
-            canvas.DrawPath(Operations, Pen, BaseBrush);
+            canvas.DrawPath(Operations, Pen, Brush);
         }
 
         private void Add(PathOperation operation)

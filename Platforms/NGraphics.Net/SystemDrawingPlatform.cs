@@ -68,42 +68,63 @@ namespace NGraphics.Net
 
   public class ImageImage : IImage
   {
-    private readonly Image image;
+      readonly Image image;
 
-    public Image Image
-    {
-      get { return image; }
-    }
+      public Image Image
+      {
+          get
+          {
+              return image;
+          }
+      }
 
-    public ImageImage(Image image)
-    {
-      this.image = image;
-    }
+      public ImageImage(Image image)
+      {
+          this.image = image;
+      }
 
-    public void SaveAsPng(string path)
-    {
-      image.Save(path, ImageFormat.Png);
-    }
+      public Size Size
+      {
+          get { throw new NotImplementedException(); }
+      }
+
+      public double Scale
+      {
+          get { throw new NotImplementedException(); }
+      }
+
+      public void SaveAsPng(string path)
+      {
+          image.Save(path, ImageFormat.Png);
+      }
+
+      public void SaveAsPng(Stream stream)
+      {
+          image.Save(stream, ImageFormat.Png);
+      }
   }
 
   public class BitmapCanvas : GraphicsCanvas, IImageCanvas
   {
-    private readonly Bitmap bitmap;
-    private readonly double scale;
+      readonly Bitmap bitmap;
+      readonly double scale;
 
-    public BitmapCanvas(Bitmap bitmap, double scale = 1.0)
-      : base(Graphics.FromImage(bitmap))
-    {
-      this.bitmap = bitmap;
-      this.scale = scale;
+      public Size Size { get { return new Size(bitmap.Width / scale, bitmap.Height / scale); } }
+      public double Scale { get { return scale; } }
 
-      graphics.ScaleTransform((float) scale, (float) scale);
-    }
+      public BitmapCanvas(Bitmap bitmap, double scale = 1.0)
+          : base(Graphics.FromImage(bitmap))
+      {
+          this.bitmap = bitmap;
+          this.scale = scale;
 
-    public IImage GetImage()
-    {
-      return new ImageImage(bitmap);
-    }
+          graphics.ScaleTransform((float)scale, (float)scale);
+      }
+
+      public IImage GetImage()
+      {
+          return new ImageImage(bitmap);
+      }
   }
 
   public class GraphicsCanvas : ICanvas
@@ -125,42 +146,19 @@ namespace NGraphics.Net
       stateStack.Push(s);
     }
 
-    public void Transform(TransformBase transform)
+    public void Transform(Transform transform)
     {
-      var t = transform;
-      var stack = new Stack<TransformBase>();
-      while (t != null)
-      {
-        stack.Push(t);
-        t = t.Previous;
-      }
-      while (stack.Count > 0)
-      {
-        t = stack.Pop();
-
-        var rt = t as Rotate;
-        if (rt != null)
+        try
         {
-          graphics.RotateTransform((float) rt.Angle);
-          t = t.Previous;
-          continue;
+            graphics.MultiplyTransform(new Matrix(
+                (float)transform.A, (float)transform.B,
+                (float)transform.C, (float)transform.D,
+                (float)transform.E, (float)transform.F), MatrixOrder.Prepend);
         }
-        var tt = t as Translate;
-        if (tt != null)
+        catch (Exception ex)
         {
-          graphics.TranslateTransform((float) tt.Size.Width, (float) tt.Size.Height);
-          t = t.Previous;
-          continue;
+            Console.WriteLine(ex);
         }
-        var st = t as Scale;
-        if (st != null)
-        {
-          graphics.ScaleTransform((float) st.Size.Width, (float) st.Size.Height);
-          t = t.Previous;
-          continue;
-        }
-        throw new NotSupportedException("Transform " + t);
-      }
     }
 
     public void RestoreState()
@@ -206,7 +204,7 @@ namespace NGraphics.Net
           var moveTo = op as MoveTo;
           if (moveTo != null)
           {
-            path.StartFigure();
+              path.StartFigure();
             continue;
           }
           var lineTo = op as LineTo;
@@ -286,13 +284,31 @@ namespace NGraphics.Net
       }
     }
 
-    public void DrawImage(IImage image, Rect frame)
+    public void DrawImage(IImage image, Rect frame, double alpha = 1.0)
     {
-      var ii = image as ImageImage;
-      if (ii != null)
-      {
-        graphics.DrawImage(ii.Image, Conversions.GetRectangleF(frame));
-      }
+        var ii = image as ImageImage;
+        if (ii != null)
+        {
+            if (alpha < 0.999)
+            {
+                var i = new ImageAttributes();
+                var mat = new ColorMatrix(new float[][] { 
+						new[] { 1.0f, 0.0f, 0.0f, 0.0f, 0.0f },
+						new[] { 0.0f, 1.0f, 0.0f, 0.0f, 0.0f },
+						new[] { 0.0f, 0.0f, 1.0f, 0.0f, 0.0f },
+						new[] { 0.0f, 0.0f, 0.0f, (float)alpha, 0.0f },
+						new[] { 0.0f, 0.0f, 0.0f, 0.0f, 1.0f }
+					});
+                i.SetColorMatrix(mat);
+                var size = ii.Image.Size;
+                graphics.DrawImage(ii.Image, Conversions.GetRectangle(frame),
+                    0, 0, size.Width, size.Height, GraphicsUnit.Pixel, i);
+            }
+            else
+            {
+                graphics.DrawImage(ii.Image, Conversions.GetRectangleF(frame));
+            }
+        }
     }
   }
 
@@ -333,6 +349,10 @@ namespace NGraphics.Net
       }
 
       return windowsPen;
+    }
+    public static System.Drawing.Rectangle GetRectangle(this Rect frame)
+    {
+        return new System.Drawing.Rectangle((int)frame.X, (int)frame.Y, (int)frame.Width, (int)frame.Height);
     }
 
     private static ColorBlend BuildBlend(List<GradientStop> stops, bool reverse = false)

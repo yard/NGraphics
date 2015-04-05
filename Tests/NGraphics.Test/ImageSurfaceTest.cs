@@ -102,7 +102,7 @@ namespace NGraphics.Test
 			p.LineTo (size.Width, 0,false);
 			p.LineTo (size.Width / 2, size.Height,false);
 			p.Close ();
-			p.BaseBrush = b;
+			p.Brush = b;
 			p.Draw (canvas);
 			canvas.GetImage ().SaveAsPng (GetPath ("ImageCanvas.TriWithRadGrad"));
 		}
@@ -110,7 +110,7 @@ namespace NGraphics.Test
 		public void Line ()
 		{
 			var canvas = Platform.CreateImageCanvas (new Size (100), transparency: true);
-			canvas.DrawLine (10, 20, 80, 70, Colors.DarkGray,false, 5);
+			canvas.DrawLine (10, 20, 80, 70, Colors.DarkGray,5);
 			canvas.GetImage ().SaveAsPng (GetPath ("ImageCanvas.Line"));
 		}
 		[Test]

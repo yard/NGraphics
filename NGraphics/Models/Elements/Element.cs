@@ -7,17 +7,20 @@ namespace NGraphics.Models.Elements
 {
     public abstract class Element : IDrawable
     {
-        public Element(Pen pen, BaseBrush baseBrush)
+        public string Id { get; set; }
+        public Transform Transform { get; set; }
+        public Pen Pen { get; set; }
+        public BaseBrush Brush { get; set; }
+
+        public Element(Pen pen, BaseBrush brush)
         {
             Id = Guid.NewGuid().ToString();
             Pen = pen;
-            BaseBrush = baseBrush;
+            Brush = brush;
+            Transform = Transform.Identity;
         }
 
-        public string Id { get; set; }
-        public TransformBase Transform { get; set; }
-        public Pen Pen { get; set; }
-        public BaseBrush BaseBrush { get; set; }
+        protected abstract void DrawElement(ICanvas canvas);
 
         #region IDrawable implementation
 
@@ -25,15 +28,12 @@ namespace NGraphics.Models.Elements
         {
             var t = Transform;
             var pushedState = false;
-            if (t != null)
-            {
-                canvas.SaveState();
-                pushedState = true;
-            }
             try
             {
-                if (t != null)
+                if (t != Transform.Identity)
                 {
+                    canvas.SaveState();
+                    pushedState = true;
                     canvas.Transform(t);
                 }
                 DrawElement(canvas);
@@ -48,7 +48,5 @@ namespace NGraphics.Models.Elements
         }
 
         #endregion
-
-        protected abstract void DrawElement(ICanvas canvas);
     }
 }

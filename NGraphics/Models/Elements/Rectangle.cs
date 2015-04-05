@@ -31,7 +31,7 @@ namespace NGraphics.Models.Elements
 
         protected override void DrawElement(ICanvas canvas)
         {
-            canvas.DrawRectangle(frame, Pen, BaseBrush);
+            canvas.DrawRectangle(frame, Pen, Brush);
         }
 
         public override string ToString()

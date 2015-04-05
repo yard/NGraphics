@@ -31,7 +31,7 @@ namespace NGraphics.Models.Elements
 
         protected override void DrawElement(ICanvas canvas)
         {
-            canvas.DrawEllipse(frame, Pen, BaseBrush);
+            canvas.DrawEllipse(frame, Pen, Brush);
         }
 
         public override string ToString()

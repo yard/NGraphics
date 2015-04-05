@@ -36,7 +36,7 @@ namespace NGraphics.Net.Test
             testSetup.First().Invoke(testFixtureInstance, null);
           }
 
-          //if (test.Name.Equals("Smile"))
+          //if (test.Name.Equals("ErulisseuiinSpaceshipPack"))
           //{
             Console.WriteLine("Running {0}...", test);
 

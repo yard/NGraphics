@@ -23,7 +23,7 @@ namespace NGraphics.Test
 				Colors.Green,
 				Colors.LightGray);				
 
-			canvas.DrawRectangle (rect, baseBrush: brush);
+			canvas.DrawRectangle (rect, brush: brush);
 
 			canvas.GetImage ().SaveAsPng (GetPath ("Brush.RectLinearGradient.png"));
 		}

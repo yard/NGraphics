@@ -75,10 +75,7 @@
     <Compile Include="Models\Segments\SvgPathSegmentList.cs" />
     <Compile Include="Models\Segments\SvgQuadraticCurveSegment.cs" />
     <Compile Include="Models\Operations\MoveTo.cs" />
-    <Compile Include="Models\Transforms\MatrixTransform.cs" />
-    <Compile Include="Models\Transforms\Rotate.cs" />
-    <Compile Include="Models\Transforms\Scale.cs" />
-    <Compile Include="Models\Transforms\Translate.cs" />
+    <Compile Include="Models\Transforms\Transform.cs" />
     <Compile Include="NullPlatform.cs" />
     <Compile Include="Parsers\CoordinateParser.cs" />
     <Compile Include="Parsers\IStylesParser.cs" />
@@ -102,7 +99,6 @@
     <Compile Include="Models\Rect.cs" />
     <Compile Include="Models\Elements\Rectangle.cs" />
     <Compile Include="Models\Elements\Path.cs" />
-    <Compile Include="Models\Transforms\TransformBase.cs" />
     <Compile Include="Models\Elements\Text.cs" />
     <Compile Include="Models\Elements\Element.cs" />
     <Compile Include="Models\Font.cs" />

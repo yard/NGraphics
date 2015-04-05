@@ -231,83 +231,84 @@ namespace NGraphics.Parsers
       pen = _stylesParser.GetPen(d);
       baseBrush = _stylesParser.GetBrush(d,defs, pen);
     }
-   
-    private TransformBase ReadTransform(string raw)
+
+    Transform ReadTransform(string raw)
     {
-      if (string.IsNullOrWhiteSpace(raw))
-        return null;
+        if (string.IsNullOrWhiteSpace(raw))
+            return Transform.Identity;
 
-      var s = raw.Trim();
+        var s = raw.Trim();
 
-      var calls = s.Split(new[] {')'}, StringSplitOptions.RemoveEmptyEntries);
+        var calls = s.Split(new[] { ')' }, StringSplitOptions.RemoveEmptyEntries);
 
-      TransformBase t = null;
+        var t = Transform.Identity;
 
-      foreach (var c in calls)
-      {
-        var args = c.Split(new[] {'(', ',', ' ', '\t', '\r', '\n'}, StringSplitOptions.RemoveEmptyEntries);
-        TransformBase nt = null;
-        switch (args[0])
+        foreach (var c in calls)
         {
-          case "matrix":
-            if (args.Length == 7)
+            var args = c.Split(new[] { '(', ',', ' ', '\t', '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+            var nt = Transform.Identity;
+            switch (args[0])
             {
-              var m = new MatrixTransform(t);
-              nt = new Translate(new Size(_valuesParser.ReadNumber(args[1]), _valuesParser.ReadNumber(args[2])), t);
+                case "matrix":
+                    if (args.Length == 7)
+                    {
+                        nt = new Transform(
+                            _valuesParser.ReadNumber(args[1]),
+                            _valuesParser.ReadNumber(args[2]),
+                            _valuesParser.ReadNumber(args[3]),
+                            _valuesParser.ReadNumber(args[4]),
+                           _valuesParser.ReadNumber(args[5]),
+                           _valuesParser.ReadNumber(args[6]));
+                    }
+                    else
+                    {
+                        throw new NotSupportedException("Matrices are expected to have 6 elements, this one has " + (args.Length - 1));
+                    }
+                    break;
+                case "translate":
+                    if (args.Length >= 3)
+                    {
+                        nt = Transform.Translate(new Size(_valuesParser.ReadNumber(args[1]), _valuesParser.ReadNumber(args[2])));
+                    }
+                    else if (args.Length >= 2)
+                    {
+                        nt = Transform.Translate(new Size(_valuesParser.ReadNumber(args[1]), 0));
+                    }
+                    break;
+                case "scale":
+                    if (args.Length >= 3)
+                    {
+                        nt = Transform.Scale(new Size(_valuesParser.ReadNumber(args[1]), _valuesParser.ReadNumber(args[2])));
+                    }
+                    else if (args.Length >= 2)
+                    {
+                        var sx = _valuesParser.ReadNumber(args[1]);
+                        nt = Transform.Scale(new Size(sx, sx));
+                    }
+                    break;
+                case "rotate":
+                    var a = _valuesParser.ReadNumber(args[1]);
+                    if (args.Length >= 4)
+                    {
+                        var x = _valuesParser.ReadNumber(args[2]);
+                        var y = _valuesParser.ReadNumber(args[3]);
+                        var t1 = Transform.Translate(new Size(x, y));
+                        var t2 = Transform.Rotate(a);
+                        var t3 = Transform.Translate(new Size(-x, -y));
+                        nt = t1 * t2 * t3;
+                    }
+                    else
+                    {
+                        nt = Transform.Rotate(a);
+                    }
+                    break;
+                default:
+                    throw new NotSupportedException("Can't transform " + args[0]);
             }
-            else
-            {
-              throw new NotSupportedException("Matrices are expected to have 6 elements, this one has " +
-                                              (args.Length - 1));
-            }
-            break;
-          case "translate":
-            if (args.Length >= 3)
-            {
-              nt = new Translate(new Size(_valuesParser.ReadNumber(args[1]), _valuesParser.ReadNumber(args[2])), t);
-            }
-            else if (args.Length >= 2)
-            {
-              nt = new Translate(new Size(_valuesParser.ReadNumber(args[1]), 0), t);
-            }
-            break;
-          case "scale":
-            if (args.Length >= 3)
-            {
-              nt = new Scale(new Size(_valuesParser.ReadNumber(args[1]), _valuesParser.ReadNumber(args[2])), t);
-            }
-            else if (args.Length >= 2)
-            {
-              var sx = _valuesParser.ReadNumber(args[1]);
-              nt = new Scale(new Size(sx, sx), t);
-            }
-            break;
-          case "rotate":
-            var a = _valuesParser.ReadNumber(args[1]);
-            if (args.Length >= 4)
-            {
-              var x = _valuesParser.ReadNumber(args[2]);
-              var y = _valuesParser.ReadNumber(args[3]);
-              var t1 = new Translate(new Size(x, y), t);
-              var t2 = new Rotate(a, t1);
-              var t3 = new Translate(new Size(-x, -y), t2);
-              nt = t3;
-            }
-            else
-            {
-              nt = new Rotate(a, t);
-            }
-            break;
-          default:
-            throw new NotSupportedException("Can't transform " + args[0]);
+            t = t * nt;
         }
-        if (nt != null)
-        {
-          t = nt;
-        }
-      }
 
-      return t;
+        return t;
     }
 
     private string ReadString(XElement e, string defaultValue = "")

@@ -52,13 +52,13 @@ namespace NGraphics.Test
 			var canvas = Platforms.Current.CreateImageCanvas (new Size (100), scale: 2);
 
 			canvas.DrawEllipse (10, 20, 30, 30, Pens.Red, Brushes.White);
-			canvas.DrawRectangle (40, 50, 60, 70, baseBrush: Brushes.Blue);
+			canvas.DrawRectangle (40, 50, 60, 70, brush: Brushes.Blue);
 			canvas.DrawPath (new PathOperation[] {	
 				new MoveTo (100, 100, false),
 				new LineTo (50, 100,false),
 				new LineTo (50, 0, false),
 				new ClosePath ()
-			}, baseBrush: Brushes.Gray);
+			}, brush: Brushes.Gray);
 
 			canvas.GetImage ().SaveAsPng (GetPath ("Example1.png"));
 		}
@@ -73,7 +73,7 @@ namespace NGraphics.Test
 				canvas.DrawEllipse (
 					new Rect (new Size (80)),
 					pen: Pens.DarkGray.WithWidth (1 << i),
-					baseBrush: Brushes.LightGray);
+					brush: Brushes.LightGray);
 				canvas.Translate (120, 0);
 			}
 
