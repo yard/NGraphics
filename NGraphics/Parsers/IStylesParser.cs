@@ -9,5 +9,6 @@ namespace NGraphics.Parsers
   {
     Pen GetPen(Dictionary<string, string> styleAttributes);
     BaseBrush GetBrush(Dictionary<string, string> styleAttributes,Dictionary<string, XElement> defs, Pen pen);
+      Dictionary<string, string> ParseStyleValues(string styleString);
   }
 }

@@ -12,7 +12,8 @@ namespace NGraphics.Parsers
   public class StylesParser : IStylesParser
   {
     private readonly IFormatProvider icult = CultureInfo.InvariantCulture;
-    private readonly Regex fillUrlRe = new Regex(@"url\s*\(\s*#([^\)]+)\)");
+    private readonly Regex _fillUrlRe = new Regex(@"url\s*\(\s*#([^\)]+)\)");
+    private readonly Regex _keyValueRegEx = new Regex(@"\s*(\w+)\s*:\s*(.*)");
     private readonly IValuesParser _valuesParser;
 
     public StylesParser(IValuesParser valuesParser)
@@ -162,7 +163,7 @@ namespace NGraphics.Parsers
         }
         else
         {
-          var urlM = fillUrlRe.Match(fill);
+          var urlM = _fillUrlRe.Match(fill);
           if (urlM.Success)
           {
             var id = urlM.Groups[1].Value.Trim();
@@ -195,6 +196,26 @@ namespace NGraphics.Parsers
 
       return baseBrush;
     }
+
+      public Dictionary<string, string> ParseStyleValues(string styleString)
+      {
+          var stylesDictionary = new Dictionary<string, string>();
+          var keyValuePairs = styleString.Split(new[] {';'}, StringSplitOptions.RemoveEmptyEntries);
+
+          foreach (var keyValuePair in keyValuePairs)
+          {
+              var m = _keyValueRegEx.Match(keyValuePair);
+
+              if (m.Success)
+              {
+                  var k = m.Groups[1].Value;
+                  var v = m.Groups[2].Value;
+                  stylesDictionary[k] = v;
+              }
+          }
+
+          return stylesDictionary;
+      }
 
     private string GetString(Dictionary<string, string> style, string name, string defaultValue = "")
     {

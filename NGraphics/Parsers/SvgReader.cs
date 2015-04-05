@@ -31,7 +31,6 @@ namespace NGraphics.Parsers
 
     private static readonly char[] WS = {' ', '\t', '\n', '\r'};
     private readonly Dictionary<string, XElement> defs = new Dictionary<string, XElement>();
-    private readonly Regex keyValueRe = new Regex(@"\s*(\w+)\s*:\s*(.*)");
     public Graphic Graphic { get; private set; }
 
     private void Read(XDocument doc)
@@ -214,22 +213,9 @@ namespace NGraphics.Parsers
 
     private void ApplyStyle(string style, ref Pen pen, ref BaseBrush baseBrush)
     {
-      var d = new Dictionary<string, string>();
-      var kvs = style.Split(new[] {';'}, StringSplitOptions.RemoveEmptyEntries);
-    
-      foreach (var kv in kvs)
-      {
-        var m = keyValueRe.Match(kv);
-        if (m.Success)
-        {
-          var k = m.Groups[1].Value;
-          var v = m.Groups[2].Value;
-          d[k] = v;
-        }
-      }
-
-      pen = _stylesParser.GetPen(d);
-      baseBrush = _stylesParser.GetBrush(d,defs, pen);
+      var stylesDictionary = _stylesParser.ParseStyleValues(style);
+      pen = _stylesParser.GetPen(stylesDictionary);
+      baseBrush = _stylesParser.GetBrush(stylesDictionary, defs, pen);
     }
 
     Transform ReadTransform(string raw)
