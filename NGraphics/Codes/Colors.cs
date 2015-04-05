@@ -19,6 +19,7 @@ namespace NGraphics.Codes
             names["yellow"] = Yellow;
             names["green"] = Green;
             names["blue"] = Blue;
+            names["gold"] = Yellow;
             names["transparent"] = Clear;
         }
 
