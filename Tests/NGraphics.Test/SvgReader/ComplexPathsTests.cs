@@ -30,7 +30,7 @@ namespace NGraphics.Test.SvgReader
         }
 
         [Test]
-        public void Ghost()
+        public void Horseshoe()
         {
             ReadAndDraw("horseshoe.svg");
         }

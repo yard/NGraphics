@@ -121,6 +121,7 @@
     <EmbeddedResource Include="Inputs\horseshoe.svg" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Inputs\W3C\Text\text-align-01-b.svg" />
     <EmbeddedResource Include="Inputs\W3C\Path\paths-data-17-f.svg" />
     <EmbeddedResource Include="Inputs\W3C\Path\paths-data-18-f.svg" />
     <EmbeddedResource Include="Inputs\W3C\Path\paths-data-19-f.svg" />
