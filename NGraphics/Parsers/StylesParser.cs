@@ -267,33 +267,34 @@ namespace NGraphics.Parsers
       throw new NotSupportedException("Color " + s);
     }
 
-    private RadialGradientBrush CreateRadialGradientBrush(XElement e)
+    RadialGradientBrush CreateRadialGradientBrush(XElement e)
     {
-      var b = new RadialGradientBrush();
+        var b = new RadialGradientBrush();
 
-      b.RelativeCenter.X = _valuesParser.ReadNumber(e.Attribute("cx"));
-      b.RelativeCenter.Y = _valuesParser.ReadNumber(e.Attribute("cy"));
-      b.RelativeFocus.X = _valuesParser.ReadNumber(e.Attribute("fx"));
-      b.RelativeFocus.Y = _valuesParser.ReadNumber(e.Attribute("fy"));
-      b.RelativeRadius = _valuesParser.ReadNumber(e.Attribute("r"));
+        b.Center.X = _valuesParser.ReadNumber(e.Attribute("cx"));
+        b.Center.Y = _valuesParser.ReadNumber(e.Attribute("cy"));
+        b.Focus.X = _valuesParser.ReadNumber(e.Attribute("fx"));
+        b.Focus.Y = _valuesParser.ReadNumber(e.Attribute("fy"));
+        var r = _valuesParser.ReadNumber(e.Attribute("r"));
+        b.Radius = new Size(r);
 
-      ReadStops(e, b.Stops);
+        ReadStops(e, b.Stops);
 
-      return b;
+        return b;
     }
 
     private LinearGradientBrush CreateLinearGradientBrush(XElement e)
     {
-      var b = new LinearGradientBrush();
+        var b = new LinearGradientBrush();
 
-      b.RelativeStart.X = _valuesParser.ReadNumber(e.Attribute("x1"));
-      b.RelativeStart.Y = _valuesParser.ReadNumber(e.Attribute("y1"));
-      b.RelativeEnd.X = _valuesParser.ReadNumber(e.Attribute("x2"));
-      b.RelativeEnd.Y = _valuesParser.ReadNumber(e.Attribute("y2"));
+        b.Start.X = _valuesParser.ReadNumber(e.Attribute("x1"));
+        b.Start.Y = _valuesParser.ReadNumber(e.Attribute("y1"));
+        b.End.X = _valuesParser.ReadNumber(e.Attribute("x2"));
+        b.End.Y = _valuesParser.ReadNumber(e.Attribute("y2"));
 
-      ReadStops(e, b.Stops);
+        ReadStops(e, b.Stops);
 
-      return b;
+        return b;
     }
   }
 }

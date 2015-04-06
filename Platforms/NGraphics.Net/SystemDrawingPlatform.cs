@@ -408,44 +408,38 @@ namespace NGraphics.Net
 
     public static Brush GetBrush(this BaseBrush baseBrush, Rect frame)
     {
-      var cb = baseBrush as SolidBrush;
-      if (cb != null)
-      {
-        return new System.Drawing.SolidBrush(cb.Color.GetColor());
-      }
+     var cb = baseBrush as SolidBrush;
+			if (cb != null) {
+				return new System.Drawing.SolidBrush (cb.Color.GetColor ());
+			}
 
-      var lgb = baseBrush as LinearGradientBrush;
-      if (lgb != null)
-      {
-        var s = frame.Position + lgb.RelativeStart*frame.Size;
-        var e = frame.Position + lgb.RelativeEnd*frame.Size;
-        var b = new System.Drawing.Drawing2D.LinearGradientBrush(GetPointF(s), GetPointF(e), System.Drawing.Color.Black,
-          System.Drawing.Color.Black);
-        var bb = BuildBlend(lgb.Stops);
-        if (bb != null)
-        {
-          b.InterpolationColors = bb;
-        }
-        return b;
-      }
+            var lgb = baseBrush as LinearGradientBrush;
+            if (lgb != null) {
+                var s = lgb.Absolute ? lgb.Start : frame.Position + lgb.Start * frame.Size;
+                var e = lgb.Absolute ? lgb.End : frame.Position + lgb.End * frame.Size;
+                var b = new System.Drawing.Drawing2D.LinearGradientBrush (GetPointF (s), GetPointF (e), System.Drawing.Color.Black, System.Drawing.Color.Black);
+                var bb = BuildBlend (lgb.Stops);
+                if (bb != null) {
+                    b.InterpolationColors = bb;
+                }
+                return b;
+            }
 
-      var rgb = baseBrush as RadialGradientBrush;
-      if (rgb != null)
-      {
-        var r = rgb.RelativeRadius*frame.Size.Max;
-        var c = frame.Position + rgb.RelativeCenter*frame.Size;
-        var path = new GraphicsPath();
-        path.AddEllipse(GetRectangleF(new Rect(c - r, new Size(2*r))));
-        var b = new PathGradientBrush(path);
-        var bb = BuildBlend(rgb.Stops, true);
-        if (bb != null)
-        {
-          b.InterpolationColors = bb;
-        }
-        return b;
-      }
+            var rgb = baseBrush as RadialGradientBrush;
+            if (rgb != null) {
+                var r = rgb.GetAbsoluteRadius (frame);
+                var c = rgb.GetAbsoluteCenter (frame);
+                var path = new GraphicsPath ();
+                path.AddEllipse (GetRectangleF (new Rect (c - r, 2 * r)));
+                var b = new PathGradientBrush (path);
+                var bb = BuildBlend (rgb.Stops, true);
+                if (bb != null) {
+                    b.InterpolationColors = bb;
+                }
+                return b;
+            }
 
-      throw new NotImplementedException("Brush " + baseBrush);
+			throw new NotImplementedException ("Brush " + baseBrush);
     }
 
     public static PointF GetPointF(Point point)
