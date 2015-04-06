@@ -3,17 +3,26 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:id="@+id/mainLayout">
+    android:id="@+id/mainLayout"
+    android:background="@android:color/white">
+    <ImageView
+        android:src="@android:drawable/ic_menu_gallery"
+        android:layout_width="match_parent"
+        android:layout_height="450dip"
+        android:id="@+id/selectedImageImageView" />
     <Gallery
         android:layout_width="match_parent"
-        android:layout_height="440dip"
+        android:layout_height="100dip"
         android:id="@+id/gallery"
-        android:layout_gravity="center_vertical" />
+        android:layout_gravity="center_vertical"
+        android:visibility="gone" />
     <TextView
         android:text="Large Text"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/testStatusTextView"
-        android:gravity="center" />
+        android:gravity="center"
+        android:background="@android:color/white"
+        android:textColor="@android:color/black" />
 </LinearLayout>

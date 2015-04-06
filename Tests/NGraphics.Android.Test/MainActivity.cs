@@ -19,6 +19,8 @@ namespace NGraphics.Android.Test
   {
     private int count = 1;
     private TextView _textView;
+    private ImageView _selectedImageImageView;
+    private Gallery _gallery;
 
     protected override void OnCreate(Bundle bundle)
     {
@@ -29,10 +31,8 @@ namespace NGraphics.Android.Test
       SetContentView(Resource.Layout.Gallery);
       // Set our view from the "main" layout resource
       _textView = FindViewById<TextView>(Resource.Id.testStatusTextView);
-
-      //var mainLayout = FindViewById<LinearLayout>(Resource.Id.mainLayout);
-     
-      //mainLayout.SetBackgroundColor(Color.White);
+      _gallery = FindViewById<Gallery>(Resource.Id.gallery);
+      _selectedImageImageView = FindViewById<ImageView>(Resource.Id.selectedImageImageView);
 
       Task.Run(async () => { await RunUnitTests(); });
     }
@@ -76,7 +76,8 @@ namespace NGraphics.Android.Test
           }
           catch (Exception ex)
           {
-            RunOnUiThread(() => { _textView.Text = "Exception occured...Check out the Output window for more details."; });
+            RunOnUiThread(
+              () => { _textView.Text = "Exception occured...Check out the Output window for more details."; });
 
             Console.WriteLine(ex);
           }
@@ -84,26 +85,34 @@ namespace NGraphics.Android.Test
         }
       }
 
-      RunOnUiThread(() => { _textView.Text = "Done..."; });
+      RunOnUiThread(() =>
+      {
+        _textView.Text = "Done...";
+      });
 
       await
-        Task.Delay(TimeSpan.FromSeconds(2))
-          .ContinueWith(result => { RunOnUiThread(() =>
+        Task.Delay(TimeSpan.FromSeconds(1))
+          .ContinueWith(result =>
           {
-            _textView.Visibility = ViewStates.Gone;
-            var gallery = FindViewById<Gallery>(Resource.Id.gallery);
+            RunOnUiThread(() =>
+            {
+              _textView.Visibility = ViewStates.Gone;
+              _gallery.Visibility = ViewStates.Visible;
 
-            gallery.Adapter = new ImageAdapter(this);
+              _gallery.Adapter = new ImageAdapter(this);
 
-            gallery.ItemClick +=
-              delegate(object sender, AdapterView.ItemClickEventArgs args)
-              {
-                Toast.MakeText(this, args.Position.ToString(), ToastLength.Short).Show();
-              };
+              _gallery.ItemClick +=
+                delegate(object sender, AdapterView.ItemClickEventArgs args)
+                {
+                  RunOnUiThread(() =>
+                  {
+                    var selectedImage = args.View as ImageView;
 
-          }); });
-
-    
+                    if (selectedImage != null) _selectedImageImageView.SetImageDrawable(selectedImage.Drawable);
+                  });
+                };
+            });
+          });
     }
   }
 }

@@ -49,13 +49,12 @@ namespace NGraphics.Android.Test
       {
         using (var imageFile = new Java.IO.File(imagePath))
         {
-          var options = new BitmapFactory.Options {InSampleSize = 2};
-          using (var bitmap = BitmapFactory.DecodeFile(imageFile.AbsolutePath, options))
+          //var options = new BitmapFactory.Options {InSampleSize = 2};
+          using (var bitmap = BitmapFactory.DecodeFile(imageFile.AbsolutePath))
           {
             imageView.SetImageBitmap(bitmap);
-
             imageView.LayoutParameters = new Gallery.LayoutParams(1000, 1000);
-            imageView.SetScaleType(ImageView.ScaleType.FitXy);
+            //imageView.SetScaleType(ImageView.ScaleType.FitXy);
           }
         }
       }
