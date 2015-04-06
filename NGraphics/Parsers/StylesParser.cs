@@ -158,7 +158,7 @@ namespace NGraphics.Parsers
             if (sb.Color.Alpha == 1 || pen == null)
               sb.Color = color;
             else
-              sb.Color = color.WithAlpha(pen.Color.Alpha);
+              sb.Color = color.WithAlpha(sb.Color.Alpha);
           }
         }
         else
