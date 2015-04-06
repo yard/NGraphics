@@ -13,7 +13,7 @@ namespace NGraphics.Parsers
   {
     private readonly IFormatProvider icult = CultureInfo.InvariantCulture;
     private readonly Regex _fillUrlRe = new Regex(@"url\s*\(\s*#([^\)]+)\)");
-    private readonly Regex _keyValueRegEx = new Regex(@"\s*(\w+)\s*:\s*(.*)");
+    private readonly Regex _styleValuesRegEx = new Regex(@"\s*(\w+)\s*:\s*(.*)");
     private readonly IValuesParser _valuesParser;
 
     public StylesParser(IValuesParser valuesParser)
@@ -204,13 +204,15 @@ namespace NGraphics.Parsers
 
           foreach (var keyValuePair in keyValuePairs)
           {
-              var m = _keyValueRegEx.Match(keyValuePair);
+              var m = _styleValuesRegEx.Match(keyValuePair);
 
               if (m.Success)
               {
-                  var k = m.Groups[1].Value;
-                  var v = m.Groups[2].Value;
-                  stylesDictionary[k] = v;
+                  var styleKeyValue = keyValuePair.Split(':');
+                  var key = styleKeyValue[0];
+                  var value = styleKeyValue[1];
+                 
+                  stylesDictionary[key] = value;
               }
           }
 
