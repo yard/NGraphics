@@ -48,6 +48,9 @@ namespace NGraphics.Android.Test
             PlatformTest.ResultsDirectory = System.IO.Path.Combine(ngd, "TestResults");
             PlatformTest.Platform = Platforms.Current;
             System.IO.Directory.CreateDirectory(PlatformTest.ResultsDirectory);
+
+            var resultDir = System.IO.Path.Combine(PlatformTest.ResultsDirectory, "Android");
+            System.IO.Directory.CreateDirectory(resultDir);
             //System.Environment.CurrentDirectory = PlatformTest.ResultsDirectory;
 
             foreach (var t in tfts)
@@ -56,25 +59,38 @@ namespace NGraphics.Android.Test
                 var ms = t.GetMethods().Where(m => m.GetCustomAttributes(tat, true).Length > 0);
                 foreach (var m in ms)
                 {
-                    try
+
+                    if (m.Name.Equals("ErulisseuiinSpaceshipPack"))
                     {
-                        var r = m.Invoke(test, null);
-                        var ta = r as Task;
-                        if (ta != null)
-                            await ta;
+                        try
+                        {
+                            var r = m.Invoke(test, null);
+                            var ta = r as Task;
+                            if (ta != null)
+                                await ta;
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine(ex);
+                        }
                     }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine(ex);
-                    }
+                  
                 }
             }
 
             var client = new System.Net.WebClient();
-            var pngs = System.IO.Directory.GetFiles(PlatformTest.ResultsDirectory, "*.png").ToList();
+            var pngs = System.IO.Directory.GetFiles(resultDir, "*.png").ToList();
             foreach (var f in pngs)
             {
-                client.UploadData("http://10.0.1.8:1234/" + System.IO.Path.GetFileName(f), System.IO.File.ReadAllBytes(f));
+                try
+                {
+                    var fileName = System.IO.Path.GetFileName(f);
+                    client.UploadData("http://10.0.0.14:1234/" + fileName, System.IO.File.ReadAllBytes(f));
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
             }
         }
     }
