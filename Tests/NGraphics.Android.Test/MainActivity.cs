@@ -44,6 +44,12 @@ namespace NGraphics.Android.Test
       PlatformTest.Platform = Platforms.Current;
 
       var resultDir = Path.Combine(PlatformTest.ResultsDirectory, "Android");
+
+      if (Directory.Exists(resultDir))
+      {
+        Directory.Delete(resultDir,true);  
+      }
+
       Directory.CreateDirectory(resultDir);
     }
 
@@ -64,8 +70,8 @@ namespace NGraphics.Android.Test
         var ms = t.GetMethods().Where(m => m.GetCustomAttributes(tat, true).Length > 0);
         foreach (var m in ms)
         {
-          //if (m.Name.Equals("ErulisseuiinSpaceshipPack"))
-          //{
+          if (m.Name.Equals("PathData_01"))
+          {
           try
           {
             RunOnUiThread(() => { _textView.Text = string.Format("Running {0} test...", m.Name); });
@@ -81,7 +87,7 @@ namespace NGraphics.Android.Test
 
             Console.WriteLine(ex);
           }
-          //}
+          }
         }
       }
 
