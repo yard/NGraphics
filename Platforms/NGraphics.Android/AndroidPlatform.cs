@@ -273,30 +273,34 @@ namespace NGraphics
         }
         public void DrawPath(IEnumerable<PathOperation> ops, Pen pen = null, BaseBrush brush = null)
         {
-            if (pen == null && brush == null)
-                return;
-
             using (var path = new global::Android.Graphics.Path())
             {
-
                 var bb = new BoundingBoxBuilder();
 
                 foreach (var op in ops)
                 {
-                    var mt = op as MoveTo;
-                    if (mt != null)
+                    var moveTo = op as MoveTo;
+                    if (moveTo != null)
                     {
-                        var p = mt.Start;
-                        path.MoveTo((float)p.X, (float)p.Y);
-                        bb.Add(p);
+                      var start = moveTo.Start;
+                      var end = moveTo.End;
+                   
+                        path.MoveTo((float)start.X, (float)start.Y);
+                        path.MoveTo((float)end.X, (float)end.Y);
+                   
+                      bb.Add(start);
+                      bb.Add(end);
                         continue;
                     }
-                    var lt = op as LineTo;
-                    if (lt != null)
+                    var lineTo = op as LineTo;
+                    if (lineTo != null)
                     {
-                        var p = lt.Start;
-                        path.LineTo((float)p.X, (float)p.Y);
-                        bb.Add(p);
+                      var start = lineTo.Start;
+                      var end = lineTo.End;
+                      path.LineTo((float)start.X, (float)start.Y);
+                      path.LineTo((float)end.X, (float)end.Y);
+                        bb.Add(start);
+                        bb.Add(end);
                         continue;
                     }
                     var at = op as ArcTo;
@@ -307,16 +311,21 @@ namespace NGraphics
                         bb.Add(p);
                         continue;
                     }
-                    var ct = op as CurveTo;
-                    if (ct != null)
+                    var curveTo = op as CurveTo;
+                    if (curveTo != null)
                     {
-                        var p = ct.Start;
-                        var c1 = ct.FirstControlPoint;
-                        var c2 = ct.SecondControlPoint;
-                        path.CubicTo((float)c1.X, (float)c1.Y, (float)c2.X, (float)c2.Y, (float)p.X, (float)p.Y);
-                        bb.Add(p);
-                        bb.Add(c1);
-                        bb.Add(c2);
+                        var start = curveTo.Start;
+                        var end = curveTo.End;
+                        var firstControlPoint = curveTo.FirstControlPoint;
+                        var secondControlPoint = curveTo.SecondControlPoint;
+
+                        path.CubicTo((float)firstControlPoint.X, (float)firstControlPoint.Y, (float)secondControlPoint.X, (float)secondControlPoint.Y, (float)start.X, (float)start.Y);
+                        path.CubicTo((float)firstControlPoint.X, (float)firstControlPoint.Y, (float)secondControlPoint.X, (float)secondControlPoint.Y, (float)end.X, (float)end.Y);
+
+                        bb.Add(start);
+                        bb.Add(firstControlPoint);
+                        bb.Add(secondControlPoint);
+                        bb.Add(end);
                         continue;
                     }
                     var cp = op as ClosePath;
