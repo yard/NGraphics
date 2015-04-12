@@ -317,6 +317,7 @@ Global
 		{D8259A30-0714-4160-89AF-0C644551DF3B}.AppStore|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{D8259A30-0714-4160-89AF-0C644551DF3B}.AppStore|Mixed Platforms.Build.0 = Release|Any CPU
 		{D8259A30-0714-4160-89AF-0C644551DF3B}.Debug|Android.ActiveCfg = Debug|Any CPU
+		{D8259A30-0714-4160-89AF-0C644551DF3B}.Debug|Android.Build.0 = Debug|Any CPU
 		{D8259A30-0714-4160-89AF-0C644551DF3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D8259A30-0714-4160-89AF-0C644551DF3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D8259A30-0714-4160-89AF-0C644551DF3B}.Debug|iPhone.ActiveCfg = Debug|Any CPU
