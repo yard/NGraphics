@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using Foundation;
 using UIKit;
 using NGraphics.Test;
+using System.IO;
+using System.Diagnostics;
 
 namespace NGraphics.iOS.Test
 {
@@ -23,7 +25,12 @@ namespace NGraphics.iOS.Test
 			var types = typeof (DrawingTest).Assembly.GetTypes ();
 			var tfts = types.Where (t => t.GetCustomAttributes (tfat, false).Length > 0);
 
-			PlatformTest.ResultsDirectory = System.IO.Path.Combine (Environment.GetEnvironmentVariable ("NGraphicsDir"), "TestResults");
+			var documentsDirectory = Environment.GetFolderPath
+				(Environment.SpecialFolder.Personal);
+
+			Directory.CreateDirectory (Path.Combine (documentsDirectory, "iOS"));
+
+			PlatformTest.ResultsDirectory = documentsDirectory;
 			PlatformTest.Platform = Platforms.Current;
 			Environment.CurrentDirectory = PlatformTest.ResultsDirectory;
 
@@ -31,7 +38,14 @@ namespace NGraphics.iOS.Test
 				var test = Activator.CreateInstance (t);
 				var ms = t.GetMethods ().Where (m => m.GetCustomAttributes (tat, true).Length > 0);
 				foreach (var m in ms) {
-					m.Invoke (test, null);
+
+					try{
+//						if (m.Name.Contains ("Path")) {
+						m.Invoke (test, null);
+							//					}
+					}catch(Exception e){
+						Debug.WriteLine (e.ToString());
+					}
 				}
 			}
 
