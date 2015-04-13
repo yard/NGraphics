@@ -360,6 +360,7 @@ namespace NGraphics
 						var start = moveTo.Start;
 						var end = moveTo.End;
 						context.MoveTo ((nfloat)start.X, (nfloat)start.Y);
+						context.MoveTo ((nfloat)end.X, (nfloat)end.Y);
 						bb.Add (start);
 						bb.Add (end);
 						continue;
@@ -369,8 +370,8 @@ namespace NGraphics
 						var start = lt.Start;
 						var end = lt.End;
 
-						lines.Add(new CGPoint((nfloat)lt.Start.X, (nfloat)lt.Start.Y ));
-						lines.Add(new CGPoint((nfloat)lt.End.X, (nfloat)lt.End.Y ));
+						context.AddLineToPoint((float)start.X, (float)start.Y);
+						context.AddLineToPoint((float)end.X, (float)end.Y);
 
 						bb.Add (start);
 						bb.Add (end);
@@ -409,7 +410,6 @@ namespace NGraphics
 					throw new NotSupportedException ("Path Op " + op);
 				}
 
-				context.AddLines(lines.ToArray());
 
 				return bb.BoundingBox;
 
