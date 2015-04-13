@@ -203,11 +203,12 @@ namespace NGraphics
       return paint;
     }
 
-    private void AddBrushPaint(Paint paint, BaseBrush brush, Rect bb)
+    private void AddBrushPaint(Paint paint, BaseBrush brush, Rect frame)
     {
       paint.SetStyle(Paint.Style.Fill);
 
       var sb = brush as SolidBrush;
+
       if (sb != null)
       {
         paint.SetARGB(sb.Color.A, sb.Color.R, sb.Color.G, sb.Color.B);
@@ -228,8 +229,8 @@ namespace NGraphics
             locs[i] = (float) s.Offset;
             comps[i] = s.Color.Argb;
           }
-          var p1 = lgb.Absolute ? lgb.Start : bb.Position + lgb.Start*bb.Size;
-          var p2 = lgb.Absolute ? lgb.End : bb.Position + lgb.End*bb.Size;
+          var p1 = lgb.Absolute ? lgb.Start : frame.Position + lgb.Start*frame.Size;
+          var p2 = lgb.Absolute ? lgb.End : frame.Position + lgb.End*frame.Size;
           var lg = new LinearGradient(
             (float) p1.X, (float) p1.Y,
             (float) p2.X, (float) p2.Y,
@@ -255,8 +256,8 @@ namespace NGraphics
             locs[i] = (float) s.Offset;
             comps[i] = s.Color.Argb;
           }
-          var p1 = rgb.GetAbsoluteCenter(bb);
-          var r = rgb.GetAbsoluteRadius(bb);
+          var p1 = rgb.GetAbsoluteCenter(frame);
+          var r = rgb.GetAbsoluteRadius(frame);
           var rg = new RadialGradient(
             (float) p1.X, (float) p1.Y,
             (float) r.Max,
@@ -356,15 +357,33 @@ namespace NGraphics
 
         if (brush != null)
         {
-          var paint = GetBrushPaint(brush, frame);
-          graphics.DrawPath(path, paint);
+          var solidBrush = brush as SolidBrush;
+
+          if (solidBrush != null)
+          {
+            path.SetFillType(GetPathFillType(((SolidBrush)brush).FillMode));
+          }
+          
+          var brushPaint = GetBrushPaint(brush, frame);
+          graphics.DrawPath(path, brushPaint);
         }
         if (pen != null)
         {
-          var paint = GetPenPaint(pen);
-          graphics.DrawPath(path, paint);
+          var penPaint = GetPenPaint(pen);
+          graphics.DrawPath(path, penPaint);
         }
       }
+    }
+
+    private Path.FillType GetPathFillType(FillMode fillMode)
+    {
+      switch (fillMode)
+      {
+          case FillMode.EvenOdd:
+          return Path.FillType.EvenOdd;
+      }
+
+      return Path.FillType.Winding;
     }
 
     public void DrawRectangle(Rect frame, Pen pen = null, BaseBrush brush = null)
