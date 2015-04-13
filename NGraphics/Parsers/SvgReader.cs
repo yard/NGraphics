@@ -196,10 +196,9 @@ namespace NGraphics.Parsers
           break;
         case "namedview":
         case "metadata":
-          // Ignore
-          break;
         case "SVGTestCase":
-          break;
+		case "switch":
+			break;
         default:
           throw new NotSupportedException("SVG element \"" + e.Name.LocalName + "\" is not supported");
       }

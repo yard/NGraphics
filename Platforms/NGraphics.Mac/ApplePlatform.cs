@@ -13,6 +13,7 @@ using NGraphics.Models;
 using NGraphics.Models.Brushes;
 using NGraphics.Models.Operations;
 using NGraphics.Models.Transforms;
+using NGraphics.Interfaces;
 
 namespace NGraphics
 {
