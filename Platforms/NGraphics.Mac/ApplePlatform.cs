@@ -174,8 +174,6 @@ namespace NGraphics
 
 	public class CGContextCanvas : ICanvas
 	{
-		
-
 		readonly CGContext context;
 
 		public CGContext Context { get { return context; } }
@@ -183,7 +181,7 @@ namespace NGraphics
 		public CGContextCanvas (CGContext context)
 		{
 			this.context = context;
-//			context.InterpolationQuality = CGInterpolationQuality.High;
+			//			context.InterpolationQuality = CGInterpolationQuality.High;
 			context.TextMatrix = CGAffineTransform.MakeScale (1, -1);
 		}
 
@@ -193,12 +191,10 @@ namespace NGraphics
 		}
 		public void Transform (Transform transform)
 		{
-
 			context.ConcatCTM (new CGAffineTransform (
 				(nfloat)transform.A, (nfloat)transform.B,
 				(nfloat)transform.C, (nfloat)transform.D,
 				(nfloat)transform.E, (nfloat)transform.F));
-
 		}
 		public void RestoreState ()
 		{
@@ -222,37 +218,92 @@ namespace NGraphics
 			return new CGGradient (cs, comps, locs);
 		}
 
-		public void DrawText (string text, Rect frame, Font font, TextAlignment alignment = TextAlignment.Left, Pen pen = null, BaseBrush baseBrush = null)
+		private static NSString NSFontAttributeName = new NSString("NSFontAttributeName");
+
+		public Size MeasureText(string text, Font font)
+		{
+			if (string.IsNullOrEmpty(text))
+				return Size.Zero;
+			if (font == null)
+				throw new ArgumentNullException("font");
+
+			string fontName = font.Name;
+			Array availableFonts =
+				#if __IOS__
+				UIKit.UIFont.FontNamesForFamilyName(fontName);
+				#else
+				AppKit.NSFontManager.SharedFontManager.AvailableMembersOfFontFamily (fontName).ToArray ();
+				#endif
+
+			#if __IOS__
+			UIKit.UIFont nsFont;
+			if (availableFonts != null && availableFonts.Length > 0)
+				nsFont = UIKit.UIFont.FromName(font.Name, (nfloat)font.Size);
+			else
+				nsFont = UIKit.UIFont.FromName("Georgia", (nfloat)font.Size);
+			#else
+			AppKit.NSFont nsFont;
+			if (availableFonts != null && availableFonts.Length > 0)
+			nsFont = AppKit.NSFont.FromFontName(font.Name, (nfloat)font.Size);
+			else
+			nsFont = AppKit.NSFont.FromFontName("Georgia", (nfloat)font.Size);
+			#endif
+
+			using (var s = new NSAttributedString(text, font: nsFont))
+			using (nsFont)
+			{
+				#if __IOS__
+				var result = s.GetBoundingRect(new CGSize(float.MaxValue, float.MaxValue), NSStringDrawingOptions.UsesDeviceMetrics, null);
+				#else
+				var result = s.BoundingRectWithSize(new CGSize(float.MaxValue, float.MaxValue), NSStringDrawingOptions.UsesDeviceMetrics);
+				#endif
+				return new Size(result.Width, result.Height);
+			}
+		}
+
+		public void DrawText (string text, Rect frame, Font font, TextAlignment alignment = TextAlignment.Left, Pen pen = null, BaseBrush brush = null)
 		{
 			if (string.IsNullOrEmpty (text))
 				return;
 			if (font == null)
 				throw new ArgumentNullException ("font");
 
-			SetBrush (baseBrush);
+			SetBrush (brush);
 
-			context.SelectFont (font.Name, (nfloat)font.Size, CGTextEncoding.MacRoman);
+			string fontName = font.Name;
+			Array availableFonts =
+				#if __IOS__
+				UIKit.UIFont.FontNamesForFamilyName(fontName);
+				#else
+				AppKit.NSFontManager.SharedFontManager.AvailableMembersOfFontFamily (fontName).ToArray ();
+				#endif
+			if (availableFonts != null && availableFonts.Length > 0)
+				context.SelectFont (font.Name, (nfloat)font.Size, CGTextEncoding.MacRoman);
+			else
+				context.SelectFont ("Georgia", (nfloat)font.Size, CGTextEncoding.MacRoman);
+
 			context.ShowTextAtPoint ((nfloat)frame.X, (nfloat)frame.Y, text);
 
-//			using (var atext = new NSMutableAttributedString (text)) {
-//
-//				atext.AddAttributes (new CTStringAttributes {
-//					ForegroundColor = new CGColor (1, 0, 0, 1),
-//				}, new NSRange (0, text.Length));
-//
-//				using (var ct = new CTFramesetter (atext))
-//				using (var path = CGPath.FromRect (Conversions.GetCGRect (frame)))
-//				using (var tframe = ct.GetFrame (new NSRange (0, atext.Length), path, null))
-//					tframe.Draw (context);
-//			}
+			//			using (var atext = new NSMutableAttributedString (text)) {
+			//
+			//				atext.AddAttributes (new CTStringAttributes {
+			//					ForegroundColor = new CGColor (1, 0, 0, 1),
+			//				}, new NSRange (0, text.Length));
+			//
+			//				using (var ct = new CTFramesetter (atext))
+			//				using (var path = CGPath.FromRect (Conversions.GetCGRect (frame)))
+			//				using (var tframe = ct.GetFrame (new NSRange (0, atext.Length), path, null))
+			//					tframe.Draw (context);
+			//			}
 		}
 
-		void DrawElement (Func<Rect> add, Pen pen = null, BaseBrush baseBrush = null)
+
+		void DrawElement (Func<Rect> add, Pen pen = null, BaseBrush brush = null)
 		{
-			if (pen == null && baseBrush == null)
+			if (pen == null && brush == null)
 				return;
 
-			var lgb = baseBrush as LinearGradientBrush;
+			var lgb = brush as LinearGradientBrush;
 			if (lgb != null) {
 				var cg = CreateGradient (lgb.Stops);
 				context.SaveState ();
@@ -260,14 +311,14 @@ namespace NGraphics
 				context.Clip ();
 				CGGradientDrawingOptions options = CGGradientDrawingOptions.DrawsBeforeStartLocation | CGGradientDrawingOptions.DrawsAfterEndLocation;
 				var size = frame.Size;
-				var start = Conversions.GetCGPoint (frame.Position + lgb.Start * size);
-				var end = Conversions.GetCGPoint (frame.Position + lgb.End * size);
+				var start = Conversions.GetCGPoint (lgb.Absolute ? lgb.Start : frame.Position + lgb.Start * size);
+				var end = Conversions.GetCGPoint (lgb.Absolute ? lgb.End : frame.Position + lgb.End * size);
 				context.DrawLinearGradient (cg, start, end, options);
 				context.RestoreState ();
-				baseBrush = null;
+				brush = null;
 			}
 
-			var rgb = baseBrush as RadialGradientBrush;
+			var rgb = brush as RadialGradientBrush;
 			if (rgb != null) {
 				var cg = CreateGradient (rgb.Stops);
 				context.SaveState ();
@@ -275,17 +326,17 @@ namespace NGraphics
 				context.Clip ();
 				CGGradientDrawingOptions options = CGGradientDrawingOptions.DrawsBeforeStartLocation | CGGradientDrawingOptions.DrawsAfterEndLocation;
 				var size = frame.Size;
-				var start = Conversions.GetCGPoint (frame.Position + rgb.Center * size);
-				var r = (nfloat)(rgb.Radius * size).Max;
-				var end = Conversions.GetCGPoint (frame.Position + rgb.Focus * size);
+				var start = Conversions.GetCGPoint (rgb.GetAbsoluteCenter (frame));
+				var r = (nfloat)rgb.GetAbsoluteRadius (frame).Max;
+				var end = Conversions.GetCGPoint (rgb.GetAbsoluteFocus (frame));
 				context.DrawRadialGradient (cg, start, 0, end, r, options);
 				context.RestoreState ();
-				baseBrush = null;
+				brush = null;
 			}
 
-			if (pen != null || baseBrush != null)
+			if (pen != null || brush != null)
 			{
-				var mode = SetPenAndBrush (pen, baseBrush);
+				var mode = SetPenAndBrush (pen, brush);
 
 				add ();
 				context.DrawPath (mode);
