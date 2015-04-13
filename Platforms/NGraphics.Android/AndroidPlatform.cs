@@ -303,7 +303,6 @@ namespace NGraphics
             var end = moveTo.End;
 
             path.MoveTo((float) start.X, (float) start.Y);
-            path.MoveTo((float) end.X, (float) end.Y);
 
             bb.Add(start);
             bb.Add(end);
@@ -331,17 +330,13 @@ namespace NGraphics
           var curveTo = op as CurveTo;
           if (curveTo != null)
           {
-            var start = curveTo.Start;
             var end = curveTo.End;
             var firstControlPoint = curveTo.FirstControlPoint;
             var secondControlPoint = curveTo.SecondControlPoint;
 
             path.CubicTo((float) firstControlPoint.X, (float) firstControlPoint.Y, (float) secondControlPoint.X,
-              (float) secondControlPoint.Y, (float) start.X, (float) start.Y);
-            path.CubicTo((float) firstControlPoint.X, (float) firstControlPoint.Y, (float) secondControlPoint.X,
               (float) secondControlPoint.Y, (float) end.X, (float) end.Y);
 
-            bb.Add(start);
             bb.Add(firstControlPoint);
             bb.Add(secondControlPoint);
             bb.Add(end);
