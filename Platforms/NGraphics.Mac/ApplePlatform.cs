@@ -357,9 +357,11 @@ namespace NGraphics
 				foreach (var op in ops) {
 					var moveTo = op as MoveTo;
 					if (moveTo != null) {
-						var p = moveTo.End;
-						context.MoveTo ((nfloat)p.X, (nfloat)p.Y);
-						bb.Add (p);
+						var start = moveTo.Start;
+						var end = moveTo.End;
+						context.MoveTo ((nfloat)start.X, (nfloat)start.Y);
+						bb.Add (start);
+						bb.Add (end);
 						continue;
 					}
 					var lt = op as LineTo;
@@ -389,10 +391,12 @@ namespace NGraphics
 						var end = curveTo.End;
 						var control1 = curveTo.FirstControlPoint;
 						var control2 = curveTo.SecondControlPoint;
+
 						context.AddCurveToPoint ((nfloat)control1.X, (nfloat)control1.Y, (nfloat)control2.X, (nfloat)control2.Y, (nfloat)end.X, (nfloat)end.Y);
-						bb.Add (end);
+					
 						bb.Add (control1);
 						bb.Add (control2);
+						bb.Add (end);
 						continue;
 					}
 					var cp = op as ClosePath;
