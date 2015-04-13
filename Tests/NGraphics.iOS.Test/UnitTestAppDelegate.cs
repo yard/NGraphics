@@ -28,7 +28,13 @@ namespace NGraphics.iOS.Test
 			var documentsDirectory = Environment.GetFolderPath
 				(Environment.SpecialFolder.Personal);
 
-			Directory.CreateDirectory (Path.Combine (documentsDirectory, "iOS"));
+			var resultDir = Path.Combine (documentsDirectory, "iOS");
+
+			if (Directory.Exists (resultDir)) {
+				Directory.Delete (resultDir, true);
+			}
+
+			Directory.CreateDirectory (resultDir);
 
 			PlatformTest.ResultsDirectory = documentsDirectory;
 			PlatformTest.Platform = Platforms.Current;
