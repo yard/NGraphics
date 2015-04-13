@@ -101,6 +101,10 @@ namespace NGraphics
 		CGBitmapContext context;
 		readonly double scale;
 
+		public Size Size { get { return new Size (context.Width / scale, context.Height / scale); } }
+		public Size SizeInPixels { get { return new Size (context.Width, context.Height); } }
+		public double Scale { get { return scale; } }
+
 		public CGBitmapContextCanvas (CGBitmapContext context, double scale)
 			: base (context)
 		{
@@ -149,10 +153,29 @@ namespace NGraphics
 				dest.Close ();
 			}
 		}
+
+		public void SaveAsPng (Stream stream)
+		{
+			if (stream == null)
+				throw new ArgumentNullException ();
+
+			using (var data = new NSMutableData ()) {
+				using (var dest = CGImageDestination.Create (data, "public.png", 1)) {
+					if (dest == null) {
+						throw new InvalidOperationException (string.Format ("Could not create image destination from {0}.", stream));
+					}
+					dest.AddImage (image);
+					dest.Close ();
+				}
+				data.AsStream ().CopyTo (stream);
+			}
+		}
 	}
 
 	public class CGContextCanvas : ICanvas
 	{
+		
+
 		readonly CGContext context;
 
 		public CGContext Context { get { return context; } }
@@ -168,34 +191,14 @@ namespace NGraphics
 		{
 			context.SaveState ();
 		}
-		public void Transform (TransformBase transform)
+		public void Transform (Transform transform)
 		{
-			var t = transform;
-			var stack = new Stack<TransformBase> ();
-			while (t != null) {
-				stack.Push (t);
-				t = t.Previous;
-			}
-			while (stack.Count > 0) {
-				t = stack.Pop ();
 
-				var rt = t as Rotate;
-				if (rt != null) {
-					context.RotateCTM ((nfloat)(rt.Angle * Math.PI / 180));
-					continue;
-				}
-				var tt = t as Translate;
-				if (tt != null) {
-					context.TranslateCTM ((nfloat)tt.Size.Width, (nfloat)tt.Size.Height);
-					continue;
-				}
-				var st = t as Scale;
-				if (st != null) {
-					context.ScaleCTM ((nfloat)st.Size.Width, (nfloat)st.Size.Height);
-					continue;
-				}
-				throw new NotSupportedException ("Transform " + t);
-			}
+			context.ConcatCTM (new CGAffineTransform (
+				(nfloat)transform.A, (nfloat)transform.B,
+				(nfloat)transform.C, (nfloat)transform.D,
+				(nfloat)transform.E, (nfloat)transform.F));
+
 		}
 		public void RestoreState ()
 		{
@@ -257,8 +260,8 @@ namespace NGraphics
 				context.Clip ();
 				CGGradientDrawingOptions options = CGGradientDrawingOptions.DrawsBeforeStartLocation | CGGradientDrawingOptions.DrawsAfterEndLocation;
 				var size = frame.Size;
-				var start = Conversions.GetCGPoint (frame.Position + lgb.RelativeStart * size);
-				var end = Conversions.GetCGPoint (frame.Position + lgb.RelativeEnd * size);
+				var start = Conversions.GetCGPoint (frame.Position + lgb.Start * size);
+				var end = Conversions.GetCGPoint (frame.Position + lgb.End * size);
 				context.DrawLinearGradient (cg, start, end, options);
 				context.RestoreState ();
 				baseBrush = null;
@@ -272,9 +275,9 @@ namespace NGraphics
 				context.Clip ();
 				CGGradientDrawingOptions options = CGGradientDrawingOptions.DrawsBeforeStartLocation | CGGradientDrawingOptions.DrawsAfterEndLocation;
 				var size = frame.Size;
-				var start = Conversions.GetCGPoint (frame.Position + rgb.RelativeCenter * size);
-				var r = (nfloat)(rgb.RelativeRadius * size).Max;
-				var end = Conversions.GetCGPoint (frame.Position + rgb.RelativeFocus * size);
+				var start = Conversions.GetCGPoint (frame.Position + rgb.Center * size);
+				var r = (nfloat)(rgb.Radius * size).Max;
+				var end = Conversions.GetCGPoint (frame.Position + rgb.Focus * size);
 				context.DrawRadialGradient (cg, start, 0, end, r, options);
 				context.RestoreState ();
 				baseBrush = null;
@@ -301,9 +304,9 @@ namespace NGraphics
 				var lines = new List<CGPoint>();
 
 				foreach (var op in ops) {
-					var mt = op as MoveTo;
-					if (mt != null) {
-						var p = mt.Start;
+					var moveTo = op as MoveTo;
+					if (moveTo != null) {
+						var p = moveTo.End;
 						context.MoveTo ((nfloat)p.X, (nfloat)p.Y);
 						bb.Add (p);
 						continue;
@@ -311,7 +314,7 @@ namespace NGraphics
 					var lt = op as LineTo;
 					if (lt != null) {
 						var start = lt.Start;
-						var end = lt.Start;
+						var end = lt.End;
 
 						lines.Add(new CGPoint((nfloat)lt.Start.X, (nfloat)lt.Start.Y ));
 						lines.Add(new CGPoint((nfloat)lt.End.X, (nfloat)lt.End.Y ));
@@ -330,15 +333,15 @@ namespace NGraphics
 						bb.Add (p);
 						continue;
 					}
-					var ct = op as CurveTo;
-					if (ct != null) {
-						var p = ct.SecondControlPoint;
-						var c1 = ct.Start;
-						var c2 = ct.FirstControlPoint;
-						context.AddCurveToPoint ((nfloat)c1.X, (nfloat)c1.Y, (nfloat)c2.X, (nfloat)c2.Y, (nfloat)p.X, (nfloat)p.Y);
-						bb.Add (p);
-						bb.Add (c1);
-						bb.Add (c2);
+					var curveTo = op as CurveTo;
+					if (curveTo != null) {
+						var end = curveTo.End;
+						var control1 = curveTo.FirstControlPoint;
+						var control2 = curveTo.SecondControlPoint;
+						context.AddCurveToPoint ((nfloat)control1.X, (nfloat)control1.Y, (nfloat)control2.X, (nfloat)control2.Y, (nfloat)end.X, (nfloat)end.Y);
+						bb.Add (end);
+						bb.Add (control1);
+						bb.Add (control2);
 						continue;
 					}
 					var cp = op as ClosePath;
@@ -377,7 +380,7 @@ namespace NGraphics
 				return frame;
 			}, pen, baseBrush);
 		}
-		public void DrawImage (IImage image, Rect frame)
+		public void DrawImage (IImage image, Rect frame, double alpha = 1.0)
 		{
 			var cgi = image as CGImageImage;
 
