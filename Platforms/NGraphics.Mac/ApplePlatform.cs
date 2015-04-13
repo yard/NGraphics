@@ -484,6 +484,33 @@ namespace NGraphics
 
 		void SetPen (Pen pen)
 		{
+			switch (pen.LineJoin)
+			{
+			case SvgStrokeLineJoin.Round:
+				context.SetLineJoin (CGLineJoin.Round);
+				break;
+			case SvgStrokeLineJoin.Bevel:
+				context.SetLineJoin (CGLineJoin.Bevel);
+				break;
+			case SvgStrokeLineJoin.Miter:
+				context.SetLineJoin (CGLineJoin.Miter);
+				break;
+			}
+
+
+			switch (pen.LineCap)
+			{
+			case SvgStrokeLineCap.Round:
+				context.SetLineCap (CGLineCap.Round);
+				break;
+			case SvgStrokeLineCap.Square:
+				context.SetLineCap (CGLineCap.Square);
+				break;
+			default:
+				context.SetLineCap (CGLineCap.Butt);
+				break;
+			}
+
 			context.SetStrokeColor ((nfloat)pen.Color.Red, (nfloat)pen.Color.Green, (nfloat)pen.Color.Blue, (nfloat)pen.Color.Alpha);
 			context.SetLineWidth ((nfloat)pen.Width);
 		}
