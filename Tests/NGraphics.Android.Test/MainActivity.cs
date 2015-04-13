@@ -70,8 +70,8 @@ namespace NGraphics.Android.Test
         var ms = t.GetMethods().Where(m => m.GetCustomAttributes(tat, true).Length > 0);
         foreach (var m in ms)
         {
-          if (m.Name.Equals("PathData_01"))
-          {
+          //if (m.Name.Equals("PathData_03"))
+          //{
           try
           {
             RunOnUiThread(() => { _textView.Text = string.Format("Running {0} test...", m.Name); });
@@ -87,7 +87,7 @@ namespace NGraphics.Android.Test
 
             Console.WriteLine(ex);
           }
-          }
+          //}
         }
       }
 
