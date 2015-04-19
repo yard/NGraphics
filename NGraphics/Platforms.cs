@@ -2,7 +2,6 @@ using System;
 using System.Linq;
 using System.Reflection;
 using NGraphics.Interfaces;
-using NGraphics.Net;
 #if __ANDROID__
 using NGraphics.Android;
 #endif
@@ -25,10 +24,12 @@ namespace NGraphics
 					current = new ApplePlatform ();
 					#elif __ANDROID__
 					current = new AndroidPlatform ();
-					#else
-					current = new SystemDrawingPlatform ();
-					#endif
-				}
+          #elif NETFX_CORE
+          current = new WinRTPlatform();
+          #else
+          current = new SystemDrawingPlatform ();
+          #endif
+                             }
 				return current;
 			}
 		}
