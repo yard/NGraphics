@@ -221,8 +221,10 @@ namespace NGraphics
 					}
 					else if (op is LineTo) {
 						var lt = ((LineTo)op);
-						sink.AddLine (Conversions.ToVector2 (lt.Start));
+						sink.AddLine (lt.Start.ToVector2());
+						sink.AddLine (lt.End.ToVector2());
 						bb.Add (lt.Start);
+						bb.Add (lt.End);
 					}
 					else if (op is ArcTo) {
 						var ar = ((ArcTo)op);
@@ -240,12 +242,12 @@ namespace NGraphics
 						sink.AddBezier (new D2D1.BezierSegment {
 							Point1 = Conversions.ToVector2 (ct.FirstControlPoint),
 							Point2 = Conversions.ToVector2 (ct.SecondControlPoint),
-							Point3 = Conversions.ToVector2 (ct.Start),
+							Point3 = Conversions.ToVector2 (ct.End),
 						});
-						bb.Add (ct.Start);
             bb.Add(ct.FirstControlPoint);
             bb.Add(ct.SecondControlPoint);
-					}
+            bb.Add(ct.End);
+          }
 					else if (op is ClosePath) {
 						sink.EndFigure (D2D1.FigureEnd.Closed);
 						figureDepth--;
