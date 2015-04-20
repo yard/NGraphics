@@ -100,7 +100,6 @@ namespace NGraphics.WindowsStore.Test
       }
 
       Debug.WriteLine("Done...");
-      await Task.Delay(TimeSpan.FromSeconds(1));
     }
 
     private static async Task UploadToLocalhost(string name, Stream stream)
