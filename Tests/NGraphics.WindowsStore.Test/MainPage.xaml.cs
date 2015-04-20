@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -9,6 +10,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Imaging;
 using NGraphics.Test;
+using NGraphics.WindowsStore.Test.Models;
 using NUnit.Framework;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
@@ -20,26 +22,28 @@ namespace NGraphics.WindowsStore.Test
   /// </summary>
   public sealed partial class MainPage : Page
   {
+    private ObservableCollection<SampleImage> _sampleImages;
+
     public MainPage()
     {
       InitializeComponent();
+      ImageGridView.ItemsSource = SampleImages;
+    }
+
+    public ObservableCollection<SampleImage> SampleImages
+    {
+      get { return _sampleImages ?? (_sampleImages = new ObservableCollection<SampleImage>()); }
     }
 
     private async void Page_Loaded(object sender, RoutedEventArgs e)
     {
-      await RunUnitTests();
+      PlatformSetup();
+      await RunTests();
     }
 
-    private async Task RunUnitTests()
+    private void PlatformSetup()
     {
-      var tat = typeof (TestAttribute);
-      var tfat = typeof (TestFixtureAttribute);
-
-      var types = typeof (DrawingTest).GetTypeInfo().Assembly.ExportedTypes;
-      var tfts = types.Where(t => t.GetTypeInfo().GetCustomAttributes(tfat, false).Any());
-
-      var ngd = "";
-      PlatformTest.ResultsDirectory = Path.Combine(ngd, "TestResults");
+      PlatformTest.ResultsDirectory = "TestResults";
       PlatformTest.Platform = Platforms.Current;
 
       PlatformTest.OpenStream = path => new FileMemoryStream {Path = path};
@@ -47,42 +51,56 @@ namespace NGraphics.WindowsStore.Test
       {
         //await UploadToLocalhost(name, stream, client);
 
-        using (stream)
+        using (var memStream =
+          stream.AsRandomAccessStream())
         {
-          using (var memStream =
-            stream.AsRandomAccessStream())
-          {
-            var bitMapImage = new BitmapImage();
-            memStream.Seek(0);
-            bitMapImage.SetSource(memStream);
+          var bitmapImage = new BitmapImage();
+          memStream.Seek(0);
+          bitmapImage.SetSource(memStream);
 
-            ImagesStackPanel.Children.Add(new Image {Source = bitMapImage});
-          }
+          SampleImages.Add(new SampleImage
+          {
+            Name = name,
+            ImageSource = bitmapImage
+          });
         }
       };
+    }
 
-      foreach (var t in tfts)
+    private static async Task RunTests()
+    {
+      var tat = typeof (TestAttribute);
+      var tfat = typeof (TestFixtureAttribute);
+      var testSetupAttr = typeof (SetUpAttribute);
+
+      var types = typeof (DrawingTest).GetTypeInfo().Assembly.ExportedTypes;
+      var testFixtures = types.Where(t => t.GetTypeInfo().GetCustomAttributes(tfat, false).Any());
+
+      foreach (var testFixture in testFixtures)
       {
-        var test = Activator.CreateInstance(t);
-        var ms = t.GetRuntimeMethods().Where(m => m.GetCustomAttributes(tat, true).Any());
-        foreach (var m in ms)
+        var testFixtureInstance = Activator.CreateInstance(testFixture);
+        var tests = testFixture.GetRuntimeMethods().Where(m => m.GetCustomAttributes(tat, true).Any());
+        var testSetup =
+          testFixture.GetRuntimeMethods().Where(m => m.GetCustomAttributes(testSetupAttr, true).Any()).ToList();
+
+        foreach (var test in tests)
         {
-          try
+          if (testSetup.Any())
           {
-            if (m.Name.Contains("PathData"))
-            {
-              var r = m.Invoke(test, null);
-              var ta = r as Task;
-              if (ta != null)
-                await ta;
-            }
+            testSetup.First().Invoke(testFixtureInstance, null);
           }
-          catch (Exception ex)
-          {
-            Debug.WriteLine(ex);
-          }
+
+          //if (test.Name.Equals("ErulisseuiinSpaceshipPack"))
+          //{
+          Debug.WriteLine("Running {0}...", test);
+
+          test.Invoke(testFixtureInstance, null);
+          //}
         }
       }
+
+      Debug.WriteLine("Done...");
+      await Task.Delay(TimeSpan.FromSeconds(1));
     }
 
     private static async Task UploadToLocalhost(string name, Stream stream)

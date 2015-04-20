@@ -8,8 +8,27 @@
     mc:Ignorable="d" Loaded="Page_Loaded">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-      <ScrollViewer HorizontalScrollMode="Enabled" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Hidden" >
-        <StackPanel VerticalAlignment="Center"  Background="White" x:Name="ImagesStackPanel" Orientation="Horizontal"/>
-      </ScrollViewer>
+      
+      <GridView x:Name="ImageGridView" SelectionMode="None" VerticalAlignment="Center">
+        <GridView.ItemContainerStyle>
+        <Style
+            TargetType="GridViewItem">
+          <Setter
+                Property="Height"
+                Value="400" />
+          <Setter
+                Property="Width"
+                Value="400" />
+          </Style>
+      </GridView.ItemContainerStyle>
+        <GridView.ItemTemplate>
+          <DataTemplate>
+            <StackPanel Background="White">
+              <Image Source="{Binding ImageSource}"/>
+              <TextBlock Text="{Binding Name}" Foreground="Black" HorizontalAlignment="Center"/>
+            </StackPanel>
+          </DataTemplate>
+        </GridView.ItemTemplate>
+      </GridView>
     </Grid>
 </Page>
