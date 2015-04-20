@@ -2,6 +2,8 @@ using System;
 using System.Linq;
 using System.Reflection;
 using NGraphics.Interfaces;
+using NGraphics.Net;
+
 #if __ANDROID__
 using NGraphics.Android;
 #endif
