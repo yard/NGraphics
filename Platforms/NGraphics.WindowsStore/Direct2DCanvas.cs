@@ -194,7 +194,8 @@ namespace NGraphics
 		{
 			var layout = new DW.TextLayout (factories.DWFactory, text, GetTextFormat (font), (float)frame.Width, (float)frame.Height);
 			var h = layout.Metrics.Height;
-			renderTarget.DrawTextLayout ((frame.TopLeft - h*Point.OneY.Y).ToVector2 (), layout, GetBrush (frame, brush));
+      //todo : : Attempted to read or write protected memory. This is often an indication that other memory is corrupt.
+      //renderTarget.DrawTextLayout ((frame.TopLeft - h*Point.OneY.Y).ToVector2 (), layout, GetBrush (frame, brush));
 		}
 
 	  private DW.TextFormat GetTextFormat (Font font)
