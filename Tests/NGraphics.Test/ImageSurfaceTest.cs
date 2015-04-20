@@ -4,6 +4,7 @@ using NGraphics;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
+using System.Threading.Tasks;
 using NGraphics.Codes;
 using NGraphics.Interfaces;
 using NGraphics.Models;
@@ -19,7 +20,12 @@ namespace NGraphics.Test
 			public static IPlatform Current { get { return PlatformTest.Platform; } }
 		}
 
-		public static IPlatform Platform = new NullPlatform ();
+    public static IPlatform Platform =
+#if NETFX_CORE
+			new WindowsXamlPlatform ();
+#else
+ new NullPlatform();
+#endif
 
 		public static string ResultsDirectory = "";
 		public static string GetPath (string filename)
@@ -47,24 +53,50 @@ namespace NGraphics.Test
 				return Platform.LoadImage (s);
 			}
 		}
+
+    public static Func<string, Stream> OpenStream = p => null;
+    public static Func<Stream, string, Task> CloseStream = (s,n) => Task.FromResult<object>(null);
+
+    public async Task SaveImage(IImage i, string name)
+    {
+      var path = GetPath(name);
+      using (var s = OpenStream(path))
+      {
+        if (s == null)
+        {
+          i.SaveAsPng(path);
+        }
+        else
+        {
+          i.SaveAsPng(s);
+          await CloseStream(s,name);
+        }
+      }
+    }
+
+    public async Task SaveImage(IImageCanvas canvas, string name)
+    {
+      await SaveImage(canvas.GetImage(), name);
+    }
 	}
 
 	[TestFixture]
 	public class ImageCanvasTest : PlatformTest
 	{
 		[Test]
-		public void BlurImage ()
+		public async Task BlurImage ()
 		{
 			var img = Platform.CreateImage (
 				          new[] { Colors.Red, Colors.Green, Colors.Blue, Colors.Yellow },
 				          2);
 			var canvas = Platform.CreateImageCanvas (new Size (100), transparency: true);
 			canvas.DrawImage (img, new Rect (new Size (100)));
-			canvas.GetImage ().SaveAsPng (GetPath ("ImageCanvas.BlurImage"));
+      await SaveImage(canvas, "ImageCanvas.BlurImage");
+      //canvas.GetImage ().SaveAsPng (GetPath ("ImageCanvas.BlurImage"));
 		}
 
 		[Test]
-		public void BlurImage2 ()
+		public async Task BlurImage2 ()
 		{
 			var img = Platform.CreateImage (
 				new[] { Colors.Red, Colors.Green, Colors.Blue, Colors.Yellow },
@@ -74,7 +106,8 @@ namespace NGraphics.Test
 			canvas.DrawImage (img, new Rect (new Point (0, 50), new Size (50)));
 			canvas.DrawImage (img, new Rect (new Point (50, 0), new Size (150, 50)));
 			canvas.DrawImage (img, new Rect (new Point (50, 50), new Size (150, 50)));
-			canvas.GetImage ().SaveAsPng (GetPath ("ImageCanvas.BlurImage2"));
+      await SaveImage(canvas, "ImageCanvas.BlurImage2");
+      //canvas.GetImage().SaveAsPng(GetPath("ImageCanvas.BlurImage2"));
 		}
 
 		[Test]
