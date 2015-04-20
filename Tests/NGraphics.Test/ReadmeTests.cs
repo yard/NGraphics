@@ -1,7 +1,9 @@
 ﻿using NUnit.Framework;
 using System.IO;
 using System;
+using System.ComponentModel;
 using System.Reflection;
+using System.Threading.Tasks;
 using NGraphics.Codes;
 using NGraphics.Interfaces;
 using NGraphics.Models;
@@ -16,7 +18,7 @@ namespace NGraphics.Test
 		// http://app.coolors.co/dcdcdd-c5c3c6-46494c-4c5c68-4183c4
 		// http://app.coolors.co/dcdcdd-c5c3c6-46494c-4c5c68-68a5e2
 		[Test]
-		public void Icon ()
+		public async Task Icon ()
 		{
 			var size = new Size (64);
 			var canvas = Platforms.Current.CreateImageCanvas (size, scale: 2);
@@ -42,12 +44,11 @@ namespace NGraphics.Test
 				p.Draw (canvas);
 				canvas.Translate (1 / 16.0, 0);
 			}
-
-			canvas.GetImage ().SaveAsPng (GetPath ("Icon.png"));
+      await SaveImage (canvas, "Icon.png");
 		}
 
 		[Test]
-		public void Example1 ()
+    public async Task Example1()
 		{
 			var canvas = Platforms.Current.CreateImageCanvas (new Size (100), scale: 2);
 
@@ -60,11 +61,11 @@ namespace NGraphics.Test
 				new ClosePath ()
 			}, brush: Brushes.Gray);
 
-			canvas.GetImage ().SaveAsPng (GetPath ("Example1.png"));
+      await SaveImage(canvas, "Example1.png");
 		}
 
 		[Test]
-		public void PenWidths ()
+		public async Task PenWidths ()
 		{
 			var canvas = Platforms.Current.CreateImageCanvas (new Size (120*5, 120), scale: 2);
 
@@ -77,7 +78,7 @@ namespace NGraphics.Test
 				canvas.Translate (120, 0);
 			}
 
-			canvas.GetImage ().SaveAsPng (GetPath ("PenWidths.png"));
+      await SaveImage(canvas, "PenWidths.png");
 		}
 	}
 

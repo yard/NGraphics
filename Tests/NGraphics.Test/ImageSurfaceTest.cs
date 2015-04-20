@@ -92,7 +92,6 @@ namespace NGraphics.Test
 			var canvas = Platform.CreateImageCanvas (new Size (100), transparency: true);
 			canvas.DrawImage (img, new Rect (new Size (100)));
       await SaveImage(canvas, "ImageCanvas.BlurImage");
-      //canvas.GetImage ().SaveAsPng (GetPath ("ImageCanvas.BlurImage"));
 		}
 
 		[Test]
@@ -107,11 +106,10 @@ namespace NGraphics.Test
 			canvas.DrawImage (img, new Rect (new Point (50, 0), new Size (150, 50)));
 			canvas.DrawImage (img, new Rect (new Point (50, 50), new Size (150, 50)));
       await SaveImage(canvas, "ImageCanvas.BlurImage2");
-      //canvas.GetImage().SaveAsPng(GetPath("ImageCanvas.BlurImage2"));
 		}
 
 		[Test]
-		public void Cats ()
+		public async Task Cats ()
 		{
 			var img = GetResourceImage ("cat.png");
 			var canvas = Platform.CreateImageCanvas (new Size (100, 200), transparency: true);
@@ -119,11 +117,11 @@ namespace NGraphics.Test
 			canvas.DrawImage (img, new Rect (new Point (50, 0), new Size (50)));
 			canvas.DrawImage (img, new Rect (new Point (0, 50), new Size (50, 150)));
 			canvas.DrawImage (img, new Rect (new Point (50, 50), new Size (50, 150)));
-			canvas.GetImage ().SaveAsPng (GetPath ("ImageCanvas.Cats"));
+      await SaveImage(canvas, "ImageCanvas.Cats");
 		}
 
 		[Test]
-		public void TriWithRadGrad ()
+		public async Task TriWithRadGrad ()
 		{
 			var canvas = Platform.CreateImageCanvas (new Size (100), transparency: true);
 			var size = new Size (100);
@@ -137,46 +135,40 @@ namespace NGraphics.Test
 			p.Close ();
 			p.Brush = b;
 			p.Draw (canvas);
-			canvas.GetImage ().SaveAsPng (GetPath ("ImageCanvas.TriWithRadGrad"));
+      await SaveImage(canvas, "ImageCanvas.TriWithRadGrad");
 		}
-		[Test]
-		public void Line ()
-		{
-			var canvas = Platform.CreateImageCanvas (new Size (100), transparency: true);
-			canvas.DrawLine (10, 20, 80, 70, Colors.DarkGray,5);
-			canvas.GetImage ().SaveAsPng (GetPath ("ImageCanvas.Line"));
-		}
-		[Test]
-		public void Ellipse ()
-		{
-			var p = Platform;
-			var s = p.CreateImageCanvas (new Size (100), transparency: true);
-			s.DrawEllipse (new Point (10, 20), new Size (30, 40), Pens.Red.WithWidth (10), Brushes.Yellow);
-			var i = s.GetImage ();
-			var path = GetPath ("Ellipse");
-			i.SaveAsPng (path);
-		}
-		[Test]
-		public void EllipseWithoutBackground ()
-		{
-			var p = Platform;
-			var s = p.CreateImageCanvas (new Size (100), transparency: false);
-			s.DrawEllipse (new Point (10, 20), new Size (30, 40), Pens.Red.WithWidth (10), Brushes.Yellow);
-			var i = s.GetImage ();
-			var path = GetPath ("ImageCanvas.EllipseWithoutBackground");
-			i.SaveAsPng (path);
-		}
-		[Test]
-		public void EllipseWithBackground ()
-		{
-			var p = Platform;
-			var s = p.CreateImageCanvas (new Size (100), transparency: false);
-			s.FillRectangle (new Rect (new Size (100)), Colors.DarkGray);
-			s.DrawEllipse (new Point (10, 20), new Size (30, 40), Pens.Red.WithWidth (10), Brushes.Yellow);
-			var i = s.GetImage ();
-			var path = GetPath ("ImageCanvas.EllipseWithBackground");
-			i.SaveAsPng (path);
-		}
+    [Test]
+    public async Task Line()
+    {
+      var canvas = Platform.CreateImageCanvas(new Size(100), transparency: true);
+      canvas.DrawLine(10, 20, 80, 70, Colors.DarkGray, 5);
+      await SaveImage(canvas, "ImageCanvas.Line");
+    }
+    [Test]
+    public async Task Ellipse()
+    {
+      var p = Platform;
+      var s = p.CreateImageCanvas(new Size(100), transparency: true);
+      s.DrawEllipse(new Point(10, 20), new Size(30, 40), Pens.Red.WithWidth(10), Brushes.Yellow);
+      await SaveImage(s, "Ellipse");
+    }
+    [Test]
+    public async Task EllipseWithoutBackground()
+    {
+      var p = Platform;
+      var s = p.CreateImageCanvas(new Size(100), transparency: false);
+      s.DrawEllipse(new Point(10, 20), new Size(30, 40), Pens.Red.WithWidth(10), Brushes.Yellow);
+      await SaveImage(s, "ImageCanvas.EllipseWithoutBackground");
+    }
+    [Test]
+    public async Task EllipseWithBackground()
+    {
+      var p = Platform;
+      var s = p.CreateImageCanvas(new Size(100), transparency: false);
+      s.FillRectangle(new Rect(new Size(100)), Colors.DarkGray);
+      s.DrawEllipse(new Point(10, 20), new Size(30, 40), Pens.Red.WithWidth(10), Brushes.Yellow);
+      await SaveImage(s, "ImageCanvas.EllipseWithBackground");
+    }
 	}
 }
 

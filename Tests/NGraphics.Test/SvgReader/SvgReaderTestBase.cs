@@ -26,7 +26,6 @@ namespace NGraphics.Test.SvgReader
             var c = Platform.CreateImageCanvas(g.Size);
             g.Draw(c);
           SaveImage(c.GetImage(), path.Replace(".svg",".png"));
-            //c.GetImage().SaveAsPng(GetPath(path));
         }
     }
 }
