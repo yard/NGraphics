@@ -163,6 +163,56 @@ namespace NGraphics.Models
             var m = brightness - c;
             return new Color(r1 + m, g1 + m, b1 + m, alpha);
         }
+        public static Color FromHSL(double hue, double saturation, double lightness, double alpha = 1.0)
+        {
+          var c = (1 - Math.Abs(2 * lightness - 1)) * saturation;
+          var hp = hue;
+          if (hp < 0)
+            hp = 1 - ((-hp) % 1);
+          if (hp > 1)
+            hp = hp % 1;
+          hp *= 6;
+          var x = c * (1 - Math.Abs((hp % 2) - 1));
+          double r1, g1, b1;
+          if (hp < 1)
+          {
+            r1 = c;
+            g1 = x;
+            b1 = 0;
+          }
+          else if (hp < 2)
+          {
+            r1 = x;
+            g1 = c;
+            b1 = 0;
+          }
+          else if (hp < 3)
+          {
+            r1 = 0;
+            g1 = c;
+            b1 = x;
+          }
+          else if (hp < 4)
+          {
+            r1 = 0;
+            g1 = x;
+            b1 = c;
+          }
+          else if (hp < 5)
+          {
+            r1 = x;
+            g1 = 0;
+            b1 = c;
+          }
+          else
+          {
+            r1 = c;
+            g1 = 0;
+            b1 = x;
+          }
+          var m = lightness - 0.5 * c;
+          return new Color(r1 + m, g1 + m, b1 + m, alpha);
+        }
 
         public override string ToString()
         {
