@@ -461,6 +461,7 @@ Global
 		{D8259A30-0714-4160-89AF-0C644551DF3B}.Debug|iPhone.Build.0 = Debug|Any CPU
 		{D8259A30-0714-4160-89AF-0C644551DF3B}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
 		{D8259A30-0714-4160-89AF-0C644551DF3B}.Debug|WinPhone.ActiveCfg = Debug|Any CPU
+		{D8259A30-0714-4160-89AF-0C644551DF3B}.Debug|WinPhone.Build.0 = Debug|Any CPU
 		{D8259A30-0714-4160-89AF-0C644551DF3B}.Debug|WinStore.ActiveCfg = Debug|Any CPU
 		{D8259A30-0714-4160-89AF-0C644551DF3B}.Release|Android.ActiveCfg = Release|Any CPU
 		{D8259A30-0714-4160-89AF-0C644551DF3B}.Release|Android.Build.0 = Release|Any CPU
