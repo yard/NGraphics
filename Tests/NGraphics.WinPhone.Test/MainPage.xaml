@@ -9,6 +9,15 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-
-    </Grid>
+    <ListView x:Name="ImageGridView" SelectionMode="None" VerticalAlignment="Center">
+      <ListView.ItemTemplate>
+        <DataTemplate>
+          <StackPanel Background="White">
+            <Image Source="{Binding ImageSource}"/>
+            <TextBlock Text="{Binding Name}" Foreground="Black" HorizontalAlignment="Center"/>
+          </StackPanel>
+        </DataTemplate>
+      </ListView.ItemTemplate>
+    </ListView>
+  </Grid>
 </Page>
