@@ -6,6 +6,7 @@ using System.IO;
 using System.Reflection;
 using System.Threading.Tasks;
 using NGraphics.Codes;
+using NGraphics.Custom;
 using NGraphics.Interfaces;
 using NGraphics.Models;
 using NGraphics.Models.Brushes;

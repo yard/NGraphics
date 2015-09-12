@@ -1,7 +1,5 @@
-using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Threading.Tasks;
 using NGraphics.Codes;
 using NGraphics.Interfaces;
 using NGraphics.Models;
@@ -9,7 +7,7 @@ using NGraphics.Models.Brushes;
 using NGraphics.Models.Operations;
 using NGraphics.Models.Transforms;
 
-namespace NGraphics
+namespace NGraphics.Custom
 {
     public class NullPlatform : IPlatform
     {

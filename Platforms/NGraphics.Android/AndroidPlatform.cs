@@ -14,7 +14,7 @@ using Path = Android.Graphics.Path;
 using Point = NGraphics.Models.Point;
 using Rect = NGraphics.Models.Rect;
 
-namespace NGraphics
+namespace NGraphics.Android.Custom
 {
   public class AndroidPlatform : IPlatform
   {

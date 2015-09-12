@@ -1,16 +1,17 @@
 using System;
 using System.Linq;
 using System.Reflection;
+using NGraphics.Custom;
 using NGraphics.Interfaces;
 
 #if __ANDROID__
-using NGraphics.Android;
+using NGraphics.Android.Custom;
 #elif NETFX_CORE
 #else
 using NGraphics.Net;
 #endif
 
-namespace NGraphics
+namespace NGraphics.Android.Custom
 {
 	public static class Platforms
 	{
