@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Imaging;
+using NGraphics.Custom;
 using NGraphics.Test;
 using NGraphics.WindowsStore.Test.Models;
 using NUnit.Framework;

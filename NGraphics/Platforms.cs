@@ -3,9 +3,11 @@ using System.Linq;
 using System.Reflection;
 using NGraphics.Custom;
 using NGraphics.Interfaces;
+
 #if __ANDROID__
 using NGraphics.Android.Custom;
 #elif NETFX_CORE
+using NGraphics.WindowsStore.Custom;
 #else
 using NGraphics.Net.Custom;
 #endif

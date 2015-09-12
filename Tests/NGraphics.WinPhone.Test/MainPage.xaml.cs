@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
+using NGraphics.Custom;
 using NGraphics.Test;
 using NGraphics.WinPhone.Test.Models;
 using NUnit.Framework;

@@ -9,8 +9,8 @@
     <ProjectGuid>{82348188-6DDB-4AB7-8DE5-E7D5A33975E1}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NGraphics.WindowsPhone</RootNamespace>
-    <AssemblyName>NGraphics.WindowsPhone</AssemblyName>
+    <RootNamespace>NGraphics.WindowsPhone.Custom</RootNamespace>
+    <AssemblyName>NGraphics.WindowsPhone.Custom</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformVersion>8.1</TargetPlatformVersion>
     <MinimumVisualStudioVersion>12</MinimumVisualStudioVersion>
@@ -26,7 +26,7 @@
     <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_PHONE_APP</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\NGraphics.WindowsPhone.xml</DocumentationFile>
+    <DocumentationFile>bin\Debug\NGraphics.WindowsPhone.Custom.xml</DocumentationFile>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -36,7 +36,7 @@
     <DefineConstants>TRACE;NETFX_CORE;WINDOWS_PHONE_APP</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Release\NGraphics.WindowsPhone.xml</DocumentationFile>
+    <DocumentationFile>bin\Release\NGraphics.WindowsPhone.Custom.xml</DocumentationFile>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
