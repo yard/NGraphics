@@ -8,6 +8,7 @@ using Android.OS;
 using Android.Views;
 using Android.Widget;
 using NGraphics.Android.Custom;
+using NGraphics.Custom;
 using NGraphics.Test;
 using NUnit.Framework;
 using Environment = System.Environment;

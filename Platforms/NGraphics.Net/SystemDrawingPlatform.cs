@@ -19,7 +19,7 @@ using Point = NGraphics.Models.Point;
 using Size = NGraphics.Models.Size;
 using SolidBrush = NGraphics.Models.Brushes.SolidBrush;
 
-namespace NGraphics.Net
+namespace NGraphics.Net.Custom
 {
   public class SystemDrawingPlatform : IPlatform
   {

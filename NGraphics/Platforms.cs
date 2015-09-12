@@ -3,15 +3,14 @@ using System.Linq;
 using System.Reflection;
 using NGraphics.Custom;
 using NGraphics.Interfaces;
-
 #if __ANDROID__
 using NGraphics.Android.Custom;
 #elif NETFX_CORE
 #else
-using NGraphics.Net;
+using NGraphics.Net.Custom;
 #endif
 
-namespace NGraphics.Android.Custom
+namespace NGraphics.Custom
 {
 	public static class Platforms
 	{
