@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+using Windows.UI.Xaml.Media.Imaging;
+using NGraphics.Codes;
+using NGraphics.Models;
+using NGraphics.Models.Brushes;
+using NGraphics.Models.Operations;
 using SharpDX;
 using D3D = SharpDX.Direct3D;
 using D3D11 = SharpDX.Direct3D11;
@@ -11,17 +13,16 @@ using D2D1 = SharpDX.Direct2D1;
 using DXGI = SharpDX.DXGI;
 using WIC = SharpDX.WIC;
 using DW = SharpDX.DirectWrite;
-
-using Windows.UI.Xaml.Media.Imaging;
-using NGraphics.Codes;
-using NGraphics.Models;
-using NGraphics.Models.Brushes;
-using NGraphics.Models.Operations;
-using NGraphics.Models.Transforms;
 using Color = NGraphics.Models.Color;
+using Font = NGraphics.Models.Font;
+using GradientStop = NGraphics.Models.Brushes.GradientStop;
+using LinearGradientBrush = NGraphics.Models.Brushes.LinearGradientBrush;
 using Point = NGraphics.Models.Point;
+using RadialGradientBrush = NGraphics.Models.Brushes.RadialGradientBrush;
+using TextAlignment = NGraphics.Codes.TextAlignment;
+using Transform = NGraphics.Models.Transforms.Transform;
 
-namespace NGraphics
+namespace NGraphics.WindowsStore.Custom
 {
 	public class WICBitmapCanvas : RenderTargetCanvas, IImageCanvas
 	{

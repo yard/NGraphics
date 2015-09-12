@@ -10,7 +10,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using Shapes = Windows.UI.Xaml.Shapes;
 
-namespace NGraphics
+namespace NGraphics.Custom
 {
 	/// <summary>
 	/// Wraps a XAML Canvas whose children are created using the ICanvas draw functions.
