@@ -7,6 +7,7 @@ using UIKit;
 using NGraphics.Test;
 using System.IO;
 using System.Diagnostics;
+using NGraphics.Custom;
 
 namespace NGraphics.iOS.Test
 {
