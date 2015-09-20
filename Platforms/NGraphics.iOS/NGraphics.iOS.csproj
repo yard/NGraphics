@@ -6,7 +6,7 @@
     <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <ProjectGuid>{11A2EFE5-5E9E-41A1-B3D4-CD6665BD5D96}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>NGraphics.iOS</RootNamespace>
+    <RootNamespace>NGraphics.iOS.Custom</RootNamespace>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
     <AssemblyName>NGraphics.iOS.Custom</AssemblyName>
   </PropertyGroup>

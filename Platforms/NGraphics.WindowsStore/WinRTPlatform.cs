@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using NGraphics.Interfaces;
 using NGraphics.Models;
+using NGraphics.WindowsStore.Custom;
 using SharpDX;
 using Color = SharpDX.Color;
 using D3D = SharpDX.Direct3D;
@@ -13,7 +14,7 @@ using D2D1 = SharpDX.Direct2D1;
 using DXGI = SharpDX.DXGI;
 using WIC = SharpDX.WIC;
 
-namespace NGraphics
+namespace NGraphics.WindowsStore.Custom
 {
 	public class WinRTPlatform : IPlatform
 	{

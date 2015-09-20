@@ -15,7 +15,7 @@ using NGraphics.Models.Operations;
 using NGraphics.Models.Transforms;
 using NGraphics.Interfaces;
 
-namespace NGraphics
+namespace NGraphics.iOS.Custom
 {
 	public class ApplePlatform : IPlatform
 	{
