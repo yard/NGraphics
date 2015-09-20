@@ -8,6 +8,8 @@ using NGraphics.Interfaces;
 using NGraphics.Android.Custom;
 #elif NETFX_CORE
 using NGraphics.WindowsStore.Custom;
+#elif __IOS__
+using NGraphics.iOS.Custom;
 #else
 using NGraphics.Net.Custom;
 #endif
