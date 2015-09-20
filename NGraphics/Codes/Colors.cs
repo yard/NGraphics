@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Globalization;
-using NGraphics.Models;
+using NGraphics.Custom.Models;
 
-namespace NGraphics.Codes
+namespace NGraphics.Custom.Codes
 {
     public static class Colors
     {

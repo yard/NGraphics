@@ -1,4 +1,4 @@
-namespace NGraphics.Models.Brushes
+namespace NGraphics.Custom.Models.Brushes
 {
     public class LinearGradientBrush : GradientBrush
     {

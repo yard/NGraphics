@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using NGraphics.Interfaces;
-using NGraphics.Models;
+using NGraphics.Custom.Interfaces;
+using NGraphics.Custom.Models;
 using NGraphics.WindowsStore.Custom;
 using SharpDX;
 using Color = SharpDX.Color;
@@ -25,13 +25,13 @@ namespace NGraphics.WindowsStore.Custom
 			return new WICBitmapCanvas (size, scale, transparency);
 		}
 
-		public IImage CreateImage (Models.Color[] colors, int width, double scale = 1.0)
+		public IImage CreateImage (NGraphics.Custom.Models.Color[] colors, int width, double scale = 1.0)
 		{
 			var factories = Direct2DFactories.Shared;
 			var pf = WIC.PixelFormat.Format32bppBGRA;
 
 			unsafe {
-				fixed (Models.Color* p = colors) {
+				fixed (NGraphics.Custom.Models.Color* p = colors) {
 					var data = new DataRectangle {
 						Pitch = width * 4,
 						DataPointer = (IntPtr)p,

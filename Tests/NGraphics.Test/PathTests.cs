@@ -2,8 +2,8 @@
 using System.IO;
 using System;
 using System.Reflection;
-using NGraphics.Models;
-using Path = NGraphics.Models.Elements.Path;
+using NGraphics.Custom.Models;
+using Path = NGraphics.Custom.Models.Elements.Path;
 
 namespace NGraphics.Test
 {

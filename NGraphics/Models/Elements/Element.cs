@@ -1,9 +1,9 @@
 using System;
-using NGraphics.Interfaces;
-using NGraphics.Models.Brushes;
-using NGraphics.Models.Transforms;
+using NGraphics.Custom.Interfaces;
+using NGraphics.Custom.Models.Brushes;
+using NGraphics.Custom.Models.Transforms;
 
-namespace NGraphics.Models.Elements
+namespace NGraphics.Custom.Models.Elements
 {
     public abstract class Element : IDrawable
     {

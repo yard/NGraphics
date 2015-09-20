@@ -2,7 +2,7 @@ using System;
 using System.Globalization;
 using System.Xml.Linq;
 
-namespace NGraphics.Parsers
+namespace NGraphics.Custom.Parsers
 {
   public class ValuesParser : IValuesParser
   {

@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using System.IO;
 using Android.Graphics;
 using Android.Text;
-using NGraphics.Codes;
-using NGraphics.Interfaces;
-using NGraphics.Models;
-using NGraphics.Models.Brushes;
-using NGraphics.Models.Operations;
-using NGraphics.Models.Transforms;
-using Color = NGraphics.Models.Color;
+using NGraphics.Custom.Codes;
+using NGraphics.Custom.Interfaces;
+using NGraphics.Custom.Models;
+using NGraphics.Custom.Models.Brushes;
+using NGraphics.Custom.Models.Operations;
+using NGraphics.Custom.Models.Transforms;
+using Color = NGraphics.Custom.Models.Color;
 using Path = Android.Graphics.Path;
-using Point = NGraphics.Models.Point;
-using Rect = NGraphics.Models.Rect;
+using Point = NGraphics.Custom.Models.Point;
+using Rect = NGraphics.Custom.Models.Rect;
 
 namespace NGraphics.Android.Custom
 {

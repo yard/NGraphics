@@ -1,6 +1,6 @@
-using NGraphics.Models.Brushes;
+using NGraphics.Custom.Models.Brushes;
 
-namespace NGraphics.Codes
+namespace NGraphics.Custom.Codes
 {
     public static class Brushes
     {

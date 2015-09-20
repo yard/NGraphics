@@ -7,13 +7,12 @@ using System.Linq;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.InteropServices;
-using NGraphics.Codes;
-using NGraphics.Interfaces;
-using NGraphics.Models;
-using NGraphics.Models.Brushes;
-using NGraphics.Models.Operations;
-using NGraphics.Models.Transforms;
-using NGraphics.Interfaces;
+using NGraphics.Custom.Codes;
+using NGraphics.Custom.Interfaces;
+using NGraphics.Custom.Models;
+using NGraphics.Custom.Models.Brushes;
+using NGraphics.Custom.Models.Operations;
+using NGraphics.Custom.Models.Transforms;
 
 namespace NGraphics.iOS.Custom
 {

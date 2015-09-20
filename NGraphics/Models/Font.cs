@@ -1,4 +1,4 @@
-﻿namespace NGraphics.Models
+﻿namespace NGraphics.Custom.Models
 {
     public class Font
     {

@@ -5,19 +5,19 @@ using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.Drawing.Text;
 using System.IO;
-using NGraphics.Codes;
-using NGraphics.Interfaces;
-using NGraphics.Models;
-using NGraphics.Models.Brushes;
-using NGraphics.Models.Operations;
-using NGraphics.Models.Transforms;
-using Color = NGraphics.Models.Color;
-using Font = NGraphics.Models.Font;
-using LinearGradientBrush = NGraphics.Models.Brushes.LinearGradientBrush;
-using Pen = NGraphics.Models.Pen;
-using Point = NGraphics.Models.Point;
-using Size = NGraphics.Models.Size;
-using SolidBrush = NGraphics.Models.Brushes.SolidBrush;
+using NGraphics.Custom.Codes;
+using NGraphics.Custom.Interfaces;
+using NGraphics.Custom.Models;
+using NGraphics.Custom.Models.Brushes;
+using NGraphics.Custom.Models.Operations;
+using NGraphics.Custom.Models.Transforms;
+using Color = NGraphics.Custom.Models.Color;
+using Font = NGraphics.Custom.Models.Font;
+using LinearGradientBrush = NGraphics.Custom.Models.Brushes.LinearGradientBrush;
+using Pen = NGraphics.Custom.Models.Pen;
+using Point = NGraphics.Custom.Models.Point;
+using Size = NGraphics.Custom.Models.Size;
+using SolidBrush = NGraphics.Custom.Models.Brushes.SolidBrush;
 
 namespace NGraphics.Net.Custom
 {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NGraphics.Models.Transforms
+namespace NGraphics.Custom.Models.Transforms
 {
     public struct Transform
     {

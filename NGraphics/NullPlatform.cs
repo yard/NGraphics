@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 using System.IO;
-using NGraphics.Codes;
-using NGraphics.Interfaces;
-using NGraphics.Models;
-using NGraphics.Models.Brushes;
-using NGraphics.Models.Operations;
-using NGraphics.Models.Transforms;
+using NGraphics.Custom.Codes;
+using NGraphics.Custom.Interfaces;
+using NGraphics.Custom.Models;
+using NGraphics.Custom.Models.Brushes;
+using NGraphics.Custom.Models.Operations;
+using NGraphics.Custom.Models.Transforms;
 
 namespace NGraphics.Custom
 {

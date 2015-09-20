@@ -1,7 +1,7 @@
 using System.IO;
-using NGraphics.Models;
+using NGraphics.Custom.Models;
 
-namespace NGraphics
+namespace NGraphics.Custom.Interfaces
 {
     public interface IImage //: IDrawable
     {

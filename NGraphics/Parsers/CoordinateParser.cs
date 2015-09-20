@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
 
-namespace NGraphics.Parsers
+namespace NGraphics.Custom.Parsers
 {
     internal class CoordinateParser
     {

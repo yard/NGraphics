@@ -1,6 +1,6 @@
 using System;
 
-namespace NGraphics.Models.Segments
+namespace NGraphics.Custom.Models.Segments
 {
     [Flags]
     public enum SvgArcSweep

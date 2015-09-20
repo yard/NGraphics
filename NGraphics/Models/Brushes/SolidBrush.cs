@@ -1,6 +1,6 @@
-using NGraphics.Codes;
+using NGraphics.Custom.Codes;
 
-namespace NGraphics.Models.Brushes
+namespace NGraphics.Custom.Models.Brushes
 {
     public class SolidBrush : BaseBrush
     {

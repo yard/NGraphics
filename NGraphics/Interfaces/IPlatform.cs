@@ -1,8 +1,8 @@
 using System;
 using System.IO;
-using NGraphics.Models;
+using NGraphics.Custom.Models;
 
-namespace NGraphics.Interfaces
+namespace NGraphics.Custom.Interfaces
 {
     public interface IPlatform
     {

@@ -1,8 +1,9 @@
 ﻿using NUnit.Framework;
 using System;
-using NGraphics.Codes;
-using NGraphics.Interfaces;
-using NGraphics.Models;
+using NGraphics.Custom;
+using NGraphics.Custom.Codes;
+using NGraphics.Custom.Interfaces;
+using NGraphics.Custom.Models;
 
 namespace NGraphics.Test
 {

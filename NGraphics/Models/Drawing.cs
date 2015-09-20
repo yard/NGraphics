@@ -1,6 +1,6 @@
 using System;
 
-namespace NGraphics.Models
+namespace NGraphics.Custom.Models
 {
     public class Drawing
     {

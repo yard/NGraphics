@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace NGraphics.Models.Brushes
+namespace NGraphics.Custom.Models.Brushes
 {
     public abstract class GradientBrush : BaseBrush
     {

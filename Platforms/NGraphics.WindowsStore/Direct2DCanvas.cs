@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using Windows.UI.Xaml.Media.Imaging;
-using NGraphics.Codes;
-using NGraphics.Models;
-using NGraphics.Models.Brushes;
-using NGraphics.Models.Operations;
+using NGraphics.Custom.Codes;
+using NGraphics.Custom.Interfaces;
+using NGraphics.Custom.Models;
+using NGraphics.Custom.Models.Brushes;
+using NGraphics.Custom.Models.Operations;
 using SharpDX;
 using D3D = SharpDX.Direct3D;
 using D3D11 = SharpDX.Direct3D11;
@@ -13,14 +14,14 @@ using D2D1 = SharpDX.Direct2D1;
 using DXGI = SharpDX.DXGI;
 using WIC = SharpDX.WIC;
 using DW = SharpDX.DirectWrite;
-using Color = NGraphics.Models.Color;
-using Font = NGraphics.Models.Font;
-using GradientStop = NGraphics.Models.Brushes.GradientStop;
-using LinearGradientBrush = NGraphics.Models.Brushes.LinearGradientBrush;
-using Point = NGraphics.Models.Point;
-using RadialGradientBrush = NGraphics.Models.Brushes.RadialGradientBrush;
-using TextAlignment = NGraphics.Codes.TextAlignment;
-using Transform = NGraphics.Models.Transforms.Transform;
+using Color = NGraphics.Custom.Models.Color;
+using Font = NGraphics.Custom.Models.Font;
+using GradientStop = NGraphics.Custom.Models.Brushes.GradientStop;
+using LinearGradientBrush = NGraphics.Custom.Models.Brushes.LinearGradientBrush;
+using Point = NGraphics.Custom.Models.Point;
+using RadialGradientBrush = NGraphics.Custom.Models.Brushes.RadialGradientBrush;
+using TextAlignment = NGraphics.Custom.Codes.TextAlignment;
+using Transform = NGraphics.Custom.Models.Transforms.Transform;
 
 namespace NGraphics.WindowsStore.Custom
 {

@@ -1,9 +1,9 @@
 using System;
 using System.Globalization;
 using System.Text.RegularExpressions;
-using NGraphics.Models;
+using NGraphics.Custom.Models;
 
-namespace NGraphics.Parsers
+namespace NGraphics.Custom.Parsers
 {
     public sealed class SvgNumber
     {

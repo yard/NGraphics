@@ -1,9 +1,8 @@
-﻿using NGraphics.Codes;
-using NGraphics.Models;
-using NGraphics.Models.Brushes;
-using NGraphics.Models.Elements;
+﻿using NGraphics.Custom.Codes;
+using NGraphics.Custom.Interfaces;
+using NGraphics.Custom.Models.Brushes;
 
-namespace NGraphics
+namespace NGraphics.Custom.Models.Elements
 {
     public class Text : Element
     {

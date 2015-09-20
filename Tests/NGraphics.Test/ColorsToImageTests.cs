@@ -9,9 +9,9 @@ using System.IO;
 using System;
 using System.Reflection;
 using System.Threading.Tasks;
-using NGraphics.Codes;
-using NGraphics.Interfaces;
-using NGraphics.Models;
+using NGraphics.Custom.Codes;
+using NGraphics.Custom.Interfaces;
+using NGraphics.Custom.Models;
 
 namespace NGraphics.Test
 {

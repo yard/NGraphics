@@ -1,6 +1,6 @@
-﻿using NGraphics.Models.Elements;
+﻿using NGraphics.Custom.Models.Elements;
 
-namespace NGraphics.Models.Segments
+namespace NGraphics.Custom.Models.Segments
 {
     public sealed class SvgClosePathSegment : SvgPathSegment
     {

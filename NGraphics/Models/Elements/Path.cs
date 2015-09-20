@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using NGraphics.Interfaces;
-using NGraphics.Models.Brushes;
-using NGraphics.Models.Operations;
+using NGraphics.Custom.Interfaces;
+using NGraphics.Custom.Models.Brushes;
+using NGraphics.Custom.Models.Operations;
 
-namespace NGraphics.Models.Elements
+namespace NGraphics.Custom.Models.Elements
 {
     public class Path : Element
     {

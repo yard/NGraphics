@@ -1,6 +1,6 @@
 using System;
 
-namespace NGraphics.Models.Operations
+namespace NGraphics.Custom.Models.Operations
 {
     public class ArcTo : PathOperation
     {

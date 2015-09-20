@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 
-namespace NGraphics
+namespace NGraphics.Custom
 {
     internal static class Log
     {

@@ -1,9 +1,9 @@
 using System;
 using System.Globalization;
 using System.Runtime.InteropServices;
-using NGraphics.Codes;
+using NGraphics.Custom.Codes;
 
-namespace NGraphics.Models
+namespace NGraphics.Custom.Models
 {
     [StructLayout(LayoutKind.Sequential)]
     public struct Color

@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using NGraphics.Models;
-using NGraphics.Models.Elements;
-using NGraphics.Models.Segments;
+using NGraphics.Custom.Models;
+using NGraphics.Custom.Models.Elements;
+using NGraphics.Custom.Models.Segments;
 
-namespace NGraphics.Parsers
+namespace NGraphics.Custom.Parsers
 {
     public static class PointFExtensions
     {

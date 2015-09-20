@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
-using NGraphics.Codes;
-using NGraphics.Models;
-using NGraphics.Models.Brushes;
+using NGraphics.Custom.Codes;
+using NGraphics.Custom.Models;
+using NGraphics.Custom.Models.Brushes;
 
-namespace NGraphics.Parsers
+namespace NGraphics.Custom.Parsers
 {
   public class StylesParser : IStylesParser
   {

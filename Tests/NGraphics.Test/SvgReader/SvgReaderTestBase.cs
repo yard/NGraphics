@@ -1,5 +1,6 @@
 ﻿using System.IO;
-using NGraphics.Parsers;
+using NGraphics.Custom;
+using NGraphics.Custom.Parsers;
 using NUnit.Framework;
 
 namespace NGraphics.Test.SvgReader
@@ -12,7 +13,7 @@ namespace NGraphics.Test.SvgReader
             {
               var valuesParser = new ValuesParser();
 
-              var r = new NGraphics.Parsers.SvgReader(new StreamReader(s),new StylesParser(valuesParser),valuesParser );
+              var r = new Custom.Parsers.SvgReader(new StreamReader(s),new StylesParser(valuesParser),valuesParser );
                 Assert.GreaterOrEqual(r.Graphic.Children.Count, 0);
                 Assert.Greater(r.Graphic.Size.Width, 1);
                 Assert.Greater(r.Graphic.Size.Height, 1);

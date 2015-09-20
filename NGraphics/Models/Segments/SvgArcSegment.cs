@@ -1,8 +1,8 @@
 ﻿using System;
-using NGraphics.Models.Elements;
-using NGraphics.Parsers;
+using NGraphics.Custom.Models.Elements;
+using NGraphics.Custom.Parsers;
 
-namespace NGraphics.Models.Segments
+namespace NGraphics.Custom.Models.Segments
 {
     public sealed class SvgArcSegment : SvgPathSegment
     {

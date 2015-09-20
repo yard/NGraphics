@@ -1,7 +1,7 @@
-﻿using NGraphics.Codes;
-using NGraphics.ExtensionMethods;
+﻿using NGraphics.Custom.Codes;
+using NGraphics.Custom.ExtensionMethods;
 
-namespace NGraphics.Models
+namespace NGraphics.Custom.Models
 {
     public class Operation
     {

@@ -4,11 +4,11 @@ using System;
 using System.ComponentModel;
 using System.Reflection;
 using System.Threading.Tasks;
-using NGraphics.Codes;
-using NGraphics.Interfaces;
-using NGraphics.Models;
-using NGraphics.Models.Operations;
-using Path = NGraphics.Models.Elements.Path;
+using NGraphics.Custom.Codes;
+using NGraphics.Custom.Interfaces;
+using NGraphics.Custom.Models;
+using NGraphics.Custom.Models.Operations;
+using Path = NGraphics.Custom.Models.Elements.Path;
 
 namespace NGraphics.Test
 {

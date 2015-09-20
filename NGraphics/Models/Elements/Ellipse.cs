@@ -1,8 +1,8 @@
 ﻿using System.Globalization;
-using NGraphics.Interfaces;
-using NGraphics.Models.Brushes;
+using NGraphics.Custom.Interfaces;
+using NGraphics.Custom.Models.Brushes;
 
-namespace NGraphics.Models.Elements
+namespace NGraphics.Custom.Models.Elements
 {
     public class Ellipse : Element
     {

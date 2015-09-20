@@ -1,4 +1,4 @@
-﻿namespace NGraphics.Models
+﻿namespace NGraphics.Custom.Codes
 {
     public enum FillMode
     {

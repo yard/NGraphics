@@ -1,4 +1,4 @@
-﻿namespace NGraphics.Codes
+﻿namespace NGraphics.Custom.Codes
 {
   public enum SvgStrokeLineCap
   {

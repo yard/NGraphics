@@ -1,4 +1,4 @@
-namespace NGraphics.Interfaces
+namespace NGraphics.Custom.Interfaces
 {
     public interface IDrawable
     {

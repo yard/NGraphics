@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
 
-namespace NGraphics.Models
+namespace NGraphics.Custom.Models
 {
     public sealed class CssNumber
     {

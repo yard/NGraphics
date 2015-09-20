@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 
-namespace NGraphics.Models.Segments
+namespace NGraphics.Custom.Models.Segments
 {
     public sealed class SvgPathSegmentList : IList<SvgPathSegment>
     {

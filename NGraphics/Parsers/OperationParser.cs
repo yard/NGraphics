@@ -1,8 +1,8 @@
 ﻿using System;
-using NGraphics.Codes;
-using NGraphics.Models;
+using NGraphics.Custom.Codes;
+using NGraphics.Custom.Models;
 
-namespace NGraphics.Parsers
+namespace NGraphics.Custom.Parsers
 {
     public class OperationParser
     {

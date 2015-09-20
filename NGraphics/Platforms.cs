@@ -2,8 +2,7 @@ using System;
 using System.Linq;
 using System.Reflection;
 using NGraphics.Custom;
-using NGraphics.Interfaces;
-
+using NGraphics.Custom.Interfaces;
 #if __ANDROID__
 using NGraphics.Android.Custom;
 #elif NETFX_CORE

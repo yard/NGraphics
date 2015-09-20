@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using NGraphics.Interfaces;
-using NGraphics.Models;
-using NGraphics.Parsers;
+using NGraphics.Custom.Interfaces;
+using NGraphics.Custom.Models;
+using NGraphics.Custom.Parsers;
 
-namespace NGraphics
+namespace NGraphics.Custom
 {
     public class Graphic : IDrawable
     {

@@ -1,20 +1,18 @@
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Xml.Linq;
-using NGraphics.Codes;
-using NGraphics.Interfaces;
-using NGraphics.Models;
-using NGraphics.Models.Brushes;
-using NGraphics.Models.Elements;
-using NGraphics.Models.Transforms;
-using Group = NGraphics.Models.Elements.Group;
-using Path = NGraphics.Models.Elements.Path;
+using NGraphics.Custom.Codes;
+using NGraphics.Custom.Interfaces;
+using NGraphics.Custom.Models;
+using NGraphics.Custom.Models.Brushes;
+using NGraphics.Custom.Models.Elements;
+using NGraphics.Custom.Models.Transforms;
+using Group = NGraphics.Custom.Models.Elements.Group;
+using Path = NGraphics.Custom.Models.Elements.Path;
 
-namespace NGraphics.Parsers
+namespace NGraphics.Custom.Parsers
 {
   public class SvgReader
   {

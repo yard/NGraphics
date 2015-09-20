@@ -1,6 +1,6 @@
 using System.Xml.Linq;
 
-namespace NGraphics.Parsers
+namespace NGraphics.Custom.Parsers
 {
   public interface IValuesParser
   {

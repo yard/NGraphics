@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Xml.Linq;
-using NGraphics.Models;
-using NGraphics.Models.Brushes;
+using NGraphics.Custom.Models;
+using NGraphics.Custom.Models.Brushes;
 
-namespace NGraphics.Parsers
+namespace NGraphics.Custom.Parsers
 {
   public interface IStylesParser
   {

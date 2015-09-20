@@ -1,4 +1,4 @@
-﻿namespace NGraphics.ExtensionMethods
+﻿namespace NGraphics.Custom.ExtensionMethods
 {
     public static class CharExtensions
     {

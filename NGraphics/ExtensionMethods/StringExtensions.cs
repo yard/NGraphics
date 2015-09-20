@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace NGraphics.ExtensionMethods
+namespace NGraphics.Custom.ExtensionMethods
 {
     public static class StringExtensions
     {

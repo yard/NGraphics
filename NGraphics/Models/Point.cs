@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 
-namespace NGraphics.Models
+namespace NGraphics.Custom.Models
 {
     /// <summary>
     ///     Yet another 2D point struct. I hope you enjoy this one.

@@ -1,6 +1,6 @@
-using NGraphics.Codes;
+using NGraphics.Custom.Codes;
 
-namespace NGraphics.Models
+namespace NGraphics.Custom.Models
 {
     public class Pen
     {

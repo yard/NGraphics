@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Xml.Linq;
 using FluentAssertions;
-using NGraphics.Models;
-using NGraphics.Models.Brushes;
-using NGraphics.Parsers;
+using NGraphics.Custom.Codes;
+using NGraphics.Custom.Models;
+using NGraphics.Custom.Models.Brushes;
+using NGraphics.Custom.Parsers;
 using NUnit.Framework;
 
 namespace NGraphics.Test.Parsers
