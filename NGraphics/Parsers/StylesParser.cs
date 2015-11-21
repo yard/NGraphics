@@ -102,6 +102,14 @@ namespace NGraphics.Custom.Parsers
         }
       }
 
+	  var opacity = GetString(styleAttributes, "opacity");
+	  if (!string.IsNullOrWhiteSpace(opacity))
+	  {
+		if (pen != null) {
+			pen.Color = pen.Color.WithAlpha(_valuesParser.ReadNumber(opacity));
+		}
+	  }
+
       return pen;
     }
 
@@ -193,6 +201,14 @@ namespace NGraphics.Custom.Parsers
           }
         }
       }
+
+	  var opacity = GetString(styleAttributes, "opacity");
+	  if (!string.IsNullOrWhiteSpace(opacity))
+	  {
+		var sb = baseBrush as SolidBrush;
+		if (sb != null)
+			sb.Color = sb.Color.WithAlpha(_valuesParser.ReadNumber(opacity));
+	  }
 
       return baseBrush;
     }
