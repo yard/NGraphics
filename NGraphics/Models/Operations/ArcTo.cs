@@ -1,24 +1,54 @@
 using System;
 
-namespace NGraphics.Custom.Models.Operations
-{
-    public class ArcTo : PathOperation
-    {
-        public ArcTo(Size radius, bool largeArc, bool sweepClockwise, Point point)
-        {
+namespace NGraphics.Custom.Models.Operations {
+
+	/// <summary>
+	/// Arc to.
+	/// </summary>
+    public class ArcTo : PathOperation {
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="NGraphics.Custom.Models.Operations.ArcTo"/> class.
+		/// </summary>
+		/// <param name="radius">Radius.</param>
+		/// <param name="largeArc">If set to <c>true</c> large arc.</param>
+		/// <param name="sweepClockwise">If set to <c>true</c> sweep clockwise.</param>
+		/// <param name="point">Point.</param>
+        public ArcTo(Size radius, bool largeArc, bool sweepClockwise, Point point) {
             Radius = radius;
             LargeArc = largeArc;
             SweepClockwise = sweepClockwise;
             Point = point;
         }
 
+		/// <summary>
+		/// Clone this instance.
+		/// </summary>
+		public override PathOperation Clone() {
+			return new ArcTo(Radius, LargeArc, SweepClockwise, Point);
+		}
+
+		/// <summary>
+		/// The large arc.
+		/// </summary>
         public bool LargeArc;
+
+		/// <summary>
+		/// The point.
+		/// </summary>
         public Point Point;
+
+		/// <summary>
+		/// The radius.
+		/// </summary>
         public Size Radius;
+
+		/// <summary>
+		/// The sweep clockwise.
+		/// </summary>
         public bool SweepClockwise;
 
-        public void GetCircles(Point prevPoint, out Point circle1Center, out Point circle2Center)
-        {
+        public void GetCircles(Point prevPoint, out Point circle1Center, out Point circle2Center) {
             //Following explanation at http://mathforum.org/library/drmath/view/53027.html'
             if (Radius.Width == 0)
                 throw new Exception("radius x of zero");
