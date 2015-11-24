@@ -18,7 +18,7 @@ namespace NGraphics.Custom.Models
             }
             else
             {
-                bb = bb.Union(point);
+				bb.Extend(point);
             }
             nbb++;
         }

@@ -349,8 +349,7 @@ namespace NGraphics.iOS.Custom
 				return;
 
 			DrawElement (() => {
-
-				var bb = new BoundingBoxBuilder ();
+				var bb = new BoundingBoxBuilder();
 
 				var lines = new List<CGPoint>();
 

@@ -86,6 +86,13 @@ namespace NGraphics.Custom.Models
             Height += 2*dy;
         }
 
+		public void Extend(Point p) {
+			X = Math.Min(p.X, X);
+			Y = Math.Min(p.Y, Y);
+			Width = Math.Max(p.X, Right) - X;
+			Height = Math.Max(p.Y, Bottom) - Y;
+		}
+
         public Rect Union(Point p)
         {
             var x = Math.Min(p.X, X);
