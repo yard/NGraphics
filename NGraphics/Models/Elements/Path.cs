@@ -35,7 +35,7 @@ namespace NGraphics.Custom.Models.Elements {
 		/// Clone this instance.
 		/// </summary>
 		public override IDrawable Clone() {
-			return new Path(Operations.Select(op => op.Clone()), Pen.Clone(), Brush.Clone()) {
+			return new Path(Operations.Select(op => op.Clone()), Pen?.Clone(), Brush?.Clone()) {
 				Id = this.Id,
 				Transform = this.Transform
 			};

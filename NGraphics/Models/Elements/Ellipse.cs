@@ -69,7 +69,7 @@ namespace NGraphics.Custom.Models.Elements {
 		/// Clone this instance.
 		/// </summary>
 		public override IDrawable Clone() {
-			return new Ellipse(frame, Pen.Clone(), Brush.Clone()) {
+			return new Ellipse(frame, Pen?.Clone(), Brush?.Clone()) {
 				Id = this.Id,
 				Transform = this.Transform
 			};
