@@ -51,7 +51,7 @@ namespace NGraphics.Custom.Models.Elements {
 		/// </summary>
 		/// <param name="canvas">Canvas.</param>
         protected override void DrawElement(ICanvas canvas) {
-            canvas.DrawRectangle(frame, Pen, Brush);
+			canvas.DrawRectangle(frame, Pen.Clone(), Brush.Clone());
         }
 
 		/// <summary>

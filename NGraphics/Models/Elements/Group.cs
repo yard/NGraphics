@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using NGraphics.Custom.Interfaces;
+using System.Linq;
 
 namespace NGraphics.Custom.Models.Elements {
 
@@ -26,7 +27,7 @@ namespace NGraphics.Custom.Models.Elements {
 		/// Clone this instance.
 		/// </summary>
 		public override IDrawable Clone() {
-			return new Group(Children);
+			return new Group(Children.Select(c => c.Clone()).ToList());
 		}
 
 		/// <summary>
