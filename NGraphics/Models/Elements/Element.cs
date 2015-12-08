@@ -61,6 +61,24 @@ namespace NGraphics.Custom.Models.Elements {
 		public abstract IDrawable Clone();
 
 		/// <summary>
+		/// Tint the specified color.
+		/// </summary>
+		/// <param name="color">Color.</param>
+		public virtual IDrawable Tint(Color color) {
+			var tinted = (Element)Clone();
+
+			if (tinted.Brush is SolidBrush) {
+				((SolidBrush)tinted.Brush).Color = color;
+			}
+
+			if (tinted.Pen is Pen) {
+				((Pen)tinted.Pen).Color = color;
+			}
+
+			return tinted;
+		}
+
+		/// <summary>
 		/// Draw the specified canvas.
 		/// </summary>
 		/// <param name="canvas">Canvas.</param>

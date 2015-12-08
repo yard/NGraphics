@@ -48,5 +48,20 @@ namespace NGraphics.Custom.Models.Elements {
 
 			canvas.Transform(Transform.GetInverse());
         }
+
+		/// <summary>
+		/// Tint the specified color.
+		/// </summary>
+		/// <param name="color">Color.</param>
+		public override IDrawable Tint(Color color) {
+			var tinted = (Group)base.Tint(color);
+
+			var tintedChildren = Children.Select(child => child.Tint(color)).ToList();
+			tinted.Children.Clear();
+			tinted.Children.AddRange(tintedChildren);
+
+			return tinted;
+		}
+
     }
 }

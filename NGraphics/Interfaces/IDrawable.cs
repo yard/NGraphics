@@ -1,3 +1,5 @@
+using NGraphics.Custom.Models;
+
 namespace NGraphics.Custom.Interfaces {
 
 	/// <summary>
@@ -15,6 +17,12 @@ namespace NGraphics.Custom.Interfaces {
 		/// Clone this instance.
 		/// </summary>
 		IDrawable Clone();
+
+		/// <summary>
+		/// Tint the specified color.
+		/// </summary>
+		/// <param name="color">Color.</param>
+		IDrawable Tint(Color color);
 
     }
 }

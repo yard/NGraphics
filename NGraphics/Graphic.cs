@@ -5,6 +5,7 @@ using NGraphics.Custom.Interfaces;
 using NGraphics.Custom.Models;
 using NGraphics.Custom.Parsers;
 using NGraphics.Custom.Models.Transforms;
+using NGraphics.Custom.Models.Elements;
 
 namespace NGraphics.Custom {
 	
@@ -71,6 +72,19 @@ namespace NGraphics.Custom {
 		/// </summary>
 		public IDrawable Clone() {
 			return new Graphic(Children.Select(child => child.Clone()).ToList()) {
+				Description = this.Description,
+				Title = this.Title,
+				Size = this.Size,
+				ViewBox = this.ViewBox
+			};
+		}
+
+		/// <summary>
+		/// Tint the specified tintColor.
+		/// </summary>
+		/// <param name="tintColor">Tint color.</param>
+		public IDrawable Tint(Color tintColor) {
+			return new Graphic(Children.Select(child => child.Tint(tintColor)).ToList()) {
 				Description = this.Description,
 				Title = this.Title,
 				Size = this.Size,
