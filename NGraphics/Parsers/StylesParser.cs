@@ -251,6 +251,12 @@ namespace NGraphics.Custom.Parsers
         var s = new GradientStop();
         s.Offset = _valuesParser.ReadNumber(se.Attribute("offset"));
         s.Color = ReadColor(se, "stop-color");
+		
+		var opacity = se.Attribute("stop-opacity");
+		if (opacity != null) {
+			s.Color = s.Color.WithAlpha( _valuesParser.ReadNumber(opacity) );
+		}
+
         stops.Add(s);
       }
       stops.Sort((x, y) => x.Offset.CompareTo(y.Offset));
