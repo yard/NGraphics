@@ -61,6 +61,19 @@ namespace NGraphics.Custom.Codes
                 return true;
             }
 
+            if (s.Length == 9 && s[0] == '#')
+            {
+                var icult = CultureInfo.InvariantCulture;
+
+                var r = int.Parse(s.Substring(1, 2), NumberStyles.HexNumber, icult);
+                var g = int.Parse(s.Substring(3, 2), NumberStyles.HexNumber, icult);
+                var b = int.Parse(s.Substring(5, 2), NumberStyles.HexNumber, icult);
+                var a = int.Parse(s.Substring(7, 2), NumberStyles.HexNumber, icult);
+
+                color = new Color(r/255.0, g/255.0, b/255.0, a/255.0);
+                return true;
+            }
+
             Color nc;
             if (names.TryGetValue(s.ToLowerInvariant(), out nc))
             {
