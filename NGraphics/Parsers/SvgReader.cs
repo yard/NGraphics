@@ -201,6 +201,10 @@ namespace NGraphics.Custom.Parsers
           throw new NotSupportedException("SVG element \"" + e.Name.LocalName + "\" is not supported");
       }
 
+      if (element != null) {
+        element.Id = ReadString(e.Attribute("id"));
+      }
+
       if (element != null)
       {
         element.Transform = ReadTransform(ReadString(e.Attribute("transform")));
