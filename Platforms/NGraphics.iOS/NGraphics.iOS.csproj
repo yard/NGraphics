@@ -21,6 +21,7 @@
     <ConsolePause>false</ConsolePause>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <DocumentationFile>bin\Debug\NGraphics.iOS.Custom.xml</DocumentationFile>
+    <NoWarn>CS1574,CS1591,CS1573</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <Optimize>true</Optimize>
@@ -31,6 +32,7 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <DocumentationFile>bin\Release\NGraphics.iOS.Custom.xml</DocumentationFile>
     <DebugSymbols>true</DebugSymbols>
+    <NoWarn>CS1574,CS1591,CS1573</NoWarn>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />

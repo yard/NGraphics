@@ -33,6 +33,7 @@
     <ConsolePause>false</ConsolePause>
     <DebugSymbols>true</DebugSymbols>
     <DocumentationFile>bin\Release\NGraphics.Custom.xml</DocumentationFile>
+    <NoWarn>CS1574,CS1591,CS1573</NoWarn>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Codes\FillMode.cs" />
