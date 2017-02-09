@@ -195,8 +195,9 @@ namespace NGraphics.Custom.Parsers
         case "namedview":
         case "metadata":
         case "SVGTestCase":
-		case "switch":
-			break;
+        case "switch":
+        case "style": // Gingerfix: by default just ignore style attributes exported by Adobe Illustator instead of crashing app
+          break;
         default:
           throw new NotSupportedException("SVG element \"" + e.Name.LocalName + "\" is not supported");
       }

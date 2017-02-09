@@ -115,7 +115,8 @@ namespace NGraphics.Custom.Parsers
 
     public BaseBrush GetBrush(Dictionary<string, string> styleAttributes,Dictionary<string, XElement> defs, Pen pen)
     {
-      BaseBrush baseBrush = null;
+      // Gingerfix: By default use black solid brush so we dont get full transparent images if there is no fill attribute
+      BaseBrush baseBrush = new SolidBrush(new Color(0, 0, 0, 255));
 
       var fillOpacity = GetString(styleAttributes, "fill-opacity");
       if (!string.IsNullOrWhiteSpace(fillOpacity))
