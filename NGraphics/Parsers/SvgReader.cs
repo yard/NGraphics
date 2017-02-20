@@ -159,6 +159,16 @@ namespace NGraphics.Custom.Parsers
             SvgPathParser.Parse(p, dA.Value);
             element = p;
           }
+        } 
+          break;
+        case "polygon":
+        {
+            var points = e.Attribute("points");
+            if (points != null && !string.IsNullOrWhiteSpace(points.Value)) {
+                var p = new Path(pen, baseBrush);
+                SvgPathParser.ParseFromPolygon(p, points.Value);
+                element = p;
+            }
         }
           break;
         case "g":

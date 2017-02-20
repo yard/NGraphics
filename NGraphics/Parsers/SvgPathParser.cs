@@ -57,6 +57,29 @@ namespace NGraphics.Custom.Parsers
             //return segments;
         }
 
+        public static void ParseFromPolygon(Path path, string polygonString) {
+            if (string.IsNullOrEmpty(polygonString)) {
+                throw new ArgumentNullException("polygonString");
+            }
+
+            var segments = new SvgPathSegmentList();
+
+            try {
+                string[] coordinates = polygonString.Split(' ');
+
+                for (int i = 0; i < coordinates.Length / 2; i++) {
+                    CreatePathSegment(i == 0 ? 'M' : 'L', segments, new CoordinateParser(coordinates[2 * i] + " " + coordinates[2 * i + 1]), false);
+                }
+                segments.Add(new SvgClosePathSegment());
+
+                foreach (var segment in segments) {
+                    segment.AddToPath(path);
+                }
+            } catch (Exception exc) {
+                throw new Exception(string.Format("Error parsing polygon \"{0}\": {1}", path, exc.Message));
+            }
+        }
+
         private static void CreatePathSegment(char command, SvgPathSegmentList segments, CoordinateParser parser,
             bool isRelative)
         {
