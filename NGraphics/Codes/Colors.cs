@@ -49,6 +49,18 @@ namespace NGraphics.Custom.Codes
 
             var s = colorString.Trim();
 
+            if (s.Length == 4 && s[0] == '#') // Short web colors like #48c
+            {
+                var icult = CultureInfo.InvariantCulture;
+
+                var r = int.Parse("" + s[1] + s[1], NumberStyles.HexNumber, icult);
+                var g = int.Parse("" + s[2] + s[2], NumberStyles.HexNumber, icult);
+                var b = int.Parse("" + s[3] + s[3], NumberStyles.HexNumber, icult);
+
+                color = new Color(r / 255.0, g / 255.0, b / 255.0, 1);
+                return true;
+            }
+
             if (s.Length == 7 && s[0] == '#')
             {
                 var icult = CultureInfo.InvariantCulture;
@@ -57,7 +69,7 @@ namespace NGraphics.Custom.Codes
                 var g = int.Parse(s.Substring(3, 2), NumberStyles.HexNumber, icult);
                 var b = int.Parse(s.Substring(5, 2), NumberStyles.HexNumber, icult);
 
-                color = new Color(r/255.0, g/255.0, b/255.0, 1);
+                color = new Color(r / 255.0, g / 255.0, b / 255.0, 1);
                 return true;
             }
 
@@ -70,7 +82,7 @@ namespace NGraphics.Custom.Codes
                 var b = int.Parse(s.Substring(5, 2), NumberStyles.HexNumber, icult);
                 var a = int.Parse(s.Substring(7, 2), NumberStyles.HexNumber, icult);
 
-                color = new Color(r/255.0, g/255.0, b/255.0, a/255.0);
+                color = new Color(r / 255.0, g / 255.0, b / 255.0, a / 255.0);
                 return true;
             }
 
