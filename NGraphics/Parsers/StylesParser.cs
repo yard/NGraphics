@@ -150,7 +150,7 @@ namespace NGraphics.Custom.Parsers
       }
       else if (fill == "none")
       {
-        baseBrush = null;
+        baseBrush = new SolidBrush(new Color(0, 0, 0, 0));
       }
       else
       {
