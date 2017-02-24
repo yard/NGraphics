@@ -69,10 +69,12 @@ namespace NGraphics.Custom.Models.Elements {
 
 			if (tinted.Brush is SolidBrush) {
 				((SolidBrush)tinted.Brush).Color = color;
+                ((SolidBrush)tinted.Brush).Color.A = (byte)(((SolidBrush)this.Brush).Color.A * color.A / 255.0f);
 			}
 
 			if (tinted.Pen is Pen) {
 				((Pen)tinted.Pen).Color = color;
+                ((Pen)tinted.Pen).Color.A = (byte)(((Pen)this.Pen).Color.A * color.A / 255.0f);
 			}
 
 			return tinted;
