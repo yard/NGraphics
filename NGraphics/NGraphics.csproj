@@ -58,6 +58,7 @@
     <Compile Remove="Platforms\NGraphics.iOS\Properties\AssemblyInfo.cs" />
     <Compile Remove="NGraphics\Platforms.cs" />
     <Compile Remove="NGraphics\Properties\AssemblyInfo.cs" />
+    <Compile Remove="Platforms.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Platforms\NGraphics.WindowsPhone\packages.config" />
@@ -485,11 +486,6 @@
     <Compile Update="NGraphics\Parsers\ValuesParser.cs">
       <Link>Parsers\ValuesParser.cs</Link>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="NGraphics\NGraphics.csproj">
-      <Link>NGraphics.csproj</Link>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <None Update="NGraphics\NGraphics.csproj.nuget.cache">
