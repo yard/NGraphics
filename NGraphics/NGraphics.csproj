@@ -1,113 +1,505 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <ProjectGuid>{4EA643B9-84F6-4AD4-B89E-AE230A7461B8}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <RootNamespace>NGraphics.Custom</RootNamespace>
-    <AssemblyName>NGraphics.Custom</AssemblyName>
-    <TargetFrameworkVersion>v5.0</TargetFrameworkVersion>
-    <MinimumVisualStudioVersion>10.0</MinimumVisualStudioVersion>
+    <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug</OutputPath>
-    <DefineConstants>DEBUG;</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <ConsolePause>false</ConsolePause>
-    <DocumentationFile>bin\Debug\NGraphics.Custom.xml</DocumentationFile>
-    <NoWarn>CS1574,CS1591,CS1573</NoWarn>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>full</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release</OutputPath>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <ConsolePause>false</ConsolePause>
-    <DebugSymbols>true</DebugSymbols>
-    <DocumentationFile>bin\Release\NGraphics.Custom.xml</DocumentationFile>
-    <NoWarn>CS1574,CS1591,CS1573</NoWarn>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Compile Include="Codes\FillMode.cs" />
-    <Compile Include="Codes\SvgStrokeLineCap.cs" />
-    <Compile Include="Codes\SvgStrokeLineJoin.cs" />
-    <Compile Include="Codes\TextAlignment.cs" />
-    <Compile Include="Models\BoundingBoxBuilder.cs" />
-    <Compile Include="Models\Brushes\BaseBrush.cs" />
-    <Compile Include="Codes\OperationType.cs" />
-    <Compile Include="Codes\Brushes.cs" />
-    <Compile Include="Models\Brushes\GradientBrush.cs" />
-    <Compile Include="Models\Brushes\GradientStop.cs" />
-    <Compile Include="Models\Brushes\LinearGradientBrush.cs" />
-    <Compile Include="Models\Brushes\RadialGradientBrush.cs" />
-    <Compile Include="Models\Brushes\SolidBrush.cs" />
-    <Compile Include="Models\Color.cs" />
-    <Compile Include="ExtensionMethods\CharExtensions.cs" />
-    <Compile Include="ExtensionMethods\StringExtensions.cs" />
-    <Compile Include="Interfaces\IDrawable.cs" />
-    <Compile Include="Interfaces\IImage.cs" />
-    <Compile Include="Interfaces\IPlatform.cs" />
-    <Compile Include="Log.cs" />
-    <Compile Include="Codes\Colors.cs" />
-    <Compile Include="Models\CssNumber.cs" />
-    <Compile Include="Models\DrawingFunc.cs" />
-    <Compile Include="Models\Operation.cs" />
-    <Compile Include="Models\Operations\ArcTo.cs" />
-    <Compile Include="Models\Operations\ClosePath.cs" />
-    <Compile Include="Models\Operations\CurveTo.cs" />
-    <Compile Include="Models\Operations\LineTo.cs" />
-    <Compile Include="Models\Operations\PathOperation.cs" />
-    <Compile Include="Models\Operations\StartFigure.cs" />
-    <Compile Include="Codes\Pens.cs" />
-    <Compile Include="Models\Segments\SvgArcSegment.cs" />
-    <Compile Include="Models\Segments\SvgArcSize.cs" />
-    <Compile Include="Models\Segments\SvgArcSweep.cs" />
-    <Compile Include="Models\Segments\SvgClosePathSegment.cs" />
-    <Compile Include="Models\Segments\SvgCubicCurveSegment.cs" />
-    <Compile Include="Models\Segments\SvgLineSegment.cs" />
-    <Compile Include="Models\Segments\SvgMoveToSegment.cs" />
-    <Compile Include="Models\Segments\SvgPathSegment.cs" />
-    <Compile Include="Models\Segments\SvgPathSegmentList.cs" />
-    <Compile Include="Models\Segments\SvgQuadraticCurveSegment.cs" />
-    <Compile Include="Models\Operations\MoveTo.cs" />
-    <Compile Include="Models\Transforms\Transform.cs" />
-    <Compile Include="NullPlatform.cs" />
-    <Compile Include="Parsers\CoordinateParser.cs" />
-    <Compile Include="Parsers\IStylesParser.cs" />
-    <Compile Include="Parsers\IValuesParser.cs" />
-    <Compile Include="Parsers\OperationParser.cs" />
-    <Compile Include="Parsers\StylesParser.cs" />
-    <Compile Include="Parsers\SvgNumber.cs" />
-    <Compile Include="Models\Pen.cs" />
-    <Compile Include="Models\Point.cs" />
-    <Compile Include="Models\Size.cs" />
-    <Compile Include="Parsers\ValuesParser.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Interfaces\ICanvas.cs" />
-    <Compile Include="Graphic.cs" />
-    <Compile Include="Models\Elements\Ellipse.cs" />
-    <Compile Include="GraphicCanvas.cs" />
-    <Compile Include="Models\Drawing.cs" />
-    <Compile Include="Parsers\SvgReader.cs" />
-    <Compile Include="Parsers\SvgPathParser.cs" />
-    <Compile Include="Models\Elements\Group.cs" />
-    <Compile Include="Models\Rect.cs" />
-    <Compile Include="Models\Elements\Rectangle.cs" />
-    <Compile Include="Models\Elements\Path.cs" />
-    <Compile Include="Models\Elements\Text.cs" />
-    <Compile Include="Models\Elements\Element.cs" />
-    <Compile Include="Models\Font.cs" />
+    <Compile Remove="Class1.cs" />
+    <Compile Remove="Platforms\NGraphics.Android\AndroidPlatform.cs" />
+    <Compile Remove="Platforms\NGraphics.WindowsPhone\Properties\AssemblyInfo.cs" />
+    <Compile Remove="Platforms\NGraphics.WindowsStore\CanvasCanvas.cs" />
+    <Compile Remove="Platforms\NGraphics.WindowsStore\Direct2DCanvas.cs" />
+    <Compile Remove="Platforms\NGraphics.WindowsStore\WinRTPlatform.cs" />
+    <Compile Remove="Platforms\NGraphics.WindowsStore\Properties\AssemblyInfo.cs" />
+    <Compile Remove="Tests\NGraphics.Android.Test\ImageAdapter.cs" />
+    <Compile Remove="Tests\NGraphics.Android.Test\MainActivity.cs" />
+    <Compile Remove="Tests\NGraphics.Android.Test\Properties\AssemblyInfo.cs" />
+    <Compile Remove="Tests\NGraphics.Mac.Test\AppDelegate.cs" />
+    <Compile Remove="Tests\NGraphics.Mac.Test\AppDelegate.designer.cs" />
+    <Compile Remove="Tests\NGraphics.Mac.Test\Main.cs" />
+    <Compile Remove="Tests\NGraphics.Mac.Test\MainWindow.cs" />
+    <Compile Remove="Tests\NGraphics.Mac.Test\MainWindow.designer.cs" />
+    <Compile Remove="Tests\NGraphics.Mac.Test\MainWindowController.cs" />
+    <Compile Remove="Tests\NGraphics.Mac.Test\MainWindowController.designer.cs" />
+    <Compile Remove="Tests\NGraphics.Net.Test\Program.cs" />
+    <Compile Remove="Tests\NGraphics.Net.Test\Properties\AssemblyInfo.cs" />
+    <Compile Remove="Tests\NGraphics.Test\BrushTests.cs" />
+    <Compile Remove="Tests\NGraphics.Test\ColorTests.cs" />
+    <Compile Remove="Tests\NGraphics.Test\ColorsToImageTests.cs" />
+    <Compile Remove="Tests\NGraphics.Test\DrawingTest.cs" />
+    <Compile Remove="Tests\NGraphics.Test\GraphicCanvasTests.cs" />
+    <Compile Remove="Tests\NGraphics.Test\ImageSurfaceTest.cs" />
+    <Compile Remove="Tests\NGraphics.Test\PathTests.cs" />
+    <Compile Remove="Tests\NGraphics.Test\PrimitivesTest.cs" />
+    <Compile Remove="Tests\NGraphics.Test\ReadmeTests.cs" />
+    <Compile Remove="Tests\NGraphics.Test\TransformTests.cs" />
+    <Compile Remove="Tests\NGraphics.Test\Parsers\StylesParserTests.cs" />
+    <Compile Remove="Tests\NGraphics.Test\Properties\AssemblyInfo.cs" />
+    <Compile Remove="Tests\NGraphics.Test\SvgReader\ComplexPathsTests.cs" />
+    <Compile Remove="Tests\NGraphics.Test\SvgReader\SvgReaderTestBase.cs" />
+    <Compile Remove="Tests\NGraphics.Test\SvgReader\TextTests.cs" />
+    <Compile Remove="Tests\NGraphics.Test\SvgReader\W3CPathDataTests.cs" />
+    <Compile Remove="Tests\NGraphics.WinPhone.Test\App.xaml.cs" />
+    <Compile Remove="Tests\NGraphics.WinPhone.Test\MainPage.xaml.cs" />
+    <Compile Remove="Tests\NGraphics.WinPhone.Test\Models\SampleImage.cs" />
+    <Compile Remove="Tests\NGraphics.WinPhone.Test\Properties\AssemblyInfo.cs" />
+    <Compile Remove="Tests\NGraphics.WindowsStore.Test\App.xaml.cs" />
+    <Compile Remove="Tests\NGraphics.WindowsStore.Test\MainPage.xaml.cs" />
+    <Compile Remove="Tests\NGraphics.WindowsStore.Test\Models\SampleImage.cs" />
+    <Compile Remove="Tests\NGraphics.WindowsStore.Test\Properties\AssemblyInfo.cs" />
+    <Compile Remove="Tests\NGraphics.iOS.Test\Main.cs" />
+    <Compile Remove="Tests\NGraphics.iOS.Test\UnitTestAppDelegate.cs" />
+    <Compile Remove="Platforms\NGraphics.Android\Resources\Resource.designer.cs" />
+    <Compile Remove="Platforms\NGraphics.Mac\ApplePlatform.cs" />
+    <Compile Remove="Platforms\NGraphics.Mac\Properties\AssemblyInfo.cs" />
+    <Compile Remove="Platforms\NGraphics.Net\SystemDrawingPlatform.cs" />
+    <Compile Remove="Platforms\NGraphics.Net\Properties\AssemblyInfo.cs" />
+    <Compile Remove="Platforms\NGraphics.iOS\Properties\AssemblyInfo.cs" />
+    <Compile Remove="NGraphics\Platforms.cs" />
+    <Compile Remove="NGraphics\Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
-  <ItemGroup />
   <ItemGroup>
-    <None Include="project.json" />
+    <None Remove="Platforms\NGraphics.WindowsPhone\packages.config" />
+    <None Remove="Platforms\NGraphics.WindowsStore\packages.config" />
+    <None Remove="TestResults\Mac\Brush.RectLinearGradient-Mac.png" />
+    <None Remove="TestResults\Mac\Color.HSB-Mac.png" />
+    <None Remove="TestResults\Mac\ColorToImage.Circle-Mac.png" />
+    <None Remove="TestResults\Mac\ColorToImage.Grid-Mac.png" />
+    <None Remove="TestResults\Mac\ColorToImage.Mandelbrot-Mac.png" />
+    <None Remove="TestResults\Mac\ColorToImage.RGBY-Mac.png" />
+    <None Remove="TestResults\Mac\ColorToImage.Rand-Mac.png" />
+    <None Remove="TestResults\Mac\ColorToImage.RandAlpha-Mac.png" />
+    <None Remove="TestResults\Mac\Ellipse-Mac.png" />
+    <None Remove="TestResults\Mac\ErulisseuiinSpaceshipPack.svg-Mac.png" />
+    <None Remove="TestResults\Mac\Example1-Mac.png" />
+    <None Remove="TestResults\Mac\Icon-Mac.png" />
+    <None Remove="TestResults\Mac\ImageCanvas.BlurImage-Mac.png" />
+    <None Remove="TestResults\Mac\ImageCanvas.BlurImage2-Mac.png" />
+    <None Remove="TestResults\Mac\ImageCanvas.BlurImage2-Net.png" />
+    <None Remove="TestResults\Mac\ImageCanvas.Cats-Mac.png" />
+    <None Remove="TestResults\Mac\ImageCanvas.EllipseWithBackground-Mac.png" />
+    <None Remove="TestResults\Mac\ImageCanvas.EllipseWithBackground-Net.png" />
+    <None Remove="TestResults\Mac\ImageCanvas.EllipseWithoutBackground-Mac.png" />
+    <None Remove="TestResults\Mac\ImageCanvas.Line-Mac.png" />
+    <None Remove="TestResults\Mac\ImageCanvas.TriWithRadGrad-Mac.png" />
+    <None Remove="TestResults\Mac\MocastIcon.svg-Mac.png" />
+    <None Remove="TestResults\Mac\PenWidths-Mac.png" />
+    <None Remove="TestResults\Mac\PenWidths-Net.png" />
+    <None Remove="TestResults\Mac\Smile.svg-Mac.png" />
+    <None Remove="TestResults\Mac\SunAtNight.svg-Mac.png" />
+    <None Remove="TestResults\Mac\TransformRotateTranslate-Mac.png" />
+    <None Remove="TestResults\Mac\TransformTranslateRotate-Mac.png" />
+    <None Remove="TestResults\Mac\mozilla.BezierCurves1.svg-Mac.png" />
+    <None Remove="TestResults\Mac\mozilla.BezierCurves2.svg-Mac.png" />
+    <None Remove="TestResults\Mac\mozilla.Text1.svg-Mac.png" />
+    <None Remove="TestResults\Mac\mozilla.Text2.svg-Mac.png" />
+    <None Remove="TestResults\Mac\mozilla.Text3.svg-Mac.png" />
+    <None Remove="TestResults\Mac\mozilla.Text4.svg-Mac.png" />
+    <None Remove="TestResults\Mac\mozilla.ellipse.svg-Mac.png" />
+    <None Remove="TestResults\Mac\mozilla.path.svg-Mac.png" />
+    <None Remove="TestResults\Mac\mozilla.transform.svg-Mac.png" />
+    <None Remove="TestResults\Net\Brush.EllipseRadialGradient-Net.png" />
+    <None Remove="TestResults\Net\Brush.RectAbsLinearGradient-Net.png" />
+    <None Remove="TestResults\Net\Brush.RectLinearGradient-Net.png" />
+    <None Remove="TestResults\Net\Color.HSB-Net.png" />
+    <None Remove="TestResults\Net\Color.HSL-Net.png" />
+    <None Remove="TestResults\Net\ColorToImage.Circle-Net.png" />
+    <None Remove="TestResults\Net\ColorToImage.Grid-Net.png" />
+    <None Remove="TestResults\Net\ColorToImage.Mandelbrot-Net.png" />
+    <None Remove="TestResults\Net\ColorToImage.RGBY-Net.png" />
+    <None Remove="TestResults\Net\ColorToImage.Rand-Net.png" />
+    <None Remove="TestResults\Net\ColorToImage.RandAlpha-Net.png" />
+    <None Remove="TestResults\Net\Ellipse-Net.png" />
+    <None Remove="TestResults\Net\ErulisseuiinSpaceshipPack-Net.png" />
+    <None Remove="TestResults\Net\Example1-Net.png" />
+    <None Remove="TestResults\Net\IPod-Net.png" />
+    <None Remove="TestResults\Net\Icon-Net.png" />
+    <None Remove="TestResults\Net\ImageCanvas.BlurImage-Net.png" />
+    <None Remove="TestResults\Net\ImageCanvas.BlurImage2-Net.png" />
+    <None Remove="TestResults\Net\ImageCanvas.Cats-Net.png" />
+    <None Remove="TestResults\Net\ImageCanvas.EllipseWithBackground-Net.png" />
+    <None Remove="TestResults\Net\ImageCanvas.EllipseWithoutBackground-Net.png" />
+    <None Remove="TestResults\Net\ImageCanvas.Line-Net.png" />
+    <None Remove="TestResults\Net\ImageCanvas.TriWithRadGrad-Net.png" />
+    <None Remove="TestResults\Net\MocastIcon-Net.png" />
+    <None Remove="TestResults\Net\PenWidths-Net.png" />
+    <None Remove="TestResults\Net\Smile-Net.png" />
+    <None Remove="TestResults\Net\SunAtNight-Net.png" />
+    <None Remove="TestResults\Net\TransformRotateTranslate-Net.png" />
+    <None Remove="TestResults\Net\TransformTranslateRotate-Net.png" />
+    <None Remove="TestResults\Net\W3C.Path.paths-data-01-t-Net.png" />
+    <None Remove="TestResults\Net\W3C.Path.paths-data-02-t-Net.png" />
+    <None Remove="TestResults\Net\W3C.Path.paths-data-03-f-Net.png" />
+    <None Remove="TestResults\Net\W3C.Path.paths-data-04-t-Net.png" />
+    <None Remove="TestResults\Net\W3C.Path.paths-data-05-t-Net.png" />
+    <None Remove="TestResults\Net\W3C.Path.paths-data-06-t-Net.png" />
+    <None Remove="TestResults\Net\W3C.Path.paths-data-07-t-Net.png" />
+    <None Remove="TestResults\Net\W3C.Path.paths-data-08-t-Net.png" />
+    <None Remove="TestResults\Net\W3C.Path.paths-data-09-t-Net.png" />
+    <None Remove="TestResults\Net\W3C.Path.paths-data-10-t-Net.png" />
+    <None Remove="TestResults\Net\W3C.Path.paths-data-12-t-Net.png" />
+    <None Remove="TestResults\Net\W3C.Path.paths-data-13-t-Net.png" />
+    <None Remove="TestResults\Net\W3C.Path.paths-data-14-t-Net.png" />
+    <None Remove="TestResults\Net\W3C.Path.paths-data-15-t-Net.png" />
+    <None Remove="TestResults\Net\W3C.Path.paths-data-16-t-Net.png" />
+    <None Remove="TestResults\Net\W3C.Path.paths-data-17-f-Net.png" />
+    <None Remove="TestResults\Net\W3C.Path.paths-data-18-f-Net.png" />
+    <None Remove="TestResults\Net\W3C.Path.paths-data-19-f-Net.png" />
+    <None Remove="TestResults\Net\W3C.Path.paths-data-20-f-Net.png" />
+    <None Remove="TestResults\Net\W3C.Text.Text1-Net.png" />
+    <None Remove="TestResults\Net\W3C.Text.Text2-Net.png" />
+    <None Remove="TestResults\Net\W3C.Text.Text3-Net.png" />
+    <None Remove="TestResults\Net\W3C.Text.Text4-Net.png" />
+    <None Remove="TestResults\Net\W3C.Text.text-align-01-b-Net.png" />
+    <None Remove="TestResults\Net\horseshoe-Net.png" />
+    <None Remove="TestResults\iOS\Brush.RectLinearGradient-iOS.png" />
+    <None Remove="TestResults\iOS\Color.HSB-iOS.png" />
+    <None Remove="TestResults\iOS\ColorToImage.Circle-iOS.png" />
+    <None Remove="TestResults\iOS\ColorToImage.Grid-iOS.png" />
+    <None Remove="TestResults\iOS\ColorToImage.Mandelbrot-iOS.png" />
+    <None Remove="TestResults\iOS\ColorToImage.RGBY-iOS.png" />
+    <None Remove="TestResults\iOS\ColorToImage.Rand-iOS.png" />
+    <None Remove="TestResults\iOS\ColorToImage.RandAlpha-iOS.png" />
+    <None Remove="TestResults\iOS\Ellipse-iOS.png" />
+    <None Remove="TestResults\iOS\ErulisseuiinSpaceshipPack.svg-iOS.png" />
+    <None Remove="TestResults\iOS\Example1-iOS.png" />
+    <None Remove="TestResults\iOS\Icon-iOS.png" />
+    <None Remove="TestResults\iOS\ImageCanvas.BlurImage-iOS.png" />
+    <None Remove="TestResults\iOS\ImageCanvas.BlurImage2-iOS.png" />
+    <None Remove="TestResults\iOS\ImageCanvas.Cats-iOS.png" />
+    <None Remove="TestResults\iOS\ImageCanvas.EllipseWithBackground-iOS.png" />
+    <None Remove="TestResults\iOS\ImageCanvas.EllipseWithoutBackground-iOS.png" />
+    <None Remove="TestResults\iOS\ImageCanvas.Line-iOS.png" />
+    <None Remove="TestResults\iOS\ImageCanvas.TriWithRadGrad-iOS.png" />
+    <None Remove="TestResults\iOS\MocastIcon.svg-iOS.png" />
+    <None Remove="TestResults\iOS\PenWidths-iOS.png" />
+    <None Remove="TestResults\iOS\Smile.svg-iOS.png" />
+    <None Remove="TestResults\iOS\SunAtNight.svg-iOS.png" />
+    <None Remove="TestResults\iOS\TransformRotateTranslate-iOS.png" />
+    <None Remove="TestResults\iOS\TransformTranslateRotate-iOS.png" />
+    <None Remove="TestResults\iOS\mozilla.BezierCurves1.svg-iOS.png" />
+    <None Remove="TestResults\iOS\mozilla.BezierCurves2.svg-iOS.png" />
+    <None Remove="TestResults\iOS\mozilla.Text1.svg-iOS.png" />
+    <None Remove="TestResults\iOS\mozilla.Text2.svg-iOS.png" />
+    <None Remove="TestResults\iOS\mozilla.Text3.svg-iOS.png" />
+    <None Remove="TestResults\iOS\mozilla.Text4.svg-iOS.png" />
+    <None Remove="TestResults\iOS\mozilla.ellipse.svg-iOS.png" />
+    <None Remove="TestResults\iOS\mozilla.path.svg-iOS.png" />
+    <None Remove="TestResults\iOS\mozilla.transform.svg-iOS.png" />
+    <None Remove="Tests\NGraphics.Android.Test\packages.config" />
+    <None Remove="Tests\NGraphics.Android.Test\Assets\AboutAssets.txt" />
+    <None Remove="Tests\NGraphics.Android.Test\Properties\AndroidManifest.xml" />
+    <None Remove="Tests\NGraphics.Android.Test\Resources\AboutResources.txt" />
+    <None Remove="Tests\NGraphics.Android.Test\Resources\drawable-hdpi\Icon.png" />
+    <None Remove="Tests\NGraphics.Android.Test\Resources\drawable-mdpi\Icon.png" />
+    <None Remove="Tests\NGraphics.Android.Test\Resources\drawable-xhdpi\Icon.png" />
+    <None Remove="Tests\NGraphics.Android.Test\Resources\drawable-xxhdpi\Icon.png" />
+    <None Remove="Tests\NGraphics.Android.Test\Resources\drawable-xxxhdpi\Icon.png" />
+    <None Remove="Tests\NGraphics.Android.Test\Resources\layout\Gallery.axml" />
+    <None Remove="Tests\NGraphics.Android.Test\Resources\values\Strings.xml" />
+    <None Remove="Tests\NGraphics.Mac.Test\Info.plist" />
+    <None Remove="Tests\NGraphics.Mac.Test\MainMenu.xib" />
+    <None Remove="Tests\NGraphics.Mac.Test\MainWindow.xib" />
+    <None Remove="Tests\NGraphics.Mac.Test\packages.config" />
+    <None Remove="Tests\NGraphics.Net.Test\packages.config" />
+    <None Remove="Tests\NGraphics.Test\fserve.fsx" />
+    <None Remove="Tests\NGraphics.Test\packages.config" />
+    <None Remove="Tests\NGraphics.Test\Inputs\Elvis.svg" />
+    <None Remove="Tests\NGraphics.Test\Inputs\ErulisseuiinSpaceshipPack.svg" />
+    <None Remove="Tests\NGraphics.Test\Inputs\IPod.svg" />
+    <None Remove="Tests\NGraphics.Test\Inputs\MocastIcon.svg" />
+    <None Remove="Tests\NGraphics.Test\Inputs\Readme.txt" />
+    <None Remove="Tests\NGraphics.Test\Inputs\Smile.svg" />
+    <None Remove="Tests\NGraphics.Test\Inputs\SunAtNight.svg" />
+    <None Remove="Tests\NGraphics.Test\Inputs\cat.png" />
+    <None Remove="Tests\NGraphics.Test\Inputs\horseshoe.svg" />
+    <None Remove="Tests\NGraphics.Test\Inputs\W3C\transform.svg" />
+    <None Remove="Tests\NGraphics.Test\Inputs\W3C\Path\paths-data-01-t.svg" />
+    <None Remove="Tests\NGraphics.Test\Inputs\W3C\Path\paths-data-02-t.svg" />
+    <None Remove="Tests\NGraphics.Test\Inputs\W3C\Path\paths-data-03-f.svg" />
+    <None Remove="Tests\NGraphics.Test\Inputs\W3C\Path\paths-data-04-t.svg" />
+    <None Remove="Tests\NGraphics.Test\Inputs\W3C\Path\paths-data-05-t.svg" />
+    <None Remove="Tests\NGraphics.Test\Inputs\W3C\Path\paths-data-06-t.svg" />
+    <None Remove="Tests\NGraphics.Test\Inputs\W3C\Path\paths-data-07-t.svg" />
+    <None Remove="Tests\NGraphics.Test\Inputs\W3C\Path\paths-data-08-t.svg" />
+    <None Remove="Tests\NGraphics.Test\Inputs\W3C\Path\paths-data-09-t.svg" />
+    <None Remove="Tests\NGraphics.Test\Inputs\W3C\Path\paths-data-10-t.svg" />
+    <None Remove="Tests\NGraphics.Test\Inputs\W3C\Path\paths-data-12-t.svg" />
+    <None Remove="Tests\NGraphics.Test\Inputs\W3C\Path\paths-data-13-t.svg" />
+    <None Remove="Tests\NGraphics.Test\Inputs\W3C\Path\paths-data-14-t.svg" />
+    <None Remove="Tests\NGraphics.Test\Inputs\W3C\Path\paths-data-15-t.svg" />
+    <None Remove="Tests\NGraphics.Test\Inputs\W3C\Path\paths-data-16-t.svg" />
+    <None Remove="Tests\NGraphics.Test\Inputs\W3C\Path\paths-data-17-f.svg" />
+    <None Remove="Tests\NGraphics.Test\Inputs\W3C\Path\paths-data-18-f.svg" />
+    <None Remove="Tests\NGraphics.Test\Inputs\W3C\Path\paths-data-19-f.svg" />
+    <None Remove="Tests\NGraphics.Test\Inputs\W3C\Path\paths-data-20-f.svg" />
+    <None Remove="Tests\NGraphics.Test\Inputs\W3C\Text\Text1.svg" />
+    <None Remove="Tests\NGraphics.Test\Inputs\W3C\Text\Text2.svg" />
+    <None Remove="Tests\NGraphics.Test\Inputs\W3C\Text\Text3.svg" />
+    <None Remove="Tests\NGraphics.Test\Inputs\W3C\Text\Text4.svg" />
+    <None Remove="Tests\NGraphics.Test\Inputs\W3C\Text\text-align-01-b.svg" />
+    <None Remove="Tests\NGraphics.WinPhone.Test\App.xaml" />
+    <None Remove="Tests\NGraphics.WinPhone.Test\MainPage.xaml" />
+    <None Remove="Tests\NGraphics.WinPhone.Test\Package.appxmanifest" />
+    <None Remove="Tests\NGraphics.WinPhone.Test\packages.config" />
+    <None Remove="Tests\NGraphics.WinPhone.Test\Assets\Logo.scale-240.png" />
+    <None Remove="Tests\NGraphics.WinPhone.Test\Assets\SmallLogo.scale-240.png" />
+    <None Remove="Tests\NGraphics.WinPhone.Test\Assets\SplashScreen.scale-240.png" />
+    <None Remove="Tests\NGraphics.WinPhone.Test\Assets\Square71x71Logo.scale-240.png" />
+    <None Remove="Tests\NGraphics.WinPhone.Test\Assets\StoreLogo.scale-240.png" />
+    <None Remove="Tests\NGraphics.WinPhone.Test\Assets\WideLogo.scale-240.png" />
+    <None Remove="Tests\NGraphics.WindowsStore.Test\App.xaml" />
+    <None Remove="Tests\NGraphics.WindowsStore.Test\MainPage.xaml" />
+    <None Remove="Tests\NGraphics.WindowsStore.Test\NGraphics.WindowsStore.Test_TemporaryKey.pfx" />
+    <None Remove="Tests\NGraphics.WindowsStore.Test\Package.appxmanifest" />
+    <None Remove="Tests\NGraphics.WindowsStore.Test\packages.config" />
+    <None Remove="Tests\NGraphics.WindowsStore.Test\Assets\Logo.scale-100.png" />
+    <None Remove="Tests\NGraphics.WindowsStore.Test\Assets\SmallLogo.scale-100.png" />
+    <None Remove="Tests\NGraphics.WindowsStore.Test\Assets\SplashScreen.scale-100.png" />
+    <None Remove="Tests\NGraphics.WindowsStore.Test\Assets\StoreLogo.scale-100.png" />
+    <None Remove="Tests\NGraphics.iOS.Test\Entitlements.plist" />
+    <None Remove="Tests\NGraphics.iOS.Test\Info.plist" />
+    <None Remove="Tests\NGraphics.iOS.Test\packages.config" />
+    <None Remove="Tests\NGraphics.iOS.Test\Resources\Default-568h%402x.png" />
+    <None Remove="Tests\NGraphics.iOS.Test\Resources\Images.xcassets\AppIcons.appiconset\Contents.json" />
+    <None Remove="Platforms\NGraphics.Android\obj\Debug\designtime\libraryimports.cache" />
+    <None Remove="Platforms\NGraphics.Android\obj\Debug\__AndroidLibraryProjects__.zip" />
+    <None Remove="Platforms\NGraphics.Android\Resources\AboutResources.txt" />
+    <None Remove="Platforms\NGraphics.Android\Resources\values\Strings.xml" />
+    <None Remove="Platforms\NGraphics.Android\obj\Debug\NGraphics.Android.csprojAssemblyReference.cache" />
+    <None Remove="Platforms\NGraphics.Android\obj\Debug\R.cs.flag" />
+    <None Remove="Platforms\NGraphics.Android\obj\Debug\R.txt" />
+    <None Remove="Platforms\NGraphics.Android\obj\Debug\build.props" />
+    <None Remove="Platforms\NGraphics.Android\obj\Debug\res.flag" />
+    <None Remove="Platforms\NGraphics.Android\obj\Debug\designtime\libraryprojectimports.cache" />
+    <None Remove="Platforms\NGraphics.Android\obj\Debug\jl\__res_name_case_map.txt" />
+    <None Remove="Platforms\NGraphics.Android\obj\Debug\jl\res\values\strings.xml" />
+    <None Remove="Platforms\NGraphics.Android\obj\Debug\lp\1.stamp" />
+    <None Remove="Platforms\NGraphics.Android\obj\Debug\lp\map.cache" />
+    <None Remove="Platforms\NGraphics.Android\obj\Debug\res\values\strings.xml" />
+    <None Remove="Platforms\NGraphics.iOS\obj\Debug\NGraphics.iOS.csprojAssemblyReference.cache" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="NGraphics\Graphic.cs">
+      <Link>Graphic.cs</Link>
+    </Compile>
+    <Compile Update="NGraphics\GraphicCanvas.cs">
+      <Link>GraphicCanvas.cs</Link>
+    </Compile>
+    <Compile Update="NGraphics\Log.cs">
+      <Link>Log.cs</Link>
+    </Compile>
+    <Compile Update="NGraphics\NullPlatform.cs">
+      <Link>NullPlatform.cs</Link>
+    </Compile>
+    <Compile Update="NGraphics\Codes\Brushes.cs">
+      <Link>Codes\Brushes.cs</Link>
+    </Compile>
+    <Compile Update="NGraphics\Codes\Colors.cs">
+      <Link>Codes\Colors.cs</Link>
+    </Compile>
+    <Compile Update="NGraphics\Codes\FillMode.cs">
+      <Link>Codes\FillMode.cs</Link>
+    </Compile>
+    <Compile Update="NGraphics\Codes\OperationType.cs">
+      <Link>Codes\OperationType.cs</Link>
+    </Compile>
+    <Compile Update="NGraphics\Codes\Pens.cs">
+      <Link>Codes\Pens.cs</Link>
+    </Compile>
+    <Compile Update="NGraphics\Codes\SvgStrokeLineCap.cs">
+      <Link>Codes\SvgStrokeLineCap.cs</Link>
+    </Compile>
+    <Compile Update="NGraphics\Codes\SvgStrokeLineJoin.cs">
+      <Link>Codes\SvgStrokeLineJoin.cs</Link>
+    </Compile>
+    <Compile Update="NGraphics\Codes\TextAlignment.cs">
+      <Link>Codes\TextAlignment.cs</Link>
+    </Compile>
+    <Compile Update="NGraphics\ExtensionMethods\CharExtensions.cs">
+      <Link>ExtensionMethods\CharExtensions.cs</Link>
+    </Compile>
+    <Compile Update="NGraphics\ExtensionMethods\StringExtensions.cs">
+      <Link>ExtensionMethods\StringExtensions.cs</Link>
+    </Compile>
+    <Compile Update="NGraphics\Interfaces\ICanvas.cs">
+      <Link>Interfaces\ICanvas.cs</Link>
+    </Compile>
+    <Compile Update="NGraphics\Interfaces\IDrawable.cs">
+      <Link>Interfaces\IDrawable.cs</Link>
+    </Compile>
+    <Compile Update="NGraphics\Interfaces\IImage.cs">
+      <Link>Interfaces\IImage.cs</Link>
+    </Compile>
+    <Compile Update="NGraphics\Interfaces\IPlatform.cs">
+      <Link>Interfaces\IPlatform.cs</Link>
+    </Compile>
+    <Compile Update="NGraphics\Models\BoundingBoxBuilder.cs">
+      <Link>Models\BoundingBoxBuilder.cs</Link>
+    </Compile>
+    <Compile Update="NGraphics\Models\Color.cs">
+      <Link>Models\Color.cs</Link>
+    </Compile>
+    <Compile Update="NGraphics\Models\CssNumber.cs">
+      <Link>Models\CssNumber.cs</Link>
+    </Compile>
+    <Compile Update="NGraphics\Models\Drawing.cs">
+      <Link>Models\Drawing.cs</Link>
+    </Compile>
+    <Compile Update="NGraphics\Models\DrawingFunc.cs">
+      <Link>Models\DrawingFunc.cs</Link>
+    </Compile>
+    <Compile Update="NGraphics\Models\Font.cs">
+      <Link>Models\Font.cs</Link>
+    </Compile>
+    <Compile Update="NGraphics\Models\Operation.cs">
+      <Link>Models\Operation.cs</Link>
+    </Compile>
+    <Compile Update="NGraphics\Models\Pen.cs">
+      <Link>Models\Pen.cs</Link>
+    </Compile>
+    <Compile Update="NGraphics\Models\Point.cs">
+      <Link>Models\Point.cs</Link>
+    </Compile>
+    <Compile Update="NGraphics\Models\Rect.cs">
+      <Link>Models\Rect.cs</Link>
+    </Compile>
+    <Compile Update="NGraphics\Models\Size.cs">
+      <Link>Models\Size.cs</Link>
+    </Compile>
+    <Compile Update="NGraphics\Models\Brushes\BaseBrush.cs">
+      <Link>Models\Brushes\BaseBrush.cs</Link>
+    </Compile>
+    <Compile Update="NGraphics\Models\Brushes\GradientBrush.cs">
+      <Link>Models\Brushes\GradientBrush.cs</Link>
+    </Compile>
+    <Compile Update="NGraphics\Models\Brushes\GradientStop.cs">
+      <Link>Models\Brushes\GradientStop.cs</Link>
+    </Compile>
+    <Compile Update="NGraphics\Models\Brushes\LinearGradientBrush.cs">
+      <Link>Models\Brushes\LinearGradientBrush.cs</Link>
+    </Compile>
+    <Compile Update="NGraphics\Models\Brushes\RadialGradientBrush.cs">
+      <Link>Models\Brushes\RadialGradientBrush.cs</Link>
+    </Compile>
+    <Compile Update="NGraphics\Models\Brushes\SolidBrush.cs">
+      <Link>Models\Brushes\SolidBrush.cs</Link>
+    </Compile>
+    <Compile Update="NGraphics\Models\Elements\Element.cs">
+      <Link>Models\Elements\Element.cs</Link>
+    </Compile>
+    <Compile Update="NGraphics\Models\Elements\Ellipse.cs">
+      <Link>Models\Elements\Ellipse.cs</Link>
+    </Compile>
+    <Compile Update="NGraphics\Models\Elements\Group.cs">
+      <Link>Models\Elements\Group.cs</Link>
+    </Compile>
+    <Compile Update="NGraphics\Models\Elements\Path.cs">
+      <Link>Models\Elements\Path.cs</Link>
+    </Compile>
+    <Compile Update="NGraphics\Models\Elements\Rectangle.cs">
+      <Link>Models\Elements\Rectangle.cs</Link>
+    </Compile>
+    <Compile Update="NGraphics\Models\Elements\Text.cs">
+      <Link>Models\Elements\Text.cs</Link>
+    </Compile>
+    <Compile Update="NGraphics\Models\Operations\ArcTo.cs">
+      <Link>Models\Operations\ArcTo.cs</Link>
+    </Compile>
+    <Compile Update="NGraphics\Models\Operations\ClosePath.cs">
+      <Link>Models\Operations\ClosePath.cs</Link>
+    </Compile>
+    <Compile Update="NGraphics\Models\Operations\CurveTo.cs">
+      <Link>Models\Operations\CurveTo.cs</Link>
+    </Compile>
+    <Compile Update="NGraphics\Models\Operations\LineTo.cs">
+      <Link>Models\Operations\LineTo.cs</Link>
+    </Compile>
+    <Compile Update="NGraphics\Models\Operations\MoveTo.cs">
+      <Link>Models\Operations\MoveTo.cs</Link>
+    </Compile>
+    <Compile Update="NGraphics\Models\Operations\PathOperation.cs">
+      <Link>Models\Operations\PathOperation.cs</Link>
+    </Compile>
+    <Compile Update="NGraphics\Models\Operations\StartFigure.cs">
+      <Link>Models\Operations\StartFigure.cs</Link>
+    </Compile>
+    <Compile Update="NGraphics\Models\Segments\SvgArcSegment.cs">
+      <Link>Models\Segments\SvgArcSegment.cs</Link>
+    </Compile>
+    <Compile Update="NGraphics\Models\Segments\SvgArcSize.cs">
+      <Link>Models\Segments\SvgArcSize.cs</Link>
+    </Compile>
+    <Compile Update="NGraphics\Models\Segments\SvgArcSweep.cs">
+      <Link>Models\Segments\SvgArcSweep.cs</Link>
+    </Compile>
+    <Compile Update="NGraphics\Models\Segments\SvgClosePathSegment.cs">
+      <Link>Models\Segments\SvgClosePathSegment.cs</Link>
+    </Compile>
+    <Compile Update="NGraphics\Models\Segments\SvgCubicCurveSegment.cs">
+      <Link>Models\Segments\SvgCubicCurveSegment.cs</Link>
+    </Compile>
+    <Compile Update="NGraphics\Models\Segments\SvgLineSegment.cs">
+      <Link>Models\Segments\SvgLineSegment.cs</Link>
+    </Compile>
+    <Compile Update="NGraphics\Models\Segments\SvgMoveToSegment.cs">
+      <Link>Models\Segments\SvgMoveToSegment.cs</Link>
+    </Compile>
+    <Compile Update="NGraphics\Models\Segments\SvgPathSegment.cs">
+      <Link>Models\Segments\SvgPathSegment.cs</Link>
+    </Compile>
+    <Compile Update="NGraphics\Models\Segments\SvgPathSegmentList.cs">
+      <Link>Models\Segments\SvgPathSegmentList.cs</Link>
+    </Compile>
+    <Compile Update="NGraphics\Models\Segments\SvgQuadraticCurveSegment.cs">
+      <Link>Models\Segments\SvgQuadraticCurveSegment.cs</Link>
+    </Compile>
+    <Compile Update="NGraphics\Models\Transforms\Transform.cs">
+      <Link>Models\Transforms\Transform.cs</Link>
+    </Compile>
+    <Compile Update="NGraphics\Parsers\CoordinateParser.cs">
+      <Link>Parsers\CoordinateParser.cs</Link>
+    </Compile>
+    <Compile Update="NGraphics\Parsers\IStylesParser.cs">
+      <Link>Parsers\IStylesParser.cs</Link>
+    </Compile>
+    <Compile Update="NGraphics\Parsers\IValuesParser.cs">
+      <Link>Parsers\IValuesParser.cs</Link>
+    </Compile>
+    <Compile Update="NGraphics\Parsers\OperationParser.cs">
+      <Link>Parsers\OperationParser.cs</Link>
+    </Compile>
+    <Compile Update="NGraphics\Parsers\StylesParser.cs">
+      <Link>Parsers\StylesParser.cs</Link>
+    </Compile>
+    <Compile Update="NGraphics\Parsers\SvgNumber.cs">
+      <Link>Parsers\SvgNumber.cs</Link>
+    </Compile>
+    <Compile Update="NGraphics\Parsers\SvgPathParser.cs">
+      <Link>Parsers\SvgPathParser.cs</Link>
+    </Compile>
+    <Compile Update="NGraphics\Parsers\SvgReader.cs">
+      <Link>Parsers\SvgReader.cs</Link>
+    </Compile>
+    <Compile Update="NGraphics\Parsers\ValuesParser.cs">
+      <Link>Parsers\ValuesParser.cs</Link>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="NGraphics\NGraphics.csproj">
+      <Link>NGraphics.csproj</Link>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="NGraphics\NGraphics.csproj.nuget.cache">
+      <Link>NGraphics.csproj.nuget.cache</Link>
+    </None>
+    <None Update="NGraphics\project.json">
+      <Link>project.json</Link>
+    </None>
+    <None Update="NGraphics\project.lock.json">
+      <Link>project.lock.json</Link>
+    </None>
   </ItemGroup>
 </Project>
