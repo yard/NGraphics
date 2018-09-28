@@ -7,6 +7,7 @@
     <ProjectGuid>{11A2EFE5-5E9E-41A1-B3D4-CD6665BD5D96}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>NGraphics.iOS.Custom</RootNamespace>
+    <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
     <AssemblyName>NGraphics.iOS.Custom</AssemblyName>
   </PropertyGroup>
