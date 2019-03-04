@@ -30,16 +30,33 @@
     <DocumentationFile>bin\Debug\NGraphics.Android.Custom.xml</DocumentationFile>
     <NoWarn>CS1574,CS1591,CS1573</NoWarn>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Beta_Release|AnyCPU' ">
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release</OutputPath>
+    <OutputPath>bin\Beta_Release</OutputPath>
+    <DefineConstants>RELEASE;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
     <ConsolePause>false</ConsolePause>
     <DocumentationFile>bin\Release\NGraphics.Android.Custom.xml</DocumentationFile>
     <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
     <NoWarn>CS1574,CS1591,CS1573</NoWarn>
+    <EmbedAssembliesIntoApk>true</EmbedAssembliesIntoApk>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Staging_Release|AnyCPU' ">
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Staging_Release</OutputPath>
+    <DefineConstants>RELEASE;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
+    <ConsolePause>false</ConsolePause>
+    <DocumentationFile>bin\Release\NGraphics.Android.Custom.xml</DocumentationFile>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <NoWarn>CS1574,CS1591,CS1573</NoWarn>
+    <EmbedAssembliesIntoApk>true</EmbedAssembliesIntoApk>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
