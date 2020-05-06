@@ -23,6 +23,7 @@
     <ConsolePause>false</ConsolePause>
     <DocumentationFile>bin\Debug\NGraphics.Custom.xml</DocumentationFile>
     <NoWarn>CS1574,CS1591,CS1573</NoWarn>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>full</DebugType>
@@ -34,6 +35,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DocumentationFile>bin\Release\NGraphics.Custom.xml</DocumentationFile>
     <NoWarn>CS1574,CS1591,CS1573</NoWarn>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Codes\FillMode.cs" />
